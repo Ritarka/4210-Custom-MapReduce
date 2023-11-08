@@ -1,0 +1,21 @@
+# cs6210Project4
+MapReduce Infrastructure
+
+## Project Instructions
+
+[Project Description](description.md)
+
+[Code walk through](structure.md)
+
+### How to setup the project  
+Same as project 3 instructions
+
+You have two options for your setup: You can either use the existing configuration from Project 3, or you can pull a Docker image with all the necessary installations using the command:
+
+```bash
+docker pull dcchico/aos_project4
+```
+
+### NOTES
+
+The data utilized for this assignment is derived from publicly accessible sources on the internet, including popular literature. It's important to note that the data may contain inappropriate language or content, and it's crucial to understand that the teaching team is not accountable for or able to regulate the presence of such material.
