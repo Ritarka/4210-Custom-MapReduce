@@ -1,3 +1,58 @@
 syntax = "proto3";
 
 package masterworker;
+
+//different task type for MapReduce - handled by Master
+enum TaskType {
+	MAP = 0;
+	REDUCE = 1;
+	EMIT = 2; //should this be an enum
+}
+
+//Need message for input data
+message InputData {
+	string input = 1;
+}
+
+//Need message for output data
+message OutputData {
+	string result = 1;
+}
+
+//Need task for Map function
+message MapTask {
+	//task ID
+	int32 taskId = 1;
+	//enum for type
+	TaskType taskType = 2;
+	//Input data for map 
+	InputData inputData = 3;
+}
+
+//Need task for reduce
+message ReduceTask {
+	//task ID
+	int32 taskId = 1;
+	//enum for type
+	TaskType taskType = 2;
+	//Need list of intermediate result from MapTask
+	repeated OutputData intermediateResult = 3;
+}
+//After Map or reduce, inform master of task completion
+message TaskCompletion {
+	//task Id
+	int32 taskId = 1;
+	//enum type
+	TaskType taskType = 2;
+	// Output produced by map or reduce
+	OutputData outputData = 3;
+}
+
+//To communicate between master and worker node, we will use gRPC
+service MasterWorker {
+	//for map
+	rpc AssignMapTask(MapTask) returns (TaskCompletion);
+	//for reduce
+	rpc AssignReduceTask(ReduceTask) returns (TaskCompletion);
+}
+
