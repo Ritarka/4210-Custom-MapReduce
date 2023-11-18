@@ -67,9 +67,15 @@ inline bool read_mr_spec_from_config_file(const std::string& config_filename, Ma
 
 /* CS6210_TASK: validate the specification read from the config file */
 inline bool validate_mr_spec(const MapReduceSpec& spec) {
-	if (spec.workers != spec.ips.size()) return false; // 1 ip for each worker
-	for (string path : spec.ips) {
-		if (!ifstream(path).good()) return false; // if input file path does not exist, return false
+	if (spec.workers != spec.ips.size()) {
+		cerr << "Worker size mismatch " << spec.workers << " and " << spec.ips.size() << endl;
+		return false; // 1 ip for each worker
 	}
+	for (string path : spec.in_files)
+		if (!ifstream(path).good()) {
+			cerr << "Path: " << path << " is not good" << endl;
+			return false; // if input file path does not exist, return false
+		}
+
 	return true;
 }
