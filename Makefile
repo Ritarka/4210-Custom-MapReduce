@@ -62,6 +62,10 @@ CMAKE_SOURCE_DIR = /home/ritarka/cs4210/4210-proj4
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/ritarka/cs4210/4210-proj4
 
+#=============================================================================
+# Targets provided globally by CMake.
+
+
 test:
 	bin/mr_worker localhost:50051 & bin/mr_worker localhost:50052
 	bin/mrdemo
@@ -70,9 +74,6 @@ test:
 demo:
 	cd bin && ./mrdemo && cd ..
 .PHONY: demo
-
-#=============================================================================
-# Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
