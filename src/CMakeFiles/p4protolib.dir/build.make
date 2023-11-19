@@ -69,57 +69,57 @@ include src/CMakeFiles/p4protolib.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/p4protolib.dir/flags.make
 
-src/masterworker.pb.cc: src/masterworker.proto
+src/workerservice.pb.cc: src/workerservice.proto
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ritarka/cs4210/4210-proj4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating proto messages ..."
-	cd /home/ritarka/cs4210/4210-proj4/src && /home/ritarka/.local/bin/protoc --proto_path=/home/ritarka/cs4210/4210-proj4/src --cpp_out=/home/ritarka/cs4210/4210-proj4/src --plugin=protoc-gen-grpc=/home/ritarka/.local/bin/grpc_cpp_plugin --grpc_out=/home/ritarka/cs4210/4210-proj4/src /home/ritarka/cs4210/4210-proj4/src/masterworker.proto
+	cd /home/ritarka/cs4210/4210-proj4/src && /home/ritarka/.local/bin/protoc --proto_path=/home/ritarka/cs4210/4210-proj4/src --cpp_out=/home/ritarka/cs4210/4210-proj4/src --plugin=protoc-gen-grpc=/home/ritarka/.local/bin/grpc_cpp_plugin --grpc_out=/home/ritarka/cs4210/4210-proj4/src /home/ritarka/cs4210/4210-proj4/src/workerservice.proto
 
-src/masterworker.grpc.pb.cc: src/masterworker.pb.cc
-	@$(CMAKE_COMMAND) -E touch_nocreate src/masterworker.grpc.pb.cc
+src/workerservice.grpc.pb.cc: src/workerservice.pb.cc
+	@$(CMAKE_COMMAND) -E touch_nocreate src/workerservice.grpc.pb.cc
 
-src/masterworker.pb.h: src/masterworker.pb.cc
-	@$(CMAKE_COMMAND) -E touch_nocreate src/masterworker.pb.h
+src/workerservice.pb.h: src/workerservice.pb.cc
+	@$(CMAKE_COMMAND) -E touch_nocreate src/workerservice.pb.h
 
-src/masterworker.grpc.pb.h: src/masterworker.pb.cc
-	@$(CMAKE_COMMAND) -E touch_nocreate src/masterworker.grpc.pb.h
+src/workerservice.grpc.pb.h: src/workerservice.pb.cc
+	@$(CMAKE_COMMAND) -E touch_nocreate src/workerservice.grpc.pb.h
 
-src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o: src/CMakeFiles/p4protolib.dir/flags.make
-src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o: src/masterworker.pb.cc
-src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o: src/CMakeFiles/p4protolib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ritarka/cs4210/4210-proj4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o"
-	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o -MF CMakeFiles/p4protolib.dir/masterworker.pb.cc.o.d -o CMakeFiles/p4protolib.dir/masterworker.pb.cc.o -c /home/ritarka/cs4210/4210-proj4/src/masterworker.pb.cc
+src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o: src/CMakeFiles/p4protolib.dir/flags.make
+src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o: src/workerservice.pb.cc
+src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o: src/CMakeFiles/p4protolib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ritarka/cs4210/4210-proj4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o"
+	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o -MF CMakeFiles/p4protolib.dir/workerservice.pb.cc.o.d -o CMakeFiles/p4protolib.dir/workerservice.pb.cc.o -c /home/ritarka/cs4210/4210-proj4/src/workerservice.pb.cc
 
-src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p4protolib.dir/masterworker.pb.cc.i"
-	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ritarka/cs4210/4210-proj4/src/masterworker.pb.cc > CMakeFiles/p4protolib.dir/masterworker.pb.cc.i
+src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p4protolib.dir/workerservice.pb.cc.i"
+	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ritarka/cs4210/4210-proj4/src/workerservice.pb.cc > CMakeFiles/p4protolib.dir/workerservice.pb.cc.i
 
-src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p4protolib.dir/masterworker.pb.cc.s"
-	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ritarka/cs4210/4210-proj4/src/masterworker.pb.cc -o CMakeFiles/p4protolib.dir/masterworker.pb.cc.s
+src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p4protolib.dir/workerservice.pb.cc.s"
+	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ritarka/cs4210/4210-proj4/src/workerservice.pb.cc -o CMakeFiles/p4protolib.dir/workerservice.pb.cc.s
 
-src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o: src/CMakeFiles/p4protolib.dir/flags.make
-src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o: src/masterworker.grpc.pb.cc
-src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o: src/CMakeFiles/p4protolib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ritarka/cs4210/4210-proj4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o"
-	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o -MF CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o.d -o CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o -c /home/ritarka/cs4210/4210-proj4/src/masterworker.grpc.pb.cc
+src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o: src/CMakeFiles/p4protolib.dir/flags.make
+src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o: src/workerservice.grpc.pb.cc
+src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o: src/CMakeFiles/p4protolib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ritarka/cs4210/4210-proj4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o"
+	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o -MF CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o.d -o CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o -c /home/ritarka/cs4210/4210-proj4/src/workerservice.grpc.pb.cc
 
-src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.i"
-	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ritarka/cs4210/4210-proj4/src/masterworker.grpc.pb.cc > CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.i
+src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.i"
+	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ritarka/cs4210/4210-proj4/src/workerservice.grpc.pb.cc > CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.i
 
-src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.s"
-	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ritarka/cs4210/4210-proj4/src/masterworker.grpc.pb.cc -o CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.s
+src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.s"
+	cd /home/ritarka/cs4210/4210-proj4/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ritarka/cs4210/4210-proj4/src/workerservice.grpc.pb.cc -o CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.s
 
 # Object files for target p4protolib
 p4protolib_OBJECTS = \
-"CMakeFiles/p4protolib.dir/masterworker.pb.cc.o" \
-"CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o"
+"CMakeFiles/p4protolib.dir/workerservice.pb.cc.o" \
+"CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o"
 
 # External object files for target p4protolib
 p4protolib_EXTERNAL_OBJECTS =
 
-src/libp4protolib.a: src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o
-src/libp4protolib.a: src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o
+src/libp4protolib.a: src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o
+src/libp4protolib.a: src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o
 src/libp4protolib.a: src/CMakeFiles/p4protolib.dir/build.make
 src/libp4protolib.a: src/CMakeFiles/p4protolib.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ritarka/cs4210/4210-proj4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libp4protolib.a"
@@ -134,10 +134,10 @@ src/CMakeFiles/p4protolib.dir/clean:
 	cd /home/ritarka/cs4210/4210-proj4/src && $(CMAKE_COMMAND) -P CMakeFiles/p4protolib.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/p4protolib.dir/clean
 
-src/CMakeFiles/p4protolib.dir/depend: src/masterworker.grpc.pb.cc
-src/CMakeFiles/p4protolib.dir/depend: src/masterworker.grpc.pb.h
-src/CMakeFiles/p4protolib.dir/depend: src/masterworker.pb.cc
-src/CMakeFiles/p4protolib.dir/depend: src/masterworker.pb.h
+src/CMakeFiles/p4protolib.dir/depend: src/workerservice.grpc.pb.cc
+src/CMakeFiles/p4protolib.dir/depend: src/workerservice.grpc.pb.h
+src/CMakeFiles/p4protolib.dir/depend: src/workerservice.pb.cc
+src/CMakeFiles/p4protolib.dir/depend: src/workerservice.pb.h
 	cd /home/ritarka/cs4210/4210-proj4 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ritarka/cs4210/4210-proj4 /home/ritarka/cs4210/4210-proj4/src /home/ritarka/cs4210/4210-proj4 /home/ritarka/cs4210/4210-proj4/src /home/ritarka/cs4210/4210-proj4/src/CMakeFiles/p4protolib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/p4protolib.dir/depend
 

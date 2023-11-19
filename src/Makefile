@@ -251,54 +251,6 @@ mapreduce_impl.cc.s:
 	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s
 .PHONY : mapreduce_impl.cc.s
 
-masterworker.grpc.pb.o: masterworker.grpc.pb.cc.o
-.PHONY : masterworker.grpc.pb.o
-
-# target to build an object file
-masterworker.grpc.pb.cc.o:
-	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o
-.PHONY : masterworker.grpc.pb.cc.o
-
-masterworker.grpc.pb.i: masterworker.grpc.pb.cc.i
-.PHONY : masterworker.grpc.pb.i
-
-# target to preprocess a source file
-masterworker.grpc.pb.cc.i:
-	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.i
-.PHONY : masterworker.grpc.pb.cc.i
-
-masterworker.grpc.pb.s: masterworker.grpc.pb.cc.s
-.PHONY : masterworker.grpc.pb.s
-
-# target to generate assembly for a file
-masterworker.grpc.pb.cc.s:
-	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.s
-.PHONY : masterworker.grpc.pb.cc.s
-
-masterworker.pb.o: masterworker.pb.cc.o
-.PHONY : masterworker.pb.o
-
-# target to build an object file
-masterworker.pb.cc.o:
-	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o
-.PHONY : masterworker.pb.cc.o
-
-masterworker.pb.i: masterworker.pb.cc.i
-.PHONY : masterworker.pb.i
-
-# target to preprocess a source file
-masterworker.pb.cc.i:
-	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.i
-.PHONY : masterworker.pb.cc.i
-
-masterworker.pb.s: masterworker.pb.cc.s
-.PHONY : masterworker.pb.s
-
-# target to generate assembly for a file
-masterworker.pb.cc.s:
-	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.s
-.PHONY : masterworker.pb.cc.s
-
 mr_task_factory.o: mr_task_factory.cc.o
 .PHONY : mr_task_factory.o
 
@@ -347,6 +299,54 @@ run_worker.cc.s:
 	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.s
 .PHONY : run_worker.cc.s
 
+workerservice.grpc.pb.o: workerservice.grpc.pb.cc.o
+.PHONY : workerservice.grpc.pb.o
+
+# target to build an object file
+workerservice.grpc.pb.cc.o:
+	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o
+.PHONY : workerservice.grpc.pb.cc.o
+
+workerservice.grpc.pb.i: workerservice.grpc.pb.cc.i
+.PHONY : workerservice.grpc.pb.i
+
+# target to preprocess a source file
+workerservice.grpc.pb.cc.i:
+	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.i
+.PHONY : workerservice.grpc.pb.cc.i
+
+workerservice.grpc.pb.s: workerservice.grpc.pb.cc.s
+.PHONY : workerservice.grpc.pb.s
+
+# target to generate assembly for a file
+workerservice.grpc.pb.cc.s:
+	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.s
+.PHONY : workerservice.grpc.pb.cc.s
+
+workerservice.pb.o: workerservice.pb.cc.o
+.PHONY : workerservice.pb.o
+
+# target to build an object file
+workerservice.pb.cc.o:
+	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.o
+.PHONY : workerservice.pb.cc.o
+
+workerservice.pb.i: workerservice.pb.cc.i
+.PHONY : workerservice.pb.i
+
+# target to preprocess a source file
+workerservice.pb.cc.i:
+	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.i
+.PHONY : workerservice.pb.cc.i
+
+workerservice.pb.s: workerservice.pb.cc.s
+.PHONY : workerservice.pb.s
+
+# target to generate assembly for a file
+workerservice.pb.cc.s:
+	cd /home/ritarka/cs4210/4210-proj4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/workerservice.pb.cc.s
+.PHONY : workerservice.pb.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -368,18 +368,18 @@ help:
 	@echo "... mapreduce_impl.o"
 	@echo "... mapreduce_impl.i"
 	@echo "... mapreduce_impl.s"
-	@echo "... masterworker.grpc.pb.o"
-	@echo "... masterworker.grpc.pb.i"
-	@echo "... masterworker.grpc.pb.s"
-	@echo "... masterworker.pb.o"
-	@echo "... masterworker.pb.i"
-	@echo "... masterworker.pb.s"
 	@echo "... mr_task_factory.o"
 	@echo "... mr_task_factory.i"
 	@echo "... mr_task_factory.s"
 	@echo "... run_worker.o"
 	@echo "... run_worker.i"
 	@echo "... run_worker.s"
+	@echo "... workerservice.grpc.pb.o"
+	@echo "... workerservice.grpc.pb.i"
+	@echo "... workerservice.grpc.pb.s"
+	@echo "... workerservice.pb.o"
+	@echo "... workerservice.pb.i"
+	@echo "... workerservice.pb.s"
 .PHONY : help
 
 

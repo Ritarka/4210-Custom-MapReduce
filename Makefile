@@ -65,16 +65,6 @@ CMAKE_BINARY_DIR = /home/ritarka/cs4210/4210-proj4
 #=============================================================================
 # Targets provided globally by CMake.
 
-
-test:
-	bin/mr_worker localhost:50051 & bin/mr_worker localhost:50052
-	bin/mrdemo
-.PHONY: test
-
-demo:
-	cd bin && ./mrdemo && cd ..
-.PHONY: demo
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
