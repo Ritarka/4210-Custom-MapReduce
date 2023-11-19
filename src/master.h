@@ -10,34 +10,49 @@
 #include "workerservice.grpc.pb.h"
 
 
-using grpc::Server;
-using grpc::ServerAsyncResponseWriter;
-using grpc::ServerBuilder;
-using grpc::ServerCompletionQueue;
-using grpc::ServerContext;
+using grpc::Channel;
+using grpc::ClientContext;
 using grpc::Status;
 
 using WorkerAction::WorkerService;
 using WorkerAction::HelloReply;
-using WorkerAction::HelloRquest;
-using WorkerAction::SayHello;
+using WorkerAction::HelloRequest;
 
 
+class GreeterClient {
+ public:
+  GreeterClient(std::shared_ptr<Channel> channel)
+      : stub_(WorkerService::NewStub(channel)) {}
 
-class GreeterServiceImpl final : public WorkerService::Service {
-  Status SayHello(ServerContext* context, const HelloRequest* request,
-                  HelloReply* reply) override {
-    std::string prefix("Hello ");
-    reply->set_message(prefix + request->name());
-    return Status::OK;
-}
+  // Assembles the client's payload, sends it and presents the response back
+  // from the server.
+  std::string SayHello(const std::string& user) {
+    // Data we are sending to the server.
+    HelloRequest request;
+    request.set_name(user);
 
-  Status SayHelloAgain(ServerContext* context, const HelloRequest* request,
-                       HelloReply* reply) override {
-    std::string prefix("Hello again ");
-    reply->set_message(prefix + request->name());
-    return Status::OK;
+    // Container for the data we expect from the server.
+    HelloReply reply;
+
+    // Context for the client. It could be used to convey extra information to
+    // the server and/or tweak certain RPC behaviors.
+    ClientContext context;
+
+    // The actual RPC.
+    Status status = stub_->SayHello(&context, request, &reply);
+
+    // Act upon its status.
+    if (status.ok()) {
+      return reply.message();
+    } else {
+      std::cout << status.error_code() << ": " << status.error_message()
+                << std::endl;
+      return "RPC failed";
+    }
   }
+
+ private:
+  std::unique_ptr<WorkerService::Stub> stub_;
 };
 
 
@@ -72,8 +87,11 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
 	reduces = spec.num_out_files;
 
 	//setup connections to worker threads
-
-	
+	GreeterClient greeter(
+		grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+	std::string user("world");
+	std::string reply = greeter.SayHello(user);
+	std::cout << "Greeter received: " << reply << std::endl;	
 }
 
 

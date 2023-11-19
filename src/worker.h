@@ -3,6 +3,47 @@
 #include <mr_task_factory.h>
 #include "mr_tasks.h"
 
+#include <grpcpp/grpcpp.h>
+#include <grpc/support/log.h>
+#include <grpcpp/health_check_service_interface.h>
+#include <grpcpp/ext/proto_server_reflection_plugin.h>
+
+
+#include "workerservice.pb.h"
+#include "workerservice.grpc.pb.h"
+
+
+using grpc::Server;
+using grpc::ServerAsyncResponseWriter;
+using grpc::ServerBuilder;
+using grpc::ServerCompletionQueue;
+using grpc::ServerContext;
+using grpc::Status;
+
+using WorkerAction::WorkerService;
+using WorkerAction::HelloReply;
+using WorkerAction::HelloRequest;
+
+
+
+class GreeterServiceImpl final : public WorkerService::Service {
+  Status SayHello(ServerContext* context, const HelloRequest* request,
+                  HelloReply* reply) override {
+    std::string prefix("Hello ");
+    reply->set_message(prefix + request->name());
+    return Status::OK;
+}
+
+  Status SayHelloAgain(ServerContext* context, const HelloRequest* request,
+                       HelloReply* reply) override {
+    std::string prefix("Hello again ");
+    reply->set_message(prefix + request->name());
+    return Status::OK;
+  }
+};
+
+
+
 
 /* CS6210_TASK: Handle all the task a Worker is supposed to do.
 	This is a big task for this project, will test your understanding of map reduce */
@@ -24,7 +65,19 @@ class Worker {
 /* CS6210_TASK: ip_addr_port is the only information you get when started.
 	You can populate your other class data members here if you want */
 Worker::Worker(std::string ip_addr_port) {
+	GreeterServiceImpl service;
 
+	grpc::EnableDefaultHealthCheckService(true);
+	// grpc::reflection::InitProtoReflectionServerBuilderPlugin();
+	ServerBuilder builder;
+
+	builder.AddListeningPort(ip_addr_port, grpc::InsecureServerCredentials());
+	builder.RegisterService(&service);
+
+	std::unique_ptr<Server> server(builder.BuildAndStart());
+	std::cout << "Server listening on " << ip_addr_port << std::endl;
+
+	server->Wait();
 }
 
 extern std::shared_ptr<BaseMapper> get_mapper_from_task_factory(const std::string& user_id);
@@ -36,12 +89,15 @@ extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::str
 	BaseReduer's member BaseReducerInternal impl_ directly, 
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
-	/*  Below 5 lines are just examples of how you will call map and reduce
-		Remove them once you start writing your own logic */ 
-	std::cout << "worker.run(), I 'm not ready yet" <<std::endl;
-	auto mapper = get_mapper_from_task_factory("cs6210");
-	mapper->map("I m just a 'dummy', a \"dummy line\"");
-	auto reducer = get_reducer_from_task_factory("cs6210");
-	reducer->reduce("dummy", std::vector<std::string>({"1", "1"}));
 	return true;
+
 }
+
+
+	// /*  Below 5 lines are just examples of how you will call map and reduce
+	// 	Remove them once you start writing your own logic */ 
+	// std::cout << "worker.run(), I'm not ready yet" <<std::endl;
+	// auto mapper = get_mapper_from_task_factory("cs6210");
+	// mapper->map("I m just a 'dummy', a \"dummy line\"");
+	// auto reducer = get_reducer_from_task_factory("cs6210");
+	// reducer->reduce("dummy", std::vector<std::string>({"1", "1"}));

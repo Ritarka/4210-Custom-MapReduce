@@ -86,14 +86,19 @@ inline bool shard_files(const MapReduceSpec& spec, std::vector<FileShard>& fileS
 		start = 0;
 	}
 
-	for (MiniShard mini : minis) {
-		printf("%s: Start: %ld End: %ld Size: %ld\n", mini.file_name.c_str(), mini.start_offset, mini.end_offset,
-			mini.end_offset - mini.start_offset);
+	if (minis.size()) {
+		FileShard fs;
+		fs.shards = minis;
+		minis.clear();
+		fileShards.push_back(fs);
 	}
 
+	// for (MiniShard mini : minis) {
+	// 	printf("%s: Start: %ld End: %ld Size: %ld\n", mini.file_name.c_str(), mini.start_offset, mini.end_offset,
+	// 		mini.end_offset - mini.start_offset);
+	// }
 
-	// dumbly assign minishards to overall file shards
-	// fixe later?
+
 	for (int i = 0; i < fileShards.size(); i++) {
 		printf("Shard %d: ", i);
 		for (int j = 0; j < fileShards[i].shards.size(); j++)
