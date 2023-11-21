@@ -8,6 +8,7 @@ service MasterWorker {
 	rpc AssignMapTask(MapTask) returns (TaskCompletion);
 	//for reduce
 	rpc AssignReduceTask(ReduceTask) returns (TaskCompletion);
+	
 	 // Sends a greeting
   	rpc SayHello (HelloRequest) returns (HelloReply) {}
   	// Sends another greeting

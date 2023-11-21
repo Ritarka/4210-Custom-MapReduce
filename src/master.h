@@ -63,9 +63,10 @@ class GreeterClient {
   void AssignMapTask(const MapTask& request, TaskCompletion* response);
   void AssignReduceTask(const ReduceTask& request, TaskCompletion* response);
 
+  CompletionQueue completion_queue_;
+
  private:
   std::unique_ptr<MasterWorker::Stub> stub_;
-  CompletionQueue completion_queue_;
 };
 //Implementation of AssignMapTask
 void GreeterClient::AssignMapTask(const MapTask& request, TaskCompletion* response) {
@@ -131,7 +132,7 @@ class Master {
 		std::atomic<int> remain_reduce_tasks;
 		
 		//Do we need this
-		CompletionQueue completion_queue_;
+		// CompletionQueue completion_queue_;
 		
 		//Helper methods
 		void assignMapTasks();
@@ -202,7 +203,7 @@ void Master::assignMapTasks(){
 		greeter.AssignMapTask(mapTask, &response);
 		void* tag;
 		bool ok = false;
-		completion_queue_.Next(&tag, &ok);
+		greeter.completion_queue_.Next(&tag, &ok);
 		
 		if(ok && tag && tag == (void*)1) { //Check if the tag is correct
 			worker_states[worker_index] = false;
@@ -237,7 +238,7 @@ void Master::assignReduceTasks() {
 		greeter.AssignReduceTask(reduceTask, &response);
 		void* tag;
 		bool ok = false;
-		completion_queue_.Next(&tag, &ok);
+		greeter.completion_queue_.Next(&tag, &ok);
 		
 		if(ok && tag && tag == (void*)2) { //Check if the tag is correct
 			//int receiver_index = static_cast<int>(tag);

@@ -21,18 +21,41 @@ using grpc::ServerContext;
 using grpc::Status;
 
 using masterworker::MasterWorker;
+using masterworker::MapTask;
+using masterworker::ReduceTask;
+using masterworker::TaskCompletion;
 using masterworker::HelloReply;
 using masterworker::HelloRequest;
 
+using namespace std;
 
 
 class GreeterServiceImpl final : public MasterWorker::Service {
+
+  Status AssignMapTask(ServerContext* context, const MapTask* request,
+                       TaskCompletion* reply) override {
+    // std::string prefix("Hello again ");
+    // reply->set_message(prefix + request->name());
+	cout << "Got Map Task" << endl;
+    return Status::OK;
+  }
+
+  Status AssignReduceTask(ServerContext* context, const ReduceTask* request,
+                       TaskCompletion* reply) override {
+    // std::string prefix("Hello again ");
+    // reply->set_message(prefix + request->name());
+	cout << "Got Reduce Task" << endl;
+    return Status::OK;
+  }
+
+
+
   Status SayHello(ServerContext* context, const HelloRequest* request,
                   HelloReply* reply) override {
-    std::string prefix("Hello ");
-    reply->set_message(prefix + request->name());
-    return Status::OK;
-}
+		std::string prefix("Hello ");
+		reply->set_message(prefix + request->name());
+		return Status::OK;
+	}
 
   Status SayHelloAgain(ServerContext* context, const HelloRequest* request,
                        HelloReply* reply) override {
