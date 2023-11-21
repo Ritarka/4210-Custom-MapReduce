@@ -63,6 +63,7 @@ inline bool shard_files(const MapReduceSpec& spec, std::vector<FileShard>& fileS
 
 				FileShard fs;
 				fs.shards = minis;
+				
 				minis.clear();
 				fileShards.push_back(fs);
 

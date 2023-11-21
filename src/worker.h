@@ -9,8 +9,8 @@
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 
 
-#include "workerservice.pb.h"
-#include "workerservice.grpc.pb.h"
+#include "masterworker.pb.h"
+#include "masterworker.grpc.pb.h"
 
 
 using grpc::Server;
@@ -20,13 +20,13 @@ using grpc::ServerCompletionQueue;
 using grpc::ServerContext;
 using grpc::Status;
 
-using WorkerAction::WorkerService;
-using WorkerAction::HelloReply;
-using WorkerAction::HelloRequest;
+using masterworker::MasterWorker;
+using masterworker::HelloReply;
+using masterworker::HelloRequest;
 
 
 
-class GreeterServiceImpl final : public WorkerService::Service {
+class GreeterServiceImpl final : public MasterWorker::Service {
   Status SayHello(ServerContext* context, const HelloRequest* request,
                   HelloReply* reply) override {
     std::string prefix("Hello ");
@@ -67,8 +67,8 @@ class Worker {
 Worker::Worker(std::string ip_addr_port) {
 	GreeterServiceImpl service;
 
-	grpc::EnableDefaultHealthCheckService(true);
-	// grpc::reflection::InitProtoReflectionServerBuilderPlugin();
+	//grpc::EnableDefaultHealthCheckService(true);
+	//grpc::reflection::InitProtoReflectionServerBuilderPlugin();
 	ServerBuilder builder;
 
 	builder.AddListeningPort(ip_addr_port, grpc::InsecureServerCredentials());

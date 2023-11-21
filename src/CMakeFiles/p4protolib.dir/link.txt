@@ -1,2 +1,2 @@
-/usr/bin/ar qc libp4protolib.a CMakeFiles/p4protolib.dir/workerservice.pb.cc.o CMakeFiles/p4protolib.dir/workerservice.grpc.pb.cc.o
+/usr/bin/ar qc libp4protolib.a CMakeFiles/p4protolib.dir/masterworker.pb.cc.o CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o
 /usr/bin/ranlib libp4protolib.a
