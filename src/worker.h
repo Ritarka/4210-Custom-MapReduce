@@ -34,35 +34,39 @@ class GreeterServiceImpl final : public MasterWorker::Service {
 
   Status AssignMapTask(ServerContext* context, const MapTask* request,
                        TaskCompletion* reply) override {
-    // std::string prefix("Hello again ");
-    // reply->set_message(prefix + request->name());
+     //std::string prefix("Hello again ");
+     //reply->set_message(prefix + request->name());
+     reply->set_taskid(request->taskid());
+     reply->set_tasktype(request->tasktype());
 	cout << "Got Map Task" << endl;
     return Status::OK;
   }
 
   Status AssignReduceTask(ServerContext* context, const ReduceTask* request,
                        TaskCompletion* reply) override {
-    // std::string prefix("Hello again ");
-    // reply->set_message(prefix + request->name());
+     reply->set_taskid(request->taskid());
+     reply->set_tasktype(request->tasktype());
 	cout << "Got Reduce Task" << endl;
     return Status::OK;
   }
 
 
 
-  Status SayHello(ServerContext* context, const HelloRequest* request,
-                  HelloReply* reply) override {
-		std::string prefix("Hello ");
-		reply->set_message(prefix + request->name());
-		return Status::OK;
-	}
+  //Status SayHello(ServerContext* context, const HelloRequest* request,
+                  //HelloReply* reply) override {
+		//std::string prefix("Hello ");
+		//reply->set_message(prefix + request->name());
+		//return Status::OK;
+	//}
 
-  Status SayHelloAgain(ServerContext* context, const HelloRequest* request,
-                       HelloReply* reply) override {
-    std::string prefix("Hello again ");
-    reply->set_message(prefix + request->name());
-    return Status::OK;
-  }
+  //Status SayHelloAgain(ServerContext* context, const HelloRequest* request,
+                      // HelloReply* reply) override {
+    //std::string prefix("Hello again ");
+    //reply->set_message(prefix + request->name());
+    //return Status::OK;
+  //}
+  
+  
 };
 
 
@@ -81,6 +85,8 @@ class Worker {
 
 	private:
 		/* NOW you can add below, data members and member functions as per the need of your implementation*/
+		//std::unique_ptr<ServerCompletionQueue> cq_;
+		std::string ip_port;
 
 };
 
@@ -88,10 +94,10 @@ class Worker {
 /* CS6210_TASK: ip_addr_port is the only information you get when started.
 	You can populate your other class data members here if you want */
 Worker::Worker(std::string ip_addr_port) {
+	ip_port = ip_addr_port;
 	GreeterServiceImpl service;
 
-	//grpc::EnableDefaultHealthCheckService(true);
-	//grpc::reflection::InitProtoReflectionServerBuilderPlugin();
+	
 	ServerBuilder builder;
 
 	builder.AddListeningPort(ip_addr_port, grpc::InsecureServerCredentials());
@@ -112,6 +118,33 @@ extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::str
 	BaseReduer's member BaseReducerInternal impl_ directly, 
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
+	//GreeterServiceImpl service;
+	//ServerBuilder builder;
+	//builder.AddListeningPort(ip_port, grpc::InsecureServiceCredentials());
+	//builder.RegisterService(&service);
+	
+	//cq_ = builder.AddCompletionQueue();
+	
+	//std::unique_ptr<Server> server(builder.BuildAndStart());
+	//std::cout << "Server listening on " << ip_port << std::endl;
+	
+	//service.RequestAssignMapTask(cq_.get(), &cq_, server.get());
+	//service.RequestAssignReduceTask(cq_.get(), &cq_, server.get());
+	
+	//void* tag;
+	//bool ok;
+	
+	//while(true){
+		//cq_->Next(&tag, &ok);
+		//if(ok){
+			//if(tag == (void*)1 || tag == (void*)2) {
+				//do nothing
+			//}
+		//} else {
+			//std::cerr << "Error in completion queue processing." << std::endl;
+		//}
+	//}
+	
 	return true;
 
 }

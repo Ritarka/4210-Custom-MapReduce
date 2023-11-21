@@ -32,7 +32,7 @@ using masterworker::TaskType;
 class GreeterClient {
  public:
   GreeterClient(std::shared_ptr<Channel> channel)
-      : stub_(MasterWorker::NewStub(channel)), completion_queue_() {}
+      : stub_(MasterWorker::NewStub(channel)) {}
 
   // Assembles the client's payload, sends it and presents the response back
   // from the server.
@@ -60,8 +60,8 @@ class GreeterClient {
       //return "RPC failed";
     //}
   //}
-  void AssignMapTask(const MapTask& request, TaskCompletion* response);
-  void AssignReduceTask(const ReduceTask& request, TaskCompletion* response);
+  TaskCompletion AssignMapTask(const MapTask& request);
+  TaskCompletion AssignReduceTask(const ReduceTask& request);
 
   CompletionQueue completion_queue_;
 
@@ -69,33 +69,43 @@ class GreeterClient {
   std::unique_ptr<MasterWorker::Stub> stub_;
 };
 //Implementation of AssignMapTask
-void GreeterClient::AssignMapTask(const MapTask& request, TaskCompletion* response) {
+TaskCompletion GreeterClient::AssignMapTask(const MapTask& request) {
 	ClientContext context;
 	Status status;
+	TaskCompletion response;
 	
-	//Create the rpc object
-	std::unique_ptr<grpc::ClientAsyncResponseReader<TaskCompletion>> rpc(
-		stub_->PrepareAsyncAssignMapTask(&context, request, &completion_queue_));
-	//Start the async call
-	rpc->StartCall();
-	
-	//Finish the async call and wait for the response
-	rpc->Finish(response, &status, (void*)1); //tag for map
+	status = stub_->AssignMapTask(&context, request, &response);
+	if(status.ok()){
+		std::cout << "got map response" << std::endl;
+		return response;
+	} else {
+		std::cout << status.error_code() << ": " << status.error_message()
+                << std::endl;
+                //for now return empty task completion object
+                return TaskCompletion();
+        }
+        
+
 }
 
 //Implementation of AssignReduceTask
-void GreeterClient::AssignReduceTask(const ReduceTask& request, TaskCompletion* response){
+TaskCompletion GreeterClient::AssignReduceTask(const ReduceTask& request){
 	ClientContext context;
 	Status status;
+	TaskCompletion response;
+	status = stub_->AssignReduceTask(&context, request, &response);
+	if(status.ok()){
+		std::cout << "got reduce response" << std::endl;
+		return response;
+	} else {
+		std::cout << status.error_code() << ": " << status.error_message()
+                << std::endl;
+                //for now return empty task completion object
+                return TaskCompletion();
+        }
 	
 	
-	//Create the rpc object
-	std::unique_ptr<grpc::ClientAsyncResponseReader<TaskCompletion>> rpc(
-		stub_->PrepareAsyncAssignReduceTask(&context, request, &completion_queue_));
-	//Start the async call
-	rpc->StartCall();
-	//Finish the async call and wait for the response
-	rpc->Finish(response, &status, (void*)2); // 2 is the tag for reduce
+	
 }
 
 
@@ -130,6 +140,7 @@ class Master {
 		//atomic counters for number of map and reduce workers
 		std::atomic<int> remain_map_tasks;
 		std::atomic<int> remain_reduce_tasks;
+		TaskCompletion task_response;
 		
 		//Do we need this
 		// CompletionQueue completion_queue_;
@@ -149,7 +160,7 @@ class Master {
 Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_shards):
 	spec(mr_spec),
 	shards(file_shards),
-
+	task_response(TaskCompletion()),
 	maps(file_shards.size()),
 	reduces(spec.num_out_files),
 	remain_map_tasks(maps),
@@ -197,20 +208,20 @@ void Master::assignMapTasks(){
 		}
 		
 		//TaskCompletion object to hold reponse
-		TaskCompletion response;
+		//TaskCompletion response;
 		
 		//assign map task to worker async
-		greeter.AssignMapTask(mapTask, &response);
-		void* tag;
-		bool ok = false;
-		greeter.completion_queue_.Next(&tag, &ok);
-		
-		if(ok && tag && tag == (void*)1) { //Check if the tag is correct
+		//greeter.AssignMapTask(mapTask, &response);
+		TaskCompletion response = greeter.AssignMapTask(mapTask);
+		task_response = response;
+		//Handling error
+		if(response.taskid() != -1) {
 			worker_states[worker_index] = false;
 			handleTaskCompletion();
 		} else {
-			std::cerr << "Error in cq processing." << std::endl;
+			std::cout << "Error in AssignMapTask" << std::endl;
 		}
+		
 	}
 }
 
@@ -233,32 +244,27 @@ void Master::assignReduceTasks() {
 		}
 		
 		//task complete object
-		TaskCompletion response;
-		
-		greeter.AssignReduceTask(reduceTask, &response);
-		void* tag;
-		bool ok = false;
-		greeter.completion_queue_.Next(&tag, &ok);
-		
-		if(ok && tag && tag == (void*)2) { //Check if the tag is correct
-			//int receiver_index = static_cast<int>(tag);
+		TaskCompletion response = greeter.AssignReduceTask(reduceTask);
+		task_response = response;
+		//Handling error
+		if(response.taskid() != -1) {
 			worker_states[worker_index] = false;
 			handleTaskCompletion();
-			
 		} else {
-			std::cerr << "Error in cq processing." << std::endl;
+			std::cout << "Error in AssignReduceTask" << std::endl;
 		}
+		
 	}
 }
 
 void Master::handleTaskCompletion() {
-	TaskCompletion response;
+	//TaskCompletion response;
 	
 	//extract worker index
-	int worker_index = response.taskid();
-	if(response.tasktype() == TaskType::MAP){	
+	int worker_index = task_response.taskid();
+	if(task_response.tasktype() == TaskType::MAP){	
 		--remain_map_tasks;
-	} else if (response.tasktype() == TaskType::REDUCE){
+	} else if (task_response.tasktype() == TaskType::REDUCE){
 		--remain_reduce_tasks;
 	}
 	
