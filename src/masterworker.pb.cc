@@ -56,43 +56,7 @@ struct HelloReplyDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HelloReplyDefaultTypeInternal _HelloReply_default_instance_;
 template <typename>
-PROTOBUF_CONSTEXPR InputData::InputData(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.input_)*/ {
-    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
-  }
-
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct InputDataDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR InputDataDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~InputDataDefaultTypeInternal() {}
-  union {
-    InputData _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 InputDataDefaultTypeInternal _InputData_default_instance_;
-template <typename>
-PROTOBUF_CONSTEXPR OutputData::OutputData(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.result_)*/ {
-    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
-  }
-
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct OutputDataDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR OutputDataDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~OutputDataDefaultTypeInternal() {}
-  union {
-    OutputData _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OutputDataDefaultTypeInternal _OutputData_default_instance_;
-template <typename>
-PROTOBUF_CONSTEXPR MiniShard::MiniShard(
+PROTOBUF_CONSTEXPR ShardInfo::ShardInfo(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.file_name_)*/ {
     &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
@@ -103,101 +67,128 @@ PROTOBUF_CONSTEXPR MiniShard::MiniShard(
   , /*decltype(_impl_.end_offset_)*/ ::int64_t{0}
 
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct MiniShardDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MiniShardDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MiniShardDefaultTypeInternal() {}
+struct ShardInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ShardInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ShardInfoDefaultTypeInternal() {}
   union {
-    MiniShard _instance;
+    ShardInfo _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MiniShardDefaultTypeInternal _MiniShard_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ShardInfoDefaultTypeInternal _ShardInfo_default_instance_;
 template <typename>
-PROTOBUF_CONSTEXPR FileShard::FileShard(
+PROTOBUF_CONSTEXPR IntermediateFile::IntermediateFile(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.shards_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct FileShardDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR FileShardDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~FileShardDefaultTypeInternal() {}
-  union {
-    FileShard _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FileShardDefaultTypeInternal _FileShard_default_instance_;
-template <typename>
-PROTOBUF_CONSTEXPR MapTask::MapTask(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_._has_bits_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.filepath_)*/ {
+    /*decltype(_impl_.file_name_)*/ {
     &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
   }
 
-  , /*decltype(_impl_.fileshard_)*/nullptr
-  , /*decltype(_impl_.taskid_)*/ 0
-
-  , /*decltype(_impl_.tasktype_)*/ 0
-} {}
-struct MapTaskDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MapTaskDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MapTaskDefaultTypeInternal() {}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct IntermediateFileDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR IntermediateFileDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~IntermediateFileDefaultTypeInternal() {}
   union {
-    MapTask _instance;
+    IntermediateFile _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MapTaskDefaultTypeInternal _MapTask_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 IntermediateFileDefaultTypeInternal _IntermediateFile_default_instance_;
 template <typename>
-PROTOBUF_CONSTEXPR ReduceTask::ReduceTask(
+PROTOBUF_CONSTEXPR OutputFile::OutputFile(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.inputfilepath_)*/{}
-  , /*decltype(_impl_.outputfilepath_)*/ {
+    /*decltype(_impl_.file_name_)*/ {
     &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
   }
 
-  , /*decltype(_impl_.taskid_)*/ 0
-
-  , /*decltype(_impl_.tasktype_)*/ 0
-
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct ReduceTaskDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ReduceTaskDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ReduceTaskDefaultTypeInternal() {}
+struct OutputFileDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR OutputFileDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~OutputFileDefaultTypeInternal() {}
   union {
-    ReduceTask _instance;
+    OutputFile _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReduceTaskDefaultTypeInternal _ReduceTask_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OutputFileDefaultTypeInternal _OutputFile_default_instance_;
 template <typename>
-PROTOBUF_CONSTEXPR TaskCompletion::TaskCompletion(
+PROTOBUF_CONSTEXPR MapTaskRequest::MapTaskRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.outputdata_)*/nullptr
-  , /*decltype(_impl_.taskid_)*/ 0
+  , /*decltype(_impl_.shard_info_)*/nullptr
+  , /*decltype(_impl_.task_id_)*/ 0
 
-  , /*decltype(_impl_.tasktype_)*/ 0
+  , /*decltype(_impl_.num_reduces_)*/ 0
 } {}
-struct TaskCompletionDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR TaskCompletionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~TaskCompletionDefaultTypeInternal() {}
+struct MapTaskRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MapTaskRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MapTaskRequestDefaultTypeInternal() {}
   union {
-    TaskCompletion _instance;
+    MapTaskRequest _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TaskCompletionDefaultTypeInternal _TaskCompletion_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MapTaskRequestDefaultTypeInternal _MapTaskRequest_default_instance_;
+template <typename>
+PROTOBUF_CONSTEXPR MapTaskCompleted::MapTaskCompleted(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.intermediate_files_)*/{}
+  , /*decltype(_impl_.task_id_)*/ 0
+
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct MapTaskCompletedDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MapTaskCompletedDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MapTaskCompletedDefaultTypeInternal() {}
+  union {
+    MapTaskCompleted _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MapTaskCompletedDefaultTypeInternal _MapTaskCompleted_default_instance_;
+template <typename>
+PROTOBUF_CONSTEXPR ReduceTaskRequest::ReduceTaskRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.intermediate_files_)*/{}
+  , /*decltype(_impl_.task_id_)*/ 0
+
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ReduceTaskRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ReduceTaskRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ReduceTaskRequestDefaultTypeInternal() {}
+  union {
+    ReduceTaskRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReduceTaskRequestDefaultTypeInternal _ReduceTaskRequest_default_instance_;
+template <typename>
+PROTOBUF_CONSTEXPR ReduceTaskCompleted::ReduceTaskCompleted(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.output_file_)*/nullptr
+  , /*decltype(_impl_.task_id_)*/ 0
+} {}
+struct ReduceTaskCompletedDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ReduceTaskCompletedDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ReduceTaskCompletedDefaultTypeInternal() {}
+  union {
+    ReduceTaskCompleted _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReduceTaskCompletedDefaultTypeInternal _ReduceTaskCompleted_default_instance_;
 }  // namespace masterworker
 static ::_pb::Metadata file_level_metadata_masterworker_2eproto[9];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_masterworker_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_masterworker_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_masterworker_2eproto = nullptr;
 const ::uint32_t TableStruct_masterworker_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
@@ -221,83 +212,78 @@ const ::uint32_t TableStruct_masterworker_2eproto::offsets[] PROTOBUF_SECTION_VA
     ~0u,  // no sizeof(Split)
     PROTOBUF_FIELD_OFFSET(::masterworker::HelloReply, _impl_.message_),
     ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::masterworker::InputData, _internal_metadata_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ShardInfo, _internal_metadata_),
     ~0u,  // no _extensions_
     ~0u,  // no _oneof_case_
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     ~0u,  // no _split_
     ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::InputData, _impl_.input_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ShardInfo, _impl_.file_name_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ShardInfo, _impl_.start_offset_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ShardInfo, _impl_.end_offset_),
     ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::masterworker::OutputData, _internal_metadata_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::IntermediateFile, _internal_metadata_),
     ~0u,  // no _extensions_
     ~0u,  // no _oneof_case_
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     ~0u,  // no _split_
     ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::OutputData, _impl_.result_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::IntermediateFile, _impl_.file_name_),
     ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::masterworker::MiniShard, _internal_metadata_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::OutputFile, _internal_metadata_),
     ~0u,  // no _extensions_
     ~0u,  // no _oneof_case_
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     ~0u,  // no _split_
     ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::MiniShard, _impl_.file_name_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MiniShard, _impl_.start_offset_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MiniShard, _impl_.end_offset_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::masterworker::FileShard, _internal_metadata_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::OutputFile, _impl_.file_name_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _internal_metadata_),
     ~0u,  // no _extensions_
     ~0u,  // no _oneof_case_
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     ~0u,  // no _split_
     ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::FileShard, _impl_.shards_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTask, _impl_._has_bits_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTask, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _split_
-    ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTask, _impl_.taskid_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTask, _impl_.tasktype_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTask, _impl_.filepath_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTask, _impl_.fileshard_),
-    ~0u,
-    ~0u,
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.task_id_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.shard_info_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.num_reduces_),
     ~0u,
     0,
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTask, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _split_
-    ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTask, _impl_.taskid_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTask, _impl_.tasktype_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTask, _impl_.inputfilepath_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTask, _impl_.outputfilepath_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::TaskCompletion, _impl_._has_bits_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::TaskCompletion, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _split_
-    ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::masterworker::TaskCompletion, _impl_.taskid_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::TaskCompletion, _impl_.tasktype_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::TaskCompletion, _impl_.outputdata_),
     ~0u,
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskCompleted, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskCompleted, _impl_.task_id_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskCompleted, _impl_.intermediate_files_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskRequest, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskRequest, _impl_.task_id_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskRequest, _impl_.intermediate_files_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskCompleted, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskCompleted, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskCompleted, _impl_.task_id_),
+    PROTOBUF_FIELD_OFFSET(::masterworker::ReduceTaskCompleted, _impl_.output_file_),
     ~0u,
     0,
 };
@@ -306,59 +292,57 @@ static const ::_pbi::MigrationSchema
     schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
         { 0, -1, -1, sizeof(::masterworker::HelloRequest)},
         { 9, -1, -1, sizeof(::masterworker::HelloReply)},
-        { 18, -1, -1, sizeof(::masterworker::InputData)},
-        { 27, -1, -1, sizeof(::masterworker::OutputData)},
-        { 36, -1, -1, sizeof(::masterworker::MiniShard)},
-        { 47, -1, -1, sizeof(::masterworker::FileShard)},
-        { 56, 68, -1, sizeof(::masterworker::MapTask)},
-        { 72, -1, -1, sizeof(::masterworker::ReduceTask)},
-        { 84, 95, -1, sizeof(::masterworker::TaskCompletion)},
+        { 18, -1, -1, sizeof(::masterworker::ShardInfo)},
+        { 29, -1, -1, sizeof(::masterworker::IntermediateFile)},
+        { 38, -1, -1, sizeof(::masterworker::OutputFile)},
+        { 47, 58, -1, sizeof(::masterworker::MapTaskRequest)},
+        { 61, -1, -1, sizeof(::masterworker::MapTaskCompleted)},
+        { 71, -1, -1, sizeof(::masterworker::ReduceTaskRequest)},
+        { 81, 91, -1, sizeof(::masterworker::ReduceTaskCompleted)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
     &::masterworker::_HelloRequest_default_instance_._instance,
     &::masterworker::_HelloReply_default_instance_._instance,
-    &::masterworker::_InputData_default_instance_._instance,
-    &::masterworker::_OutputData_default_instance_._instance,
-    &::masterworker::_MiniShard_default_instance_._instance,
-    &::masterworker::_FileShard_default_instance_._instance,
-    &::masterworker::_MapTask_default_instance_._instance,
-    &::masterworker::_ReduceTask_default_instance_._instance,
-    &::masterworker::_TaskCompletion_default_instance_._instance,
+    &::masterworker::_ShardInfo_default_instance_._instance,
+    &::masterworker::_IntermediateFile_default_instance_._instance,
+    &::masterworker::_OutputFile_default_instance_._instance,
+    &::masterworker::_MapTaskRequest_default_instance_._instance,
+    &::masterworker::_MapTaskCompleted_default_instance_._instance,
+    &::masterworker::_ReduceTaskRequest_default_instance_._instance,
+    &::masterworker::_ReduceTaskCompleted_default_instance_._instance,
 };
 const char descriptor_table_protodef_masterworker_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
     "\n\022masterworker.proto\022\014masterworker\"\034\n\014He"
     "lloRequest\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017"
-    "\n\007message\030\001 \001(\t\"\032\n\tInputData\022\r\n\005input\030\001 "
-    "\001(\t\"\034\n\nOutputData\022\016\n\006result\030\001 \001(\t\"H\n\tMin"
-    "iShard\022\021\n\tfile_name\030\001 \001(\t\022\024\n\014start_offse"
-    "t\030\002 \001(\003\022\022\n\nend_offset\030\003 \001(\003\"4\n\tFileShard"
-    "\022\'\n\006shards\030\001 \003(\0132\027.masterworker.MiniShar"
-    "d\"\201\001\n\007MapTask\022\016\n\006taskId\030\001 \001(\005\022(\n\010taskTyp"
-    "e\030\002 \001(\0162\026.masterworker.TaskType\022\020\n\010fileP"
-    "ath\030\003 \001(\t\022*\n\tfileShard\030\004 \001(\0132\027.masterwor"
-    "ker.FileShard\"u\n\nReduceTask\022\016\n\006taskId\030\001 "
-    "\001(\005\022(\n\010taskType\030\002 \001(\0162\026.masterworker.Tas"
-    "kType\022\025\n\rinputFilePath\030\003 \003(\t\022\026\n\016outputFi"
-    "lePath\030\004 \001(\t\"x\n\016TaskCompletion\022\016\n\006taskId"
-    "\030\001 \001(\005\022(\n\010taskType\030\002 \001(\0162\026.masterworker."
-    "TaskType\022,\n\noutputData\030\003 \001(\0132\030.masterwor"
-    "ker.OutputData*)\n\010TaskType\022\007\n\003MAP\020\000\022\n\n\006R"
-    "EDUCE\020\001\022\010\n\004EMIT\020\0022\255\002\n\014MasterWorker\022D\n\rAs"
-    "signMapTask\022\025.masterworker.MapTask\032\034.mas"
-    "terworker.TaskCompletion\022J\n\020AssignReduce"
-    "Task\022\030.masterworker.ReduceTask\032\034.masterw"
-    "orker.TaskCompletion\022B\n\010SayHello\022\032.maste"
-    "rworker.HelloRequest\032\030.masterworker.Hell"
-    "oReply\"\000\022G\n\rSayHelloAgain\022\032.masterworker"
-    ".HelloRequest\032\030.masterworker.HelloReply\""
-    "\000b\006proto3"
+    "\n\007message\030\001 \001(\t\"H\n\tShardInfo\022\021\n\tfile_nam"
+    "e\030\001 \001(\t\022\024\n\014start_offset\030\002 \001(\003\022\022\n\nend_off"
+    "set\030\003 \001(\003\"%\n\020IntermediateFile\022\021\n\tfile_na"
+    "me\030\001 \001(\t\"\037\n\nOutputFile\022\021\n\tfile_name\030\001 \001("
+    "\t\"c\n\016MapTaskRequest\022\017\n\007task_id\030\001 \001(\005\022+\n\n"
+    "shard_info\030\002 \001(\0132\027.masterworker.ShardInf"
+    "o\022\023\n\013num_reduces\030\003 \001(\005\"_\n\020MapTaskComplet"
+    "ed\022\017\n\007task_id\030\001 \001(\005\022:\n\022intermediate_file"
+    "s\030\002 \003(\0132\036.masterworker.IntermediateFile\""
+    "`\n\021ReduceTaskRequest\022\017\n\007task_id\030\001 \001(\005\022:\n"
+    "\022intermediate_files\030\002 \003(\0132\036.masterworker"
+    ".IntermediateFile\"U\n\023ReduceTaskCompleted"
+    "\022\017\n\007task_id\030\001 \001(\005\022-\n\013output_file\030\002 \001(\0132\030"
+    ".masterworker.OutputFile2\302\002\n\014MasterWorke"
+    "r\022M\n\rAssignMapTask\022\034.masterworker.MapTas"
+    "kRequest\032\036.masterworker.MapTaskCompleted"
+    "\022V\n\020AssignReduceTask\022\037.masterworker.Redu"
+    "ceTaskRequest\032!.masterworker.ReduceTaskC"
+    "ompleted\022B\n\010SayHello\022\032.masterworker.Hell"
+    "oRequest\032\030.masterworker.HelloReply\"\000\022G\n\r"
+    "SayHelloAgain\022\032.masterworker.HelloReques"
+    "t\032\030.masterworker.HelloReply\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_masterworker_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_masterworker_2eproto = {
     false,
     false,
-    1009,
+    957,
     descriptor_table_protodef_masterworker_2eproto,
     "masterworker.proto",
     &descriptor_table_masterworker_2eproto_once,
@@ -391,20 +375,6 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_masterwo
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_masterworker_2eproto(&descriptor_table_masterworker_2eproto);
 namespace masterworker {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TaskType_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_masterworker_2eproto);
-  return file_level_enum_descriptors_masterworker_2eproto[0];
-}
-bool TaskType_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
 // ===================================================================
 
 class HelloRequest::_Internal {
@@ -799,410 +769,18 @@ void HelloReply::InternalSwap(HelloReply* other) {
 }
 // ===================================================================
 
-class InputData::_Internal {
+class ShardInfo::_Internal {
  public:
 };
 
-InputData::InputData(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+ShardInfo::ShardInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.InputData)
+  // @@protoc_insertion_point(arena_constructor:masterworker.ShardInfo)
 }
-InputData::InputData(const InputData& from)
+ShardInfo::ShardInfo(const ShardInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  InputData* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.input_) {}
-
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.input_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.input_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_input().empty()) {
-    _this->_impl_.input_.Set(from._internal_input(), _this->GetArenaForAllocation());
-  }
-  // @@protoc_insertion_point(copy_constructor:masterworker.InputData)
-}
-
-inline void InputData::SharedCtor(::_pb::Arena* arena) {
-  (void)arena;
-  new (&_impl_) Impl_{
-      decltype(_impl_.input_) {}
-
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.input_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.input_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-InputData::~InputData() {
-  // @@protoc_insertion_point(destructor:masterworker.InputData)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void InputData::SharedDtor() {
-  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.input_.Destroy();
-}
-
-void InputData::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void InputData::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.InputData)
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.input_.ClearToEmpty();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* InputData::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string input = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_input();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "masterworker.InputData.input"));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-::uint8_t* InputData::_InternalSerialize(
-    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.InputData)
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string input = 1;
-  if (!this->_internal_input().empty()) {
-    const std::string& _s = this->_internal_input();
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.InputData.input");
-    target = stream->WriteStringMaybeAliased(1, _s, target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.InputData)
-  return target;
-}
-
-::size_t InputData::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.InputData)
-  ::size_t total_size = 0;
-
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string input = 1;
-  if (!this->_internal_input().empty()) {
-    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-                                    this->_internal_input());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData InputData::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    InputData::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*InputData::GetClassData() const { return &_class_data_; }
-
-
-void InputData::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<InputData*>(&to_msg);
-  auto& from = static_cast<const InputData&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.InputData)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_input().empty()) {
-    _this->_internal_set_input(from._internal_input());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void InputData::CopyFrom(const InputData& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.InputData)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool InputData::IsInitialized() const {
-  return true;
-}
-
-void InputData::InternalSwap(InputData* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.input_, lhs_arena,
-                                       &other->_impl_.input_, rhs_arena);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata InputData::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
-      file_level_metadata_masterworker_2eproto[2]);
-}
-// ===================================================================
-
-class OutputData::_Internal {
- public:
-};
-
-OutputData::OutputData(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.OutputData)
-}
-OutputData::OutputData(const OutputData& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  OutputData* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.result_) {}
-
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.result_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.result_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_result().empty()) {
-    _this->_impl_.result_.Set(from._internal_result(), _this->GetArenaForAllocation());
-  }
-  // @@protoc_insertion_point(copy_constructor:masterworker.OutputData)
-}
-
-inline void OutputData::SharedCtor(::_pb::Arena* arena) {
-  (void)arena;
-  new (&_impl_) Impl_{
-      decltype(_impl_.result_) {}
-
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.result_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.result_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-OutputData::~OutputData() {
-  // @@protoc_insertion_point(destructor:masterworker.OutputData)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void OutputData::SharedDtor() {
-  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.result_.Destroy();
-}
-
-void OutputData::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void OutputData::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.OutputData)
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.result_.ClearToEmpty();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* OutputData::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string result = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_result();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "masterworker.OutputData.result"));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-::uint8_t* OutputData::_InternalSerialize(
-    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.OutputData)
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string result = 1;
-  if (!this->_internal_result().empty()) {
-    const std::string& _s = this->_internal_result();
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.OutputData.result");
-    target = stream->WriteStringMaybeAliased(1, _s, target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.OutputData)
-  return target;
-}
-
-::size_t OutputData::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.OutputData)
-  ::size_t total_size = 0;
-
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string result = 1;
-  if (!this->_internal_result().empty()) {
-    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-                                    this->_internal_result());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData OutputData::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    OutputData::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*OutputData::GetClassData() const { return &_class_data_; }
-
-
-void OutputData::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<OutputData*>(&to_msg);
-  auto& from = static_cast<const OutputData&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.OutputData)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_result().empty()) {
-    _this->_internal_set_result(from._internal_result());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void OutputData::CopyFrom(const OutputData& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.OutputData)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool OutputData::IsInitialized() const {
-  return true;
-}
-
-void OutputData::InternalSwap(OutputData* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.result_, lhs_arena,
-                                       &other->_impl_.result_, rhs_arena);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata OutputData::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
-      file_level_metadata_masterworker_2eproto[3]);
-}
-// ===================================================================
-
-class MiniShard::_Internal {
- public:
-};
-
-MiniShard::MiniShard(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.MiniShard)
-}
-MiniShard::MiniShard(const MiniShard& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  MiniShard* const _this = this; (void)_this;
+  ShardInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.file_name_) {}
 
@@ -1223,10 +801,10 @@ MiniShard::MiniShard(const MiniShard& from)
   ::memcpy(&_impl_.start_offset_, &from._impl_.start_offset_,
     static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.end_offset_) -
     reinterpret_cast<char*>(&_impl_.start_offset_)) + sizeof(_impl_.end_offset_));
-  // @@protoc_insertion_point(copy_constructor:masterworker.MiniShard)
+  // @@protoc_insertion_point(copy_constructor:masterworker.ShardInfo)
 }
 
-inline void MiniShard::SharedCtor(::_pb::Arena* arena) {
+inline void ShardInfo::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
       decltype(_impl_.file_name_) {}
@@ -1243,8 +821,8 @@ inline void MiniShard::SharedCtor(::_pb::Arena* arena) {
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
-MiniShard::~MiniShard() {
-  // @@protoc_insertion_point(destructor:masterworker.MiniShard)
+ShardInfo::~ShardInfo() {
+  // @@protoc_insertion_point(destructor:masterworker.ShardInfo)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1252,17 +830,17 @@ MiniShard::~MiniShard() {
   SharedDtor();
 }
 
-inline void MiniShard::SharedDtor() {
+inline void ShardInfo::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.file_name_.Destroy();
 }
 
-void MiniShard::SetCachedSize(int size) const {
+void ShardInfo::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void MiniShard::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.MiniShard)
+void ShardInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.ShardInfo)
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1274,7 +852,7 @@ void MiniShard::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* MiniShard::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* ShardInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     ::uint32_t tag;
@@ -1286,7 +864,7 @@ const char* MiniShard::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
           auto str = _internal_mutable_file_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "masterworker.MiniShard.file_name"));
+          CHK_(::_pbi::VerifyUTF8(str, "masterworker.ShardInfo.file_name"));
         } else {
           goto handle_unusual;
         }
@@ -1332,9 +910,9 @@ failure:
 #undef CHK_
 }
 
-::uint8_t* MiniShard::_InternalSerialize(
+::uint8_t* ShardInfo::_InternalSerialize(
     ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.MiniShard)
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.ShardInfo)
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1342,7 +920,7 @@ failure:
   if (!this->_internal_file_name().empty()) {
     const std::string& _s = this->_internal_file_name();
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.MiniShard.file_name");
+        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.ShardInfo.file_name");
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
@@ -1364,12 +942,12 @@ failure:
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.MiniShard)
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.ShardInfo)
   return target;
 }
 
-::size_t MiniShard::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.MiniShard)
+::size_t ShardInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.ShardInfo)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -1397,17 +975,17 @@ failure:
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MiniShard::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ShardInfo::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    MiniShard::MergeImpl
+    ShardInfo::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MiniShard::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ShardInfo::GetClassData() const { return &_class_data_; }
 
 
-void MiniShard::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<MiniShard*>(&to_msg);
-  auto& from = static_cast<const MiniShard&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.MiniShard)
+void ShardInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ShardInfo*>(&to_msg);
+  auto& from = static_cast<const ShardInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.ShardInfo)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1424,18 +1002,18 @@ void MiniShard::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void MiniShard::CopyFrom(const MiniShard& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.MiniShard)
+void ShardInfo::CopyFrom(const ShardInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.ShardInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MiniShard::IsInitialized() const {
+bool ShardInfo::IsInitialized() const {
   return true;
 }
 
-void MiniShard::InternalSwap(MiniShard* other) {
+void ShardInfo::InternalSwap(ShardInfo* other) {
   using std::swap;
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
@@ -1443,50 +1021,469 @@ void MiniShard::InternalSwap(MiniShard* other) {
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.file_name_, lhs_arena,
                                        &other->_impl_.file_name_, rhs_arena);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(MiniShard, _impl_.end_offset_)
-      + sizeof(MiniShard::_impl_.end_offset_)
-      - PROTOBUF_FIELD_OFFSET(MiniShard, _impl_.start_offset_)>(
+      PROTOBUF_FIELD_OFFSET(ShardInfo, _impl_.end_offset_)
+      + sizeof(ShardInfo::_impl_.end_offset_)
+      - PROTOBUF_FIELD_OFFSET(ShardInfo, _impl_.start_offset_)>(
           reinterpret_cast<char*>(&_impl_.start_offset_),
           reinterpret_cast<char*>(&other->_impl_.start_offset_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata MiniShard::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata ShardInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
+      file_level_metadata_masterworker_2eproto[2]);
+}
+// ===================================================================
+
+class IntermediateFile::_Internal {
+ public:
+};
+
+IntermediateFile::IntermediateFile(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:masterworker.IntermediateFile)
+}
+IntermediateFile::IntermediateFile(const IntermediateFile& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  IntermediateFile* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.file_name_) {}
+
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.file_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.file_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_file_name().empty()) {
+    _this->_impl_.file_name_.Set(from._internal_file_name(), _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:masterworker.IntermediateFile)
+}
+
+inline void IntermediateFile::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.file_name_) {}
+
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.file_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.file_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+IntermediateFile::~IntermediateFile() {
+  // @@protoc_insertion_point(destructor:masterworker.IntermediateFile)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void IntermediateFile::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.file_name_.Destroy();
+}
+
+void IntermediateFile::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void IntermediateFile::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.IntermediateFile)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.file_name_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* IntermediateFile::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string file_name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_file_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "masterworker.IntermediateFile.file_name"));
+        } else {
+          goto handle_unusual;
+        }
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+::uint8_t* IntermediateFile::_InternalSerialize(
+    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.IntermediateFile)
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string file_name = 1;
+  if (!this->_internal_file_name().empty()) {
+    const std::string& _s = this->_internal_file_name();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.IntermediateFile.file_name");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.IntermediateFile)
+  return target;
+}
+
+::size_t IntermediateFile::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.IntermediateFile)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string file_name = 1;
+  if (!this->_internal_file_name().empty()) {
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                    this->_internal_file_name());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData IntermediateFile::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    IntermediateFile::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*IntermediateFile::GetClassData() const { return &_class_data_; }
+
+
+void IntermediateFile::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<IntermediateFile*>(&to_msg);
+  auto& from = static_cast<const IntermediateFile&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.IntermediateFile)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_file_name().empty()) {
+    _this->_internal_set_file_name(from._internal_file_name());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void IntermediateFile::CopyFrom(const IntermediateFile& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.IntermediateFile)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool IntermediateFile::IsInitialized() const {
+  return true;
+}
+
+void IntermediateFile::InternalSwap(IntermediateFile* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.file_name_, lhs_arena,
+                                       &other->_impl_.file_name_, rhs_arena);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata IntermediateFile::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
+      file_level_metadata_masterworker_2eproto[3]);
+}
+// ===================================================================
+
+class OutputFile::_Internal {
+ public:
+};
+
+OutputFile::OutputFile(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:masterworker.OutputFile)
+}
+OutputFile::OutputFile(const OutputFile& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  OutputFile* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.file_name_) {}
+
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.file_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.file_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_file_name().empty()) {
+    _this->_impl_.file_name_.Set(from._internal_file_name(), _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:masterworker.OutputFile)
+}
+
+inline void OutputFile::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.file_name_) {}
+
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.file_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.file_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+OutputFile::~OutputFile() {
+  // @@protoc_insertion_point(destructor:masterworker.OutputFile)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void OutputFile::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.file_name_.Destroy();
+}
+
+void OutputFile::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void OutputFile::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.OutputFile)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.file_name_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* OutputFile::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string file_name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_file_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "masterworker.OutputFile.file_name"));
+        } else {
+          goto handle_unusual;
+        }
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+::uint8_t* OutputFile::_InternalSerialize(
+    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.OutputFile)
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string file_name = 1;
+  if (!this->_internal_file_name().empty()) {
+    const std::string& _s = this->_internal_file_name();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.OutputFile.file_name");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.OutputFile)
+  return target;
+}
+
+::size_t OutputFile::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.OutputFile)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string file_name = 1;
+  if (!this->_internal_file_name().empty()) {
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                    this->_internal_file_name());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData OutputFile::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    OutputFile::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*OutputFile::GetClassData() const { return &_class_data_; }
+
+
+void OutputFile::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<OutputFile*>(&to_msg);
+  auto& from = static_cast<const OutputFile&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.OutputFile)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_file_name().empty()) {
+    _this->_internal_set_file_name(from._internal_file_name());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void OutputFile::CopyFrom(const OutputFile& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.OutputFile)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool OutputFile::IsInitialized() const {
+  return true;
+}
+
+void OutputFile::InternalSwap(OutputFile* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.file_name_, lhs_arena,
+                                       &other->_impl_.file_name_, rhs_arena);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata OutputFile::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
       file_level_metadata_masterworker_2eproto[4]);
 }
 // ===================================================================
 
-class FileShard::_Internal {
+class MapTaskRequest::_Internal {
  public:
+  using HasBits = decltype(std::declval<MapTaskRequest>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(MapTaskRequest, _impl_._has_bits_);
+  static const ::masterworker::ShardInfo& shard_info(const MapTaskRequest* msg);
+  static void set_has_shard_info(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
-FileShard::FileShard(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+const ::masterworker::ShardInfo&
+MapTaskRequest::_Internal::shard_info(const MapTaskRequest* msg) {
+  return *msg->_impl_.shard_info_;
+}
+MapTaskRequest::MapTaskRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.FileShard)
+  // @@protoc_insertion_point(arena_constructor:masterworker.MapTaskRequest)
 }
-FileShard::FileShard(const FileShard& from)
+MapTaskRequest::MapTaskRequest(const MapTaskRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  FileShard* const _this = this; (void)_this;
+  MapTaskRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.shards_){from._impl_.shards_}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.shard_info_){nullptr}
+    , decltype(_impl_.task_id_) {}
+
+    , decltype(_impl_.num_reduces_) {}
+  };
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:masterworker.FileShard)
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.shard_info_ = new ::masterworker::ShardInfo(*from._impl_.shard_info_);
+  }
+  ::memcpy(&_impl_.task_id_, &from._impl_.task_id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.num_reduces_) -
+    reinterpret_cast<char*>(&_impl_.task_id_)) + sizeof(_impl_.num_reduces_));
+  // @@protoc_insertion_point(copy_constructor:masterworker.MapTaskRequest)
 }
 
-inline void FileShard::SharedCtor(::_pb::Arena* arena) {
+inline void MapTaskRequest::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
-      decltype(_impl_.shards_){arena}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.shard_info_){nullptr}
+    , decltype(_impl_.task_id_) { 0 }
+
+    , decltype(_impl_.num_reduces_) { 0 }
+
   };
 }
 
-FileShard::~FileShard() {
-  // @@protoc_insertion_point(destructor:masterworker.FileShard)
+MapTaskRequest::~MapTaskRequest() {
+  // @@protoc_insertion_point(destructor:masterworker.MapTaskRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1494,41 +1491,63 @@ FileShard::~FileShard() {
   SharedDtor();
 }
 
-inline void FileShard::SharedDtor() {
+inline void MapTaskRequest::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  _internal_mutable_shards()->~RepeatedPtrField();
+  if (this != internal_default_instance()) delete _impl_.shard_info_;
 }
 
-void FileShard::SetCachedSize(int size) const {
+void MapTaskRequest::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void FileShard::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.FileShard)
+void MapTaskRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.MapTaskRequest)
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _internal_mutable_shards()->Clear();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.shard_info_ != nullptr);
+    _impl_.shard_info_->Clear();
+  }
+  ::memset(&_impl_.task_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.num_reduces_) -
+      reinterpret_cast<char*>(&_impl_.task_id_)) + sizeof(_impl_.num_reduces_));
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* FileShard::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* MapTaskRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .masterworker.MiniShard shards = 1;
+      // int32 task_id = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_shards(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
+          _impl_.task_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else {
+          goto handle_unusual;
+        }
+        continue;
+      // .masterworker.ShardInfo shard_info = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_shard_info(), ptr);
+          CHK_(ptr);
+        } else {
+          goto handle_unusual;
+        }
+        continue;
+      // int32 num_reduces = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 24)) {
+          _impl_.num_reduces_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
         } else {
           goto handle_unusual;
         }
@@ -1549,6 +1568,7 @@ const char* FileShard::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1556,161 +1576,166 @@ failure:
 #undef CHK_
 }
 
-::uint8_t* FileShard::_InternalSerialize(
+::uint8_t* MapTaskRequest::_InternalSerialize(
     ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.FileShard)
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.MapTaskRequest)
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .masterworker.MiniShard shards = 1;
-  for (unsigned i = 0,
-      n = static_cast<unsigned>(this->_internal_shards_size()); i < n; i++) {
-    const auto& repfield = this->_internal_shards(i);
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        1, this->_internal_task_id(), target);
+  }
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // .masterworker.ShardInfo shard_info = 2;
+  if (cached_has_bits & 0x00000001u) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::shard_info(this),
+        _Internal::shard_info(this).GetCachedSize(), target, stream);
+  }
+
+  // int32 num_reduces = 3;
+  if (this->_internal_num_reduces() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        3, this->_internal_num_reduces(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.FileShard)
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.MapTaskRequest)
   return target;
 }
 
-::size_t FileShard::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.FileShard)
+::size_t MapTaskRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.MapTaskRequest)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .masterworker.MiniShard shards = 1;
-  total_size += 1UL * this->_internal_shards_size();
-  for (const auto& msg : this->_internal_shards()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  // .masterworker.ShardInfo shard_info = 2;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.shard_info_);
+  }
+
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_task_id());
+  }
+
+  // int32 num_reduces = 3;
+  if (this->_internal_num_reduces() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_num_reduces());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData FileShard::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MapTaskRequest::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    FileShard::MergeImpl
+    MapTaskRequest::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*FileShard::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MapTaskRequest::GetClassData() const { return &_class_data_; }
 
 
-void FileShard::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<FileShard*>(&to_msg);
-  auto& from = static_cast<const FileShard&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.FileShard)
+void MapTaskRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<MapTaskRequest*>(&to_msg);
+  auto& from = static_cast<const MapTaskRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.MapTaskRequest)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_shards()->MergeFrom(from._internal_shards());
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_internal_mutable_shard_info()->::masterworker::ShardInfo::MergeFrom(
+        from._internal_shard_info());
+  }
+  if (from._internal_task_id() != 0) {
+    _this->_internal_set_task_id(from._internal_task_id());
+  }
+  if (from._internal_num_reduces() != 0) {
+    _this->_internal_set_num_reduces(from._internal_num_reduces());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void FileShard::CopyFrom(const FileShard& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.FileShard)
+void MapTaskRequest::CopyFrom(const MapTaskRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.MapTaskRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool FileShard::IsInitialized() const {
+bool MapTaskRequest::IsInitialized() const {
   return true;
 }
 
-void FileShard::InternalSwap(FileShard* other) {
+void MapTaskRequest::InternalSwap(MapTaskRequest* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _internal_mutable_shards()->InternalSwap(other->_internal_mutable_shards());
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MapTaskRequest, _impl_.num_reduces_)
+      + sizeof(MapTaskRequest::_impl_.num_reduces_)
+      - PROTOBUF_FIELD_OFFSET(MapTaskRequest, _impl_.shard_info_)>(
+          reinterpret_cast<char*>(&_impl_.shard_info_),
+          reinterpret_cast<char*>(&other->_impl_.shard_info_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata FileShard::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata MapTaskRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
       file_level_metadata_masterworker_2eproto[5]);
 }
 // ===================================================================
 
-class MapTask::_Internal {
+class MapTaskCompleted::_Internal {
  public:
-  using HasBits = decltype(std::declval<MapTask>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-    8 * PROTOBUF_FIELD_OFFSET(MapTask, _impl_._has_bits_);
-  static const ::masterworker::FileShard& fileshard(const MapTask* msg);
-  static void set_has_fileshard(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
 };
 
-const ::masterworker::FileShard&
-MapTask::_Internal::fileshard(const MapTask* msg) {
-  return *msg->_impl_.fileshard_;
-}
-MapTask::MapTask(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+MapTaskCompleted::MapTaskCompleted(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.MapTask)
+  // @@protoc_insertion_point(arena_constructor:masterworker.MapTaskCompleted)
 }
-MapTask::MapTask(const MapTask& from)
+MapTaskCompleted::MapTaskCompleted(const MapTaskCompleted& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  MapTask* const _this = this; (void)_this;
+  MapTaskCompleted* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){from._impl_._has_bits_}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.filepath_) {}
+      decltype(_impl_.intermediate_files_){from._impl_.intermediate_files_}
+    , decltype(_impl_.task_id_) {}
 
-    , decltype(_impl_.fileshard_){nullptr}
-    , decltype(_impl_.taskid_) {}
-
-    , decltype(_impl_.tasktype_) {}
-  };
+    , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.filepath_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.filepath_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_filepath().empty()) {
-    _this->_impl_.filepath_.Set(from._internal_filepath(), _this->GetArenaForAllocation());
-  }
-  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    _this->_impl_.fileshard_ = new ::masterworker::FileShard(*from._impl_.fileshard_);
-  }
-  ::memcpy(&_impl_.taskid_, &from._impl_.taskid_,
-    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.tasktype_) -
-    reinterpret_cast<char*>(&_impl_.taskid_)) + sizeof(_impl_.tasktype_));
-  // @@protoc_insertion_point(copy_constructor:masterworker.MapTask)
+  _this->_impl_.task_id_ = from._impl_.task_id_;
+  // @@protoc_insertion_point(copy_constructor:masterworker.MapTaskCompleted)
 }
 
-inline void MapTask::SharedCtor(::_pb::Arena* arena) {
+inline void MapTaskCompleted::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){}
+      decltype(_impl_.intermediate_files_){arena}
+    , decltype(_impl_.task_id_) { 0 }
+
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.filepath_) {}
-
-    , decltype(_impl_.fileshard_){nullptr}
-    , decltype(_impl_.taskid_) { 0 }
-
-    , decltype(_impl_.tasktype_) { 0 }
-
   };
-  _impl_.filepath_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.filepath_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
-MapTask::~MapTask() {
-  // @@protoc_insertion_point(destructor:masterworker.MapTask)
+MapTaskCompleted::~MapTaskCompleted() {
+  // @@protoc_insertion_point(destructor:masterworker.MapTaskCompleted)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1718,77 +1743,51 @@ MapTask::~MapTask() {
   SharedDtor();
 }
 
-inline void MapTask::SharedDtor() {
+inline void MapTaskCompleted::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.filepath_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.fileshard_;
+  _internal_mutable_intermediate_files()->~RepeatedPtrField();
 }
 
-void MapTask::SetCachedSize(int size) const {
+void MapTaskCompleted::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void MapTask::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.MapTask)
+void MapTaskCompleted::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.MapTaskCompleted)
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.filepath_.ClearToEmpty();
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(_impl_.fileshard_ != nullptr);
-    _impl_.fileshard_->Clear();
-  }
-  ::memset(&_impl_.taskid_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.tasktype_) -
-      reinterpret_cast<char*>(&_impl_.taskid_)) + sizeof(_impl_.tasktype_));
-  _impl_._has_bits_.Clear();
+  _internal_mutable_intermediate_files()->Clear();
+  _impl_.task_id_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* MapTask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* MapTaskCompleted::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 taskId = 1;
+      // int32 task_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
-          _impl_.taskid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.task_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else {
           goto handle_unusual;
         }
         continue;
-      // .masterworker.TaskType taskType = 2;
+      // repeated .masterworker.IntermediateFile intermediate_files = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 16)) {
-          ::int32_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-          _internal_set_tasktype(static_cast<::masterworker::TaskType>(val));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      // string filePath = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
-          auto str = _internal_mutable_filepath();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "masterworker.MapTask.filePath"));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      // .masterworker.FileShard fileShard = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 34)) {
-          ptr = ctx->ParseMessage(_internal_mutable_fileshard(), ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_intermediate_files(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else {
           goto handle_unusual;
         }
@@ -1809,7 +1808,6 @@ const char* MapTask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
     CHK_(ptr != nullptr);
   }  // while
 message_done:
-  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1817,208 +1815,142 @@ failure:
 #undef CHK_
 }
 
-::uint8_t* MapTask::_InternalSerialize(
+::uint8_t* MapTaskCompleted::_InternalSerialize(
     ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.MapTask)
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.MapTaskCompleted)
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 taskId = 1;
-  if (this->_internal_taskid() != 0) {
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
-        1, this->_internal_taskid(), target);
+        1, this->_internal_task_id(), target);
   }
 
-  // .masterworker.TaskType taskType = 2;
-  if (this->_internal_tasktype() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        2, this->_internal_tasktype(), target);
-  }
-
-  // string filePath = 3;
-  if (!this->_internal_filepath().empty()) {
-    const std::string& _s = this->_internal_filepath();
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.MapTask.filePath");
-    target = stream->WriteStringMaybeAliased(3, _s, target);
-  }
-
-  cached_has_bits = _impl_._has_bits_[0];
-  // .masterworker.FileShard fileShard = 4;
-  if (cached_has_bits & 0x00000001u) {
+  // repeated .masterworker.IntermediateFile intermediate_files = 2;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_intermediate_files_size()); i < n; i++) {
+    const auto& repfield = this->_internal_intermediate_files(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(4, _Internal::fileshard(this),
-        _Internal::fileshard(this).GetCachedSize(), target, stream);
+        InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.MapTask)
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.MapTaskCompleted)
   return target;
 }
 
-::size_t MapTask::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.MapTask)
+::size_t MapTaskCompleted::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.MapTaskCompleted)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string filePath = 3;
-  if (!this->_internal_filepath().empty()) {
-    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-                                    this->_internal_filepath());
+  // repeated .masterworker.IntermediateFile intermediate_files = 2;
+  total_size += 1UL * this->_internal_intermediate_files_size();
+  for (const auto& msg : this->_internal_intermediate_files()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // .masterworker.FileShard fileShard = 4;
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.fileshard_);
-  }
-
-  // int32 taskId = 1;
-  if (this->_internal_taskid() != 0) {
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-        this->_internal_taskid());
-  }
-
-  // .masterworker.TaskType taskType = 2;
-  if (this->_internal_tasktype() != 0) {
-    total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_tasktype());
+        this->_internal_task_id());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MapTask::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MapTaskCompleted::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    MapTask::MergeImpl
+    MapTaskCompleted::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MapTask::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MapTaskCompleted::GetClassData() const { return &_class_data_; }
 
 
-void MapTask::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<MapTask*>(&to_msg);
-  auto& from = static_cast<const MapTask&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.MapTask)
+void MapTaskCompleted::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<MapTaskCompleted*>(&to_msg);
+  auto& from = static_cast<const MapTaskCompleted&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.MapTaskCompleted)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_filepath().empty()) {
-    _this->_internal_set_filepath(from._internal_filepath());
-  }
-  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    _this->_internal_mutable_fileshard()->::masterworker::FileShard::MergeFrom(
-        from._internal_fileshard());
-  }
-  if (from._internal_taskid() != 0) {
-    _this->_internal_set_taskid(from._internal_taskid());
-  }
-  if (from._internal_tasktype() != 0) {
-    _this->_internal_set_tasktype(from._internal_tasktype());
+  _this->_internal_mutable_intermediate_files()->MergeFrom(from._internal_intermediate_files());
+  if (from._internal_task_id() != 0) {
+    _this->_internal_set_task_id(from._internal_task_id());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void MapTask::CopyFrom(const MapTask& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.MapTask)
+void MapTaskCompleted::CopyFrom(const MapTaskCompleted& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.MapTaskCompleted)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MapTask::IsInitialized() const {
+bool MapTaskCompleted::IsInitialized() const {
   return true;
 }
 
-void MapTask::InternalSwap(MapTask* other) {
+void MapTaskCompleted::InternalSwap(MapTaskCompleted* other) {
   using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.filepath_, lhs_arena,
-                                       &other->_impl_.filepath_, rhs_arena);
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(MapTask, _impl_.tasktype_)
-      + sizeof(MapTask::_impl_.tasktype_)
-      - PROTOBUF_FIELD_OFFSET(MapTask, _impl_.fileshard_)>(
-          reinterpret_cast<char*>(&_impl_.fileshard_),
-          reinterpret_cast<char*>(&other->_impl_.fileshard_));
+  _internal_mutable_intermediate_files()->InternalSwap(other->_internal_mutable_intermediate_files());
+
+  swap(_impl_.task_id_, other->_impl_.task_id_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata MapTask::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata MapTaskCompleted::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
       file_level_metadata_masterworker_2eproto[6]);
 }
 // ===================================================================
 
-class ReduceTask::_Internal {
+class ReduceTaskRequest::_Internal {
  public:
 };
 
-ReduceTask::ReduceTask(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+ReduceTaskRequest::ReduceTaskRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.ReduceTask)
+  // @@protoc_insertion_point(arena_constructor:masterworker.ReduceTaskRequest)
 }
-ReduceTask::ReduceTask(const ReduceTask& from)
+ReduceTaskRequest::ReduceTaskRequest(const ReduceTaskRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  ReduceTask* const _this = this; (void)_this;
+  ReduceTaskRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.inputfilepath_){from._impl_.inputfilepath_}
-    , decltype(_impl_.outputfilepath_) {}
-
-    , decltype(_impl_.taskid_) {}
-
-    , decltype(_impl_.tasktype_) {}
+      decltype(_impl_.intermediate_files_){from._impl_.intermediate_files_}
+    , decltype(_impl_.task_id_) {}
 
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.outputfilepath_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.outputfilepath_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_outputfilepath().empty()) {
-    _this->_impl_.outputfilepath_.Set(from._internal_outputfilepath(), _this->GetArenaForAllocation());
-  }
-  ::memcpy(&_impl_.taskid_, &from._impl_.taskid_,
-    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.tasktype_) -
-    reinterpret_cast<char*>(&_impl_.taskid_)) + sizeof(_impl_.tasktype_));
-  // @@protoc_insertion_point(copy_constructor:masterworker.ReduceTask)
+  _this->_impl_.task_id_ = from._impl_.task_id_;
+  // @@protoc_insertion_point(copy_constructor:masterworker.ReduceTaskRequest)
 }
 
-inline void ReduceTask::SharedCtor(::_pb::Arena* arena) {
+inline void ReduceTaskRequest::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
-      decltype(_impl_.inputfilepath_){arena}
-    , decltype(_impl_.outputfilepath_) {}
-
-    , decltype(_impl_.taskid_) { 0 }
-
-    , decltype(_impl_.tasktype_) { 0 }
+      decltype(_impl_.intermediate_files_){arena}
+    , decltype(_impl_.task_id_) { 0 }
 
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.outputfilepath_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.outputfilepath_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
-ReduceTask::~ReduceTask() {
-  // @@protoc_insertion_point(destructor:masterworker.ReduceTask)
+ReduceTaskRequest::~ReduceTaskRequest() {
+  // @@protoc_insertion_point(destructor:masterworker.ReduceTaskRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -2026,78 +1958,51 @@ ReduceTask::~ReduceTask() {
   SharedDtor();
 }
 
-inline void ReduceTask::SharedDtor() {
+inline void ReduceTaskRequest::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  _internal_mutable_inputfilepath()->~RepeatedPtrField();
-  _impl_.outputfilepath_.Destroy();
+  _internal_mutable_intermediate_files()->~RepeatedPtrField();
 }
 
-void ReduceTask::SetCachedSize(int size) const {
+void ReduceTaskRequest::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void ReduceTask::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.ReduceTask)
+void ReduceTaskRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.ReduceTaskRequest)
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _internal_mutable_inputfilepath()->Clear();
-  _impl_.outputfilepath_.ClearToEmpty();
-  ::memset(&_impl_.taskid_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.tasktype_) -
-      reinterpret_cast<char*>(&_impl_.taskid_)) + sizeof(_impl_.tasktype_));
+  _internal_mutable_intermediate_files()->Clear();
+  _impl_.task_id_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* ReduceTask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* ReduceTaskRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 taskId = 1;
+      // int32 task_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
-          _impl_.taskid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.task_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else {
           goto handle_unusual;
         }
         continue;
-      // .masterworker.TaskType taskType = 2;
+      // repeated .masterworker.IntermediateFile intermediate_files = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 16)) {
-          ::int32_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-          _internal_set_tasktype(static_cast<::masterworker::TaskType>(val));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      // repeated string inputFilePath = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            auto str = _internal_add_inputfilepath();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            ptr = ctx->ParseMessage(_internal_add_intermediate_files(), ptr);
             CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "masterworker.ReduceTask.inputFilePath"));
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      // string outputFilePath = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 34)) {
-          auto str = _internal_mutable_outputfilepath();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "masterworker.ReduceTask.outputFilePath"));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else {
           goto handle_unusual;
         }
@@ -2125,206 +2030,158 @@ failure:
 #undef CHK_
 }
 
-::uint8_t* ReduceTask::_InternalSerialize(
+::uint8_t* ReduceTaskRequest::_InternalSerialize(
     ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.ReduceTask)
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.ReduceTaskRequest)
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 taskId = 1;
-  if (this->_internal_taskid() != 0) {
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
-        1, this->_internal_taskid(), target);
+        1, this->_internal_task_id(), target);
   }
 
-  // .masterworker.TaskType taskType = 2;
-  if (this->_internal_tasktype() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        2, this->_internal_tasktype(), target);
-  }
-
-  // repeated string inputFilePath = 3;
-  for (int i = 0, n = this->_internal_inputfilepath_size(); i < n; ++i) {
-    const auto& s = this->_internal_inputfilepath(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        s.data(), static_cast<int>(s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.ReduceTask.inputFilePath");
-    target = stream->WriteString(3, s, target);
-  }
-
-  // string outputFilePath = 4;
-  if (!this->_internal_outputfilepath().empty()) {
-    const std::string& _s = this->_internal_outputfilepath();
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.ReduceTask.outputFilePath");
-    target = stream->WriteStringMaybeAliased(4, _s, target);
+  // repeated .masterworker.IntermediateFile intermediate_files = 2;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_intermediate_files_size()); i < n; i++) {
+    const auto& repfield = this->_internal_intermediate_files(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.ReduceTask)
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.ReduceTaskRequest)
   return target;
 }
 
-::size_t ReduceTask::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.ReduceTask)
+::size_t ReduceTaskRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.ReduceTaskRequest)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string inputFilePath = 3;
-  total_size += 1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_internal_inputfilepath().size());
-  for (int i = 0, n = _internal_inputfilepath().size(); i < n; ++i) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        _internal_inputfilepath().Get(i));
+  // repeated .masterworker.IntermediateFile intermediate_files = 2;
+  total_size += 1UL * this->_internal_intermediate_files_size();
+  for (const auto& msg : this->_internal_intermediate_files()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // string outputFilePath = 4;
-  if (!this->_internal_outputfilepath().empty()) {
-    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-                                    this->_internal_outputfilepath());
-  }
-
-  // int32 taskId = 1;
-  if (this->_internal_taskid() != 0) {
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-        this->_internal_taskid());
-  }
-
-  // .masterworker.TaskType taskType = 2;
-  if (this->_internal_tasktype() != 0) {
-    total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_tasktype());
+        this->_internal_task_id());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ReduceTask::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ReduceTaskRequest::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    ReduceTask::MergeImpl
+    ReduceTaskRequest::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ReduceTask::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ReduceTaskRequest::GetClassData() const { return &_class_data_; }
 
 
-void ReduceTask::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<ReduceTask*>(&to_msg);
-  auto& from = static_cast<const ReduceTask&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.ReduceTask)
+void ReduceTaskRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ReduceTaskRequest*>(&to_msg);
+  auto& from = static_cast<const ReduceTaskRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.ReduceTaskRequest)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_inputfilepath()->MergeFrom(from._internal_inputfilepath());
-  if (!from._internal_outputfilepath().empty()) {
-    _this->_internal_set_outputfilepath(from._internal_outputfilepath());
-  }
-  if (from._internal_taskid() != 0) {
-    _this->_internal_set_taskid(from._internal_taskid());
-  }
-  if (from._internal_tasktype() != 0) {
-    _this->_internal_set_tasktype(from._internal_tasktype());
+  _this->_internal_mutable_intermediate_files()->MergeFrom(from._internal_intermediate_files());
+  if (from._internal_task_id() != 0) {
+    _this->_internal_set_task_id(from._internal_task_id());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void ReduceTask::CopyFrom(const ReduceTask& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.ReduceTask)
+void ReduceTaskRequest::CopyFrom(const ReduceTaskRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.ReduceTaskRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReduceTask::IsInitialized() const {
+bool ReduceTaskRequest::IsInitialized() const {
   return true;
 }
 
-void ReduceTask::InternalSwap(ReduceTask* other) {
+void ReduceTaskRequest::InternalSwap(ReduceTaskRequest* other) {
   using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _internal_mutable_inputfilepath()->InternalSwap(
-      other->_internal_mutable_inputfilepath());
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.outputfilepath_, lhs_arena,
-                                       &other->_impl_.outputfilepath_, rhs_arena);
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ReduceTask, _impl_.tasktype_)
-      + sizeof(ReduceTask::_impl_.tasktype_)
-      - PROTOBUF_FIELD_OFFSET(ReduceTask, _impl_.taskid_)>(
-          reinterpret_cast<char*>(&_impl_.taskid_),
-          reinterpret_cast<char*>(&other->_impl_.taskid_));
+  _internal_mutable_intermediate_files()->InternalSwap(other->_internal_mutable_intermediate_files());
+
+  swap(_impl_.task_id_, other->_impl_.task_id_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata ReduceTask::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata ReduceTaskRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
       file_level_metadata_masterworker_2eproto[7]);
 }
 // ===================================================================
 
-class TaskCompletion::_Internal {
+class ReduceTaskCompleted::_Internal {
  public:
-  using HasBits = decltype(std::declval<TaskCompletion>()._impl_._has_bits_);
+  using HasBits = decltype(std::declval<ReduceTaskCompleted>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-    8 * PROTOBUF_FIELD_OFFSET(TaskCompletion, _impl_._has_bits_);
-  static const ::masterworker::OutputData& outputdata(const TaskCompletion* msg);
-  static void set_has_outputdata(HasBits* has_bits) {
+    8 * PROTOBUF_FIELD_OFFSET(ReduceTaskCompleted, _impl_._has_bits_);
+  static const ::masterworker::OutputFile& output_file(const ReduceTaskCompleted* msg);
+  static void set_has_output_file(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
 };
 
-const ::masterworker::OutputData&
-TaskCompletion::_Internal::outputdata(const TaskCompletion* msg) {
-  return *msg->_impl_.outputdata_;
+const ::masterworker::OutputFile&
+ReduceTaskCompleted::_Internal::output_file(const ReduceTaskCompleted* msg) {
+  return *msg->_impl_.output_file_;
 }
-TaskCompletion::TaskCompletion(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+ReduceTaskCompleted::ReduceTaskCompleted(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:masterworker.TaskCompletion)
+  // @@protoc_insertion_point(arena_constructor:masterworker.ReduceTaskCompleted)
 }
-TaskCompletion::TaskCompletion(const TaskCompletion& from)
+ReduceTaskCompleted::ReduceTaskCompleted(const ReduceTaskCompleted& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  TaskCompletion* const _this = this; (void)_this;
+  ReduceTaskCompleted* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.outputdata_){nullptr}
-    , decltype(_impl_.taskid_) {}
-
-    , decltype(_impl_.tasktype_) {}
+    , decltype(_impl_.output_file_){nullptr}
+    , decltype(_impl_.task_id_) {}
   };
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    _this->_impl_.outputdata_ = new ::masterworker::OutputData(*from._impl_.outputdata_);
+    _this->_impl_.output_file_ = new ::masterworker::OutputFile(*from._impl_.output_file_);
   }
-  ::memcpy(&_impl_.taskid_, &from._impl_.taskid_,
-    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.tasktype_) -
-    reinterpret_cast<char*>(&_impl_.taskid_)) + sizeof(_impl_.tasktype_));
-  // @@protoc_insertion_point(copy_constructor:masterworker.TaskCompletion)
+  _this->_impl_.task_id_ = from._impl_.task_id_;
+  // @@protoc_insertion_point(copy_constructor:masterworker.ReduceTaskCompleted)
 }
 
-inline void TaskCompletion::SharedCtor(::_pb::Arena* arena) {
+inline void ReduceTaskCompleted::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.outputdata_){nullptr}
-    , decltype(_impl_.taskid_) { 0 }
-
-    , decltype(_impl_.tasktype_) { 0 }
+    , decltype(_impl_.output_file_){nullptr}
+    , decltype(_impl_.task_id_) { 0 }
 
   };
 }
 
-TaskCompletion::~TaskCompletion() {
-  // @@protoc_insertion_point(destructor:masterworker.TaskCompletion)
+ReduceTaskCompleted::~ReduceTaskCompleted() {
+  // @@protoc_insertion_point(destructor:masterworker.ReduceTaskCompleted)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -2332,63 +2189,51 @@ TaskCompletion::~TaskCompletion() {
   SharedDtor();
 }
 
-inline void TaskCompletion::SharedDtor() {
+inline void ReduceTaskCompleted::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.outputdata_;
+  if (this != internal_default_instance()) delete _impl_.output_file_;
 }
 
-void TaskCompletion::SetCachedSize(int size) const {
+void ReduceTaskCompleted::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void TaskCompletion::Clear() {
-// @@protoc_insertion_point(message_clear_start:masterworker.TaskCompletion)
+void ReduceTaskCompleted::Clear() {
+// @@protoc_insertion_point(message_clear_start:masterworker.ReduceTaskCompleted)
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(_impl_.outputdata_ != nullptr);
-    _impl_.outputdata_->Clear();
+    ABSL_DCHECK(_impl_.output_file_ != nullptr);
+    _impl_.output_file_->Clear();
   }
-  ::memset(&_impl_.taskid_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.tasktype_) -
-      reinterpret_cast<char*>(&_impl_.taskid_)) + sizeof(_impl_.tasktype_));
+  _impl_.task_id_ = 0;
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* TaskCompletion::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* ReduceTaskCompleted::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 taskId = 1;
+      // int32 task_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
-          _impl_.taskid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.task_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else {
           goto handle_unusual;
         }
         continue;
-      // .masterworker.TaskType taskType = 2;
+      // .masterworker.OutputFile output_file = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 16)) {
-          ::int32_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-          _internal_set_tasktype(static_cast<::masterworker::TaskType>(val));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      // .masterworker.OutputData outputData = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_outputdata(), ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_output_file(), ptr);
           CHK_(ptr);
         } else {
           goto handle_unusual;
@@ -2418,125 +2263,109 @@ failure:
 #undef CHK_
 }
 
-::uint8_t* TaskCompletion::_InternalSerialize(
+::uint8_t* ReduceTaskCompleted::_InternalSerialize(
     ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:masterworker.TaskCompletion)
+  // @@protoc_insertion_point(serialize_to_array_start:masterworker.ReduceTaskCompleted)
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 taskId = 1;
-  if (this->_internal_taskid() != 0) {
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
-        1, this->_internal_taskid(), target);
-  }
-
-  // .masterworker.TaskType taskType = 2;
-  if (this->_internal_tasktype() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        2, this->_internal_tasktype(), target);
+        1, this->_internal_task_id(), target);
   }
 
   cached_has_bits = _impl_._has_bits_[0];
-  // .masterworker.OutputData outputData = 3;
+  // .masterworker.OutputFile output_file = 2;
   if (cached_has_bits & 0x00000001u) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(3, _Internal::outputdata(this),
-        _Internal::outputdata(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::output_file(this),
+        _Internal::output_file(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:masterworker.TaskCompletion)
+  // @@protoc_insertion_point(serialize_to_array_end:masterworker.ReduceTaskCompleted)
   return target;
 }
 
-::size_t TaskCompletion::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:masterworker.TaskCompletion)
+::size_t ReduceTaskCompleted::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:masterworker.ReduceTaskCompleted)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .masterworker.OutputData outputData = 3;
+  // .masterworker.OutputFile output_file = 2;
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.outputdata_);
+        *_impl_.output_file_);
   }
 
-  // int32 taskId = 1;
-  if (this->_internal_taskid() != 0) {
+  // int32 task_id = 1;
+  if (this->_internal_task_id() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-        this->_internal_taskid());
-  }
-
-  // .masterworker.TaskType taskType = 2;
-  if (this->_internal_tasktype() != 0) {
-    total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_tasktype());
+        this->_internal_task_id());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData TaskCompletion::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ReduceTaskCompleted::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    TaskCompletion::MergeImpl
+    ReduceTaskCompleted::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*TaskCompletion::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ReduceTaskCompleted::GetClassData() const { return &_class_data_; }
 
 
-void TaskCompletion::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<TaskCompletion*>(&to_msg);
-  auto& from = static_cast<const TaskCompletion&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.TaskCompletion)
+void ReduceTaskCompleted::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ReduceTaskCompleted*>(&to_msg);
+  auto& from = static_cast<const ReduceTaskCompleted&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:masterworker.ReduceTaskCompleted)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    _this->_internal_mutable_outputdata()->::masterworker::OutputData::MergeFrom(
-        from._internal_outputdata());
+    _this->_internal_mutable_output_file()->::masterworker::OutputFile::MergeFrom(
+        from._internal_output_file());
   }
-  if (from._internal_taskid() != 0) {
-    _this->_internal_set_taskid(from._internal_taskid());
-  }
-  if (from._internal_tasktype() != 0) {
-    _this->_internal_set_tasktype(from._internal_tasktype());
+  if (from._internal_task_id() != 0) {
+    _this->_internal_set_task_id(from._internal_task_id());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void TaskCompletion::CopyFrom(const TaskCompletion& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.TaskCompletion)
+void ReduceTaskCompleted::CopyFrom(const ReduceTaskCompleted& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:masterworker.ReduceTaskCompleted)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool TaskCompletion::IsInitialized() const {
+bool ReduceTaskCompleted::IsInitialized() const {
   return true;
 }
 
-void TaskCompletion::InternalSwap(TaskCompletion* other) {
+void ReduceTaskCompleted::InternalSwap(ReduceTaskCompleted* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(TaskCompletion, _impl_.tasktype_)
-      + sizeof(TaskCompletion::_impl_.tasktype_)
-      - PROTOBUF_FIELD_OFFSET(TaskCompletion, _impl_.outputdata_)>(
-          reinterpret_cast<char*>(&_impl_.outputdata_),
-          reinterpret_cast<char*>(&other->_impl_.outputdata_));
+      PROTOBUF_FIELD_OFFSET(ReduceTaskCompleted, _impl_.task_id_)
+      + sizeof(ReduceTaskCompleted::_impl_.task_id_)
+      - PROTOBUF_FIELD_OFFSET(ReduceTaskCompleted, _impl_.output_file_)>(
+          reinterpret_cast<char*>(&_impl_.output_file_),
+          reinterpret_cast<char*>(&other->_impl_.output_file_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata TaskCompletion::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata ReduceTaskCompleted::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_masterworker_2eproto_getter, &descriptor_table_masterworker_2eproto_once,
       file_level_metadata_masterworker_2eproto[8]);
@@ -2552,33 +2381,33 @@ template<> PROTOBUF_NOINLINE ::masterworker::HelloReply*
 Arena::CreateMaybeMessage< ::masterworker::HelloReply >(Arena* arena) {
   return Arena::CreateMessageInternal< ::masterworker::HelloReply >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::InputData*
-Arena::CreateMaybeMessage< ::masterworker::InputData >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::InputData >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::ShardInfo*
+Arena::CreateMaybeMessage< ::masterworker::ShardInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::ShardInfo >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::OutputData*
-Arena::CreateMaybeMessage< ::masterworker::OutputData >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::OutputData >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::IntermediateFile*
+Arena::CreateMaybeMessage< ::masterworker::IntermediateFile >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::IntermediateFile >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::MiniShard*
-Arena::CreateMaybeMessage< ::masterworker::MiniShard >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::MiniShard >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::OutputFile*
+Arena::CreateMaybeMessage< ::masterworker::OutputFile >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::OutputFile >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::FileShard*
-Arena::CreateMaybeMessage< ::masterworker::FileShard >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::FileShard >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::MapTaskRequest*
+Arena::CreateMaybeMessage< ::masterworker::MapTaskRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::MapTaskRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::MapTask*
-Arena::CreateMaybeMessage< ::masterworker::MapTask >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::MapTask >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::MapTaskCompleted*
+Arena::CreateMaybeMessage< ::masterworker::MapTaskCompleted >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::MapTaskCompleted >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::ReduceTask*
-Arena::CreateMaybeMessage< ::masterworker::ReduceTask >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::ReduceTask >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::ReduceTaskRequest*
+Arena::CreateMaybeMessage< ::masterworker::ReduceTaskRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::ReduceTaskRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::masterworker::TaskCompletion*
-Arena::CreateMaybeMessage< ::masterworker::TaskCompletion >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::masterworker::TaskCompletion >(arena);
+template<> PROTOBUF_NOINLINE ::masterworker::ReduceTaskCompleted*
+Arena::CreateMaybeMessage< ::masterworker::ReduceTaskCompleted >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::masterworker::ReduceTaskCompleted >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 // @@protoc_insertion_point(global_scope)

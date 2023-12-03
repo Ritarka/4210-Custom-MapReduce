@@ -2,6 +2,8 @@
 
 #include <mr_task_factory.h>
 #include "mr_tasks.h"
+#include <chrono>
+#include <thread>
 
 #include <grpcpp/grpcpp.h>
 #include <grpc/support/log.h>
@@ -19,36 +21,108 @@ using grpc::ServerBuilder;
 using grpc::ServerCompletionQueue;
 using grpc::ServerContext;
 using grpc::Status;
-
+using masterworker::IntermediateFile;
+using masterworker::MapTaskCompleted;
+using masterworker::MapTaskRequest;
 using masterworker::MasterWorker;
-using masterworker::MapTask;
-using masterworker::ReduceTask;
-using masterworker::TaskCompletion;
-using masterworker::HelloReply;
-using masterworker::HelloRequest;
-
+using masterworker::ReduceTaskCompleted;
+using masterworker::ReduceTaskRequest;
 using namespace std;
 
 
 class GreeterServiceImpl final : public MasterWorker::Service {
+public:
+	explicit GreeterServiceImpl(bool simulateTimeout = false, bool simulateFailure = false, int simulateDelay = 0);
 
-  Status AssignMapTask(ServerContext* context, const MapTask* request,
-                       TaskCompletion* reply) override {
+    	Status AssignMapTask(ServerContext* context, const MapTaskRequest* request,
+                         MapTaskCompleted* reply) override;
+
+    	Status AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
+                            ReduceTaskCompleted* reply) override;
+private:
+	bool simulate_timeout_;
+	bool simulate_failure_;
+	int simulate_delay_;
+	void simulateScenarios();
+};
+
+GreeterServiceImpl::GreeterServiceImpl(bool simulateTimeout, bool simulateFailure, int simulateDelay)
+    : simulate_timeout_(simulateTimeout), simulate_failure_(simulateFailure), simulate_delay_(simulateDelay) {}
+
+Status GreeterServiceImpl::AssignMapTask(ServerContext* context, const MapTaskRequest* request,
+                                         MapTaskCompleted* reply) {
+    simulateScenarios();  // Simulate different scenarios
+
+    // Check for simulated timeout
+    if (simulate_timeout_) {
+        return Status(grpc::DEADLINE_EXCEEDED, "Simulated timeout in task processing.");
+    }
+
+    reply->set_task_id(request->task_id());
+    std::cout << "Worker received MapTask " << request->task_id() << std::endl;
+
+    // Add intermediate file
+    for (int i = 0; i < request->num_reduces(); ++i) {
+        IntermediateFile* intermediate_file = reply->add_intermediate_files();
+        intermediate_file->set_file_name("intermediate" + std::to_string(i) + ".txt");
+    }
+
+    std::cout << "Got Map Task" << std::endl;
+    return Status::OK;
+}
+Status GreeterServiceImpl::AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
+                                            ReduceTaskCompleted* reply) {
+    simulateScenarios();  // Simulate different scenarios
+
+    // Check for simulated timeout
+    if (simulate_timeout_) {
+        return Status(grpc::DEADLINE_EXCEEDED, "Simulated timeout in task processing.");
+    }
+
+    reply->set_task_id(request->task_id());
+    std::cout << "Worker received ReduceTask " << request->task_id() << std::endl;
+
+    // Add the output file
+    reply->mutable_output_file()->set_file_name("output" + std::to_string(request->task_id()) + ".txt");
+
+    std::cout << "Got Reduce Task" << std::endl;
+    return Status::OK;
+}
+void GreeterServiceImpl::simulateScenarios() {
+    if (simulate_failure_) {
+        std::cerr << "Simulated failure in task processing." << std::endl;
+        exit(1);  // Simulate a failure by exiting the worker process
+    } else if (simulate_delay_ > 0) {
+        std::this_thread::sleep_for(std::chrono::seconds(simulate_delay_));  // Simulate a delay in task processing
+    } else {
+        std::cout << "Worker is ready to process tasks." << std::endl;
+    }
+}
+  //Status AssignMapTask(ServerContext* context, const MapTaskRequest* request,
+                       //MapTaskCompleted* reply) override {
      //std::string prefix("Hello again ");
      //reply->set_message(prefix + request->name());
-     reply->set_taskid(request->taskid());
-     reply->set_tasktype(request->tasktype());
-	cout << "Got Map Task" << endl;
-    return Status::OK;
-  }
+     //reply->set_task_id(request->task_id());
+     //std::cout << "Worker received MapTask" << request->task_id() << std::endl;
+	// Add intermediate file
+    // for (int i = 0; i < request->num_reduces(); ++i)
+     //{
+	//IntermediateFile *intermediate_file = reply->add_intermediate_files();
+	//intermediate_file->set_file_name("intermediate" + std::to_string(i) + ".txt");
+     //}
+	//cout << "Got Map Task" << endl;
+    //return Status::OK;
+  //}
 
-  Status AssignReduceTask(ServerContext* context, const ReduceTask* request,
-                       TaskCompletion* reply) override {
-     reply->set_taskid(request->taskid());
-     reply->set_tasktype(request->tasktype());
-	cout << "Got Reduce Task" << endl;
-    return Status::OK;
-  }
+  //Status AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
+                       //ReduceTaskCompleted* reply) override {
+     //reply->set_task_id(request->task_id());
+     //std::cout << "Worker received ReduceTask" << request->task_id() << std::endl;
+	// add the output file
+     //reply->mutable_output_file()->set_file_name("output" + std::to_string(request->task_id()) + ".txt");
+	//cout << "Got Reduce Task" << endl;
+    //return Status::OK;
+  //}
 
 
 
@@ -67,7 +141,7 @@ class GreeterServiceImpl final : public MasterWorker::Service {
   //}
   
   
-};
+//};
 
 
 
@@ -118,7 +192,7 @@ extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::str
 	BaseReduer's member BaseReducerInternal impl_ directly, 
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
-	//GreeterServiceImpl service;
+	GreeterServiceImpl service(true, false, 10);
 	//ServerBuilder builder;
 	//builder.AddListeningPort(ip_port, grpc::InsecureServiceCredentials());
 	//builder.RegisterService(&service);

@@ -41,46 +41,46 @@ MasterWorker::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& chann
   , rpcmethod_SayHelloAgain_(MasterWorker_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status MasterWorker::Stub::AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::masterworker::TaskCompletion* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::masterworker::MapTask, ::masterworker::TaskCompletion, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_AssignMapTask_, context, request, response);
+::grpc::Status MasterWorker::Stub::AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::masterworker::MapTaskCompleted* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_AssignMapTask_, context, request, response);
 }
 
-void MasterWorker::Stub::async::AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::masterworker::MapTask, ::masterworker::TaskCompletion, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AssignMapTask_, context, request, response, std::move(f));
+void MasterWorker::Stub::async::AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AssignMapTask_, context, request, response, std::move(f));
 }
 
-void MasterWorker::Stub::async::AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response, ::grpc::ClientUnaryReactor* reactor) {
+void MasterWorker::Stub::async::AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AssignMapTask_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* MasterWorker::Stub::PrepareAsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::TaskCompletion, ::masterworker::MapTask, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_AssignMapTask_, context, request);
+::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>* MasterWorker::Stub::PrepareAsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::MapTaskCompleted, ::masterworker::MapTaskRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_AssignMapTask_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* MasterWorker::Stub::AsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>* MasterWorker::Stub::AsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncAssignMapTaskRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status MasterWorker::Stub::AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::masterworker::TaskCompletion* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::masterworker::ReduceTask, ::masterworker::TaskCompletion, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_AssignReduceTask_, context, request, response);
+::grpc::Status MasterWorker::Stub::AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::masterworker::ReduceTaskCompleted* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_AssignReduceTask_, context, request, response);
 }
 
-void MasterWorker::Stub::async::AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::masterworker::ReduceTask, ::masterworker::TaskCompletion, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AssignReduceTask_, context, request, response, std::move(f));
+void MasterWorker::Stub::async::AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AssignReduceTask_, context, request, response, std::move(f));
 }
 
-void MasterWorker::Stub::async::AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response, ::grpc::ClientUnaryReactor* reactor) {
+void MasterWorker::Stub::async::AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AssignReduceTask_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* MasterWorker::Stub::PrepareAsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::TaskCompletion, ::masterworker::ReduceTask, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_AssignReduceTask_, context, request);
+::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>* MasterWorker::Stub::PrepareAsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::ReduceTaskCompleted, ::masterworker::ReduceTaskRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_AssignReduceTask_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* MasterWorker::Stub::AsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>* MasterWorker::Stub::AsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncAssignReduceTaskRaw(context, request, cq);
   result->StartCall();
@@ -137,21 +137,21 @@ MasterWorker::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       MasterWorker_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MasterWorker::Service, ::masterworker::MapTask, ::masterworker::TaskCompletion, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< MasterWorker::Service, ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](MasterWorker::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::masterworker::MapTask* req,
-             ::masterworker::TaskCompletion* resp) {
+             const ::masterworker::MapTaskRequest* req,
+             ::masterworker::MapTaskCompleted* resp) {
                return service->AssignMapTask(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       MasterWorker_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MasterWorker::Service, ::masterworker::ReduceTask, ::masterworker::TaskCompletion, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< MasterWorker::Service, ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](MasterWorker::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::masterworker::ReduceTask* req,
-             ::masterworker::TaskCompletion* resp) {
+             const ::masterworker::ReduceTaskRequest* req,
+             ::masterworker::ReduceTaskCompleted* resp) {
                return service->AssignReduceTask(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
@@ -179,14 +179,14 @@ MasterWorker::Service::Service() {
 MasterWorker::Service::~Service() {
 }
 
-::grpc::Status MasterWorker::Service::AssignMapTask(::grpc::ServerContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response) {
+::grpc::Status MasterWorker::Service::AssignMapTask(::grpc::ServerContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status MasterWorker::Service::AssignReduceTask(::grpc::ServerContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response) {
+::grpc::Status MasterWorker::Service::AssignReduceTask(::grpc::ServerContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response) {
   (void) context;
   (void) request;
   (void) response;

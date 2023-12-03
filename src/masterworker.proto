@@ -5,9 +5,9 @@ package masterworker;
 //To communicate between master and worker node, we will use gRPC
 service MasterWorker {
 	//for map
-	rpc AssignMapTask(MapTask) returns (TaskCompletion);
+	rpc AssignMapTask(MapTaskRequest) returns (MapTaskCompleted);
 	//for reduce
-	rpc AssignReduceTask(ReduceTask) returns (TaskCompletion);
+	rpc AssignReduceTask(ReduceTaskRequest) returns (ReduceTaskCompleted);
 	
 	 // Sends a greeting
   	rpc SayHello (HelloRequest) returns (HelloReply) {}
@@ -27,68 +27,48 @@ message HelloReply {
   string message = 1;
 }
 
-//different task type for MapReduce - handled by Master
-enum TaskType {
-	MAP = 0;
-	REDUCE = 1;
-	EMIT = 2; //should this be an enum
-}
-
-//Need message for input data
-message InputData {
-	string input = 1;
-}
-
-//Need message for output data
-message OutputData {
-	string result = 1;
-}
-
-message MiniShard {
+//File shard information
+message ShardInfo {
+	//name of input file
 	string file_name = 1;
-	int64 start_offset  = 2;
+	//start offset
+	int64 start_offset = 2;
+	//end offset
 	int64 end_offset = 3;
 }
-message FileShard {
-	repeated MiniShard shards = 1;
-}
-//Need task for Map function
-message MapTask {
-	//task ID
-	int32 taskId = 1;
-	//enum for type
-	TaskType taskType = 2;
-	//Input data for map 
-	//InputData inputData = 3;
-	//path to file - intermediate?
-	string filePath = 3;
-	//file shard info
-	FileShard fileShard = 4;
+
+//intermediate file for mapper
+message IntermediateFile {
+	string file_name = 1;
 }
 
-//Need task for reduce
-message ReduceTask {
-	//task ID
-	int32 taskId = 1;
-	//enum for type
-	TaskType taskType = 2;
-	//Need list of intermediate result from MapTask - don't need it? will be in the file
-	//repeated OutputData intermediateResult = 3;
-	//path to file- output?
-	repeated string inputFilePath = 3; //to read intermediate data
-	string outputFilePath = 4; //to write output data
-	//file shard info - doesn't need it- reads from the filepath
-	//FileShard fileShard = 4;
-}
-//After Map or reduce, inform master of task completion
-message TaskCompletion {
-	//task Id
-	int32 taskId = 1;
-	//enum type
-	TaskType taskType = 2;
-	// Output produced by map or reduce
-	OutputData outputData = 3;
+//Output file
+message OutputFile {
+	string file_name = 1;
 }
 
+//Message sent from master to worker to assign map task
+message MapTaskRequest {
+	int32 task_id = 1;
+	ShardInfo shard_info = 2;
+	int32 num_reduces = 3;
+}
+
+//message sent from worker to master for map task complete
+message MapTaskCompleted {
+	int32 task_id = 1;
+	//list of intermediate files produces
+	repeated IntermediateFile intermediate_files = 2;
+}
+//message from master to worker for reduce task
+message ReduceTaskRequest {
+	int32 task_id = 1;
+	repeated IntermediateFile intermediate_files = 2;
+}
+//message from worker to master for reduce task
+message ReduceTaskCompleted {
+	int32 task_id = 1;
+	OutputFile output_file = 2;
+}
 
 

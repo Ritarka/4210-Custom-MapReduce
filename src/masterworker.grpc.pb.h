@@ -37,20 +37,20 @@ class MasterWorker final {
    public:
     virtual ~StubInterface() {}
     // for map
-    virtual ::grpc::Status AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::masterworker::TaskCompletion* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>> AsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>>(AsyncAssignMapTaskRaw(context, request, cq));
+    virtual ::grpc::Status AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::masterworker::MapTaskCompleted* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapTaskCompleted>> AsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapTaskCompleted>>(AsyncAssignMapTaskRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>> PrepareAsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>>(PrepareAsyncAssignMapTaskRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapTaskCompleted>> PrepareAsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapTaskCompleted>>(PrepareAsyncAssignMapTaskRaw(context, request, cq));
     }
     // for reduce
-    virtual ::grpc::Status AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::masterworker::TaskCompletion* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>> AsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>>(AsyncAssignReduceTaskRaw(context, request, cq));
+    virtual ::grpc::Status AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::masterworker::ReduceTaskCompleted* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceTaskCompleted>> AsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceTaskCompleted>>(AsyncAssignReduceTaskRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>> PrepareAsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>>(PrepareAsyncAssignReduceTaskRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceTaskCompleted>> PrepareAsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceTaskCompleted>>(PrepareAsyncAssignReduceTaskRaw(context, request, cq));
     }
     // Sends a greeting
     virtual ::grpc::Status SayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::masterworker::HelloReply* response) = 0;
@@ -72,11 +72,11 @@ class MasterWorker final {
      public:
       virtual ~async_interface() {}
       // for map
-      virtual void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // for reduce
-      virtual void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Sends a greeting
       virtual void SayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest* request, ::masterworker::HelloReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest* request, ::masterworker::HelloReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
@@ -88,10 +88,10 @@ class MasterWorker final {
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>* AsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>* PrepareAsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>* AsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::TaskCompletion>* PrepareAsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapTaskCompleted>* AsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapTaskCompleted>* PrepareAsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceTaskCompleted>* AsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceTaskCompleted>* PrepareAsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::HelloReply>* AsyncSayHelloRaw(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::HelloReply>* PrepareAsyncSayHelloRaw(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::HelloReply>* AsyncSayHelloAgainRaw(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -100,19 +100,19 @@ class MasterWorker final {
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::masterworker::TaskCompletion* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>> AsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>>(AsyncAssignMapTaskRaw(context, request, cq));
+    ::grpc::Status AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::masterworker::MapTaskCompleted* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>> AsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>>(AsyncAssignMapTaskRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>> PrepareAsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>>(PrepareAsyncAssignMapTaskRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>> PrepareAsyncAssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>>(PrepareAsyncAssignMapTaskRaw(context, request, cq));
     }
-    ::grpc::Status AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::masterworker::TaskCompletion* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>> AsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>>(AsyncAssignReduceTaskRaw(context, request, cq));
+    ::grpc::Status AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::masterworker::ReduceTaskCompleted* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>> AsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>>(AsyncAssignReduceTaskRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>> PrepareAsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>>(PrepareAsyncAssignReduceTaskRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>> PrepareAsyncAssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>>(PrepareAsyncAssignReduceTaskRaw(context, request, cq));
     }
     ::grpc::Status SayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::masterworker::HelloReply* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::HelloReply>> AsyncSayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) {
@@ -131,10 +131,10 @@ class MasterWorker final {
     class async final :
       public StubInterface::async_interface {
      public:
-      void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response, std::function<void(::grpc::Status)>) override;
-      void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response, std::function<void(::grpc::Status)>) override;
-      void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response, std::function<void(::grpc::Status)>) override;
+      void AssignMapTask(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response, std::function<void(::grpc::Status)>) override;
+      void AssignReduceTask(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response, ::grpc::ClientUnaryReactor* reactor) override;
       void SayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest* request, ::masterworker::HelloReply* response, std::function<void(::grpc::Status)>) override;
       void SayHello(::grpc::ClientContext* context, const ::masterworker::HelloRequest* request, ::masterworker::HelloReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void SayHelloAgain(::grpc::ClientContext* context, const ::masterworker::HelloRequest* request, ::masterworker::HelloReply* response, std::function<void(::grpc::Status)>) override;
@@ -150,10 +150,10 @@ class MasterWorker final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* AsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* PrepareAsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTask& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* AsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::masterworker::TaskCompletion>* PrepareAsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTask& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>* AsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::MapTaskCompleted>* PrepareAsyncAssignMapTaskRaw(::grpc::ClientContext* context, const ::masterworker::MapTaskRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>* AsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceTaskCompleted>* PrepareAsyncAssignReduceTaskRaw(::grpc::ClientContext* context, const ::masterworker::ReduceTaskRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::masterworker::HelloReply>* AsyncSayHelloRaw(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::masterworker::HelloReply>* PrepareAsyncSayHelloRaw(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::masterworker::HelloReply>* AsyncSayHelloAgainRaw(::grpc::ClientContext* context, const ::masterworker::HelloRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -170,9 +170,9 @@ class MasterWorker final {
     Service();
     virtual ~Service();
     // for map
-    virtual ::grpc::Status AssignMapTask(::grpc::ServerContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response);
+    virtual ::grpc::Status AssignMapTask(::grpc::ServerContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response);
     // for reduce
-    virtual ::grpc::Status AssignReduceTask(::grpc::ServerContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response);
+    virtual ::grpc::Status AssignReduceTask(::grpc::ServerContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response);
     // Sends a greeting
     virtual ::grpc::Status SayHello(::grpc::ServerContext* context, const ::masterworker::HelloRequest* request, ::masterworker::HelloReply* response);
     // Sends another greeting
@@ -190,11 +190,11 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestAssignMapTask(::grpc::ServerContext* context, ::masterworker::MapTask* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::TaskCompletion>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestAssignMapTask(::grpc::ServerContext* context, ::masterworker::MapTaskRequest* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::MapTaskCompleted>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -210,11 +210,11 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestAssignReduceTask(::grpc::ServerContext* context, ::masterworker::ReduceTask* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::TaskCompletion>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestAssignReduceTask(::grpc::ServerContext* context, ::masterworker::ReduceTaskRequest* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::ReduceTaskCompleted>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -266,25 +266,25 @@ class MasterWorker final {
    public:
     WithCallbackMethod_AssignMapTask() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::MapTask, ::masterworker::TaskCompletion>(
+          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::masterworker::MapTask* request, ::masterworker::TaskCompletion* response) { return this->AssignMapTask(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::masterworker::MapTaskRequest* request, ::masterworker::MapTaskCompleted* response) { return this->AssignMapTask(context, request, response); }));}
     void SetMessageAllocatorFor_AssignMapTask(
-        ::grpc::MessageAllocator< ::masterworker::MapTask, ::masterworker::TaskCompletion>* allocator) {
+        ::grpc::MessageAllocator< ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::MapTask, ::masterworker::TaskCompletion>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_AssignMapTask() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* AssignMapTask(
-      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_AssignReduceTask : public BaseClass {
@@ -293,25 +293,25 @@ class MasterWorker final {
    public:
     WithCallbackMethod_AssignReduceTask() {
       ::grpc::Service::MarkMethodCallback(1,
-          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::ReduceTask, ::masterworker::TaskCompletion>(
+          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::masterworker::ReduceTask* request, ::masterworker::TaskCompletion* response) { return this->AssignReduceTask(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::masterworker::ReduceTaskRequest* request, ::masterworker::ReduceTaskCompleted* response) { return this->AssignReduceTask(context, request, response); }));}
     void SetMessageAllocatorFor_AssignReduceTask(
-        ::grpc::MessageAllocator< ::masterworker::ReduceTask, ::masterworker::TaskCompletion>* allocator) {
+        ::grpc::MessageAllocator< ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::ReduceTask, ::masterworker::TaskCompletion>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_AssignReduceTask() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* AssignReduceTask(
-      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_SayHello : public BaseClass {
@@ -381,7 +381,7 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -398,7 +398,7 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -449,7 +449,7 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -469,7 +469,7 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -532,7 +532,7 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -554,7 +554,7 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -613,10 +613,10 @@ class MasterWorker final {
     WithStreamedUnaryMethod_AssignMapTask() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::masterworker::MapTask, ::masterworker::TaskCompletion>(
+          ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::masterworker::MapTask, ::masterworker::TaskCompletion>* streamer) {
+                     ::masterworker::MapTaskRequest, ::masterworker::MapTaskCompleted>* streamer) {
                        return this->StreamedAssignMapTask(context,
                          streamer);
                   }));
@@ -625,12 +625,12 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignMapTask(::grpc::ServerContext* /*context*/, const ::masterworker::MapTaskRequest* /*request*/, ::masterworker::MapTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedAssignMapTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::MapTask,::masterworker::TaskCompletion>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedAssignMapTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::MapTaskRequest,::masterworker::MapTaskCompleted>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_AssignReduceTask : public BaseClass {
@@ -640,10 +640,10 @@ class MasterWorker final {
     WithStreamedUnaryMethod_AssignReduceTask() {
       ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::masterworker::ReduceTask, ::masterworker::TaskCompletion>(
+          ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::masterworker::ReduceTask, ::masterworker::TaskCompletion>* streamer) {
+                     ::masterworker::ReduceTaskRequest, ::masterworker::ReduceTaskCompleted>* streamer) {
                        return this->StreamedAssignReduceTask(context,
                          streamer);
                   }));
@@ -652,12 +652,12 @@ class MasterWorker final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTask* /*request*/, ::masterworker::TaskCompletion* /*response*/) override {
+    ::grpc::Status AssignReduceTask(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceTaskRequest* /*request*/, ::masterworker::ReduceTaskCompleted* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedAssignReduceTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::ReduceTask,::masterworker::TaskCompletion>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedAssignReduceTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::ReduceTaskRequest,::masterworker::ReduceTaskCompleted>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_SayHello : public BaseClass {

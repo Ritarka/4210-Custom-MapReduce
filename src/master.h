@@ -1,8 +1,14 @@
 #pragma once
 
-#include <atomic>
+
 #include <queue>
+
 #include <iostream>
+#include <vector>
+#include <string>
+#include <thread>
+#include <chrono> //timeout for slow worker and worker failure
+#include <future> //to store the asynchronous results
 #include "mapreduce_spec.h"
 #include "file_shard.h"
 
@@ -18,91 +24,141 @@ using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
 using grpc::CompletionQueue;
+using grpc::ClientAsyncResponseReader;
 
 using masterworker::MasterWorker;
 using masterworker::HelloReply;
 using masterworker::HelloRequest;
-using masterworker::MapTask;
-using masterworker::ReduceTask;
-using masterworker::TaskCompletion;
-using masterworker::TaskType;
+using masterworker::MapTaskRequest;
+using masterworker::MapTaskCompleted;
+using masterworker::ReduceTaskRequest;
+using masterworker::ReduceTaskCompleted;
+using masterworker::ShardInfo;
+using masterworker::IntermediateFile;
+using masterworker::OutputFile;
 //using masterworker::FileShard;
 
 
 class GreeterClient {
  public:
   GreeterClient(std::shared_ptr<Channel> channel)
-      : stub_(MasterWorker::NewStub(channel)) {}
+      : stub_(MasterWorker::NewStub(channel)), cq_() {}
 
-  // Assembles the client's payload, sends it and presents the response back
-  // from the server.
-  //std::string SayHello(const std::string& user) {
-    // Data we are sending to the server.
-    //HelloRequest request;
-    //request.set_name(user);
-
-    // Container for the data we expect from the server.
-    //HelloReply reply;
-
-    // Context for the client. It could be used to convey extra information to
-    // the server and/or tweak certain RPC behaviors.
-    //ClientContext context;
-
-    // The actual RPC.
-    //Status status = stub_->SayHello(&context, request, &reply);
-
-    // Act upon its status.
-    //if (status.ok()) {
-      //return reply.message();
-    //} else {
-      //std::cout << status.error_code() << ": " << status.error_message()
-               // << std::endl;
-      //return "RPC failed";
-    //}
-  //}
-  TaskCompletion AssignMapTask(const MapTask& request);
-  TaskCompletion AssignReduceTask(const ReduceTask& request);
-
-  CompletionQueue completion_queue_;
+ 
+  int AssignMapTask(const MapTaskRequest& request, promise<MapTaskCompleted>* promise);
+  int AssignReduceTask(const ReduceTaskRequest& request, promise<ReduceTaskCompleted>* promise);
+  
+ 
 
  private:
+ // Out of the passed in Channel comes the stub, stored here, our view of the
+  // server's exposed services.
   std::unique_ptr<MasterWorker::Stub> stub_;
+  // The producer-consumer queue we use to communicate asynchronously with the
+  // gRPC runtime.
+  CompletionQueue cq_;
 };
 //Implementation of AssignMapTask
-TaskCompletion GreeterClient::AssignMapTask(const MapTask& request) {
+int GreeterClient::AssignMapTask(const MapTaskRequest& request, promise<MapTaskCompleted>* promise) {
 	ClientContext context;
 	Status status;
-	TaskCompletion response;
+	MapTaskCompleted response;
+	//5 second deadline for rpc
+	auto deadline = std::chrono::system_clock::now() + std::chrono::seconds(180);
+	context.set_deadline(deadline);
 	
-	status = stub_->AssignMapTask(&context, request, &response);
-	if(status.ok()){
-		std::cout << "got map response" << std::endl;
-		return response;
-	} else {
-		std::cout << status.error_code() << ": " << status.error_message()
-                << std::endl;
-                //for now return empty task completion object
-                return TaskCompletion();
-        }
+	//future/promise
+	//std::promise<MapTaskCompleted> promise;
+	//auto promise_ptr = std::make_shared<std::promise<MapTaskCompleted>>();
+	//auto future = promise_ptr->get_future();
+	
+	std::unique_ptr<ClientAsyncResponseReader<MapTaskCompleted>> rpc(
+		stub_->PrepareAsyncAssignMapTask(&context, request, &cq_));
+	rpc->StartCall();
+	//pass in promise as "tag"
+	rpc->Finish(&response, &status, (void*)1);
+	
+	void* got_tag;
+	bool ok = false;
+	GPR_ASSERT(cq_.Next(&got_tag, &ok));
+	
+		GPR_ASSERT(ok);
+		//std::shared_ptr<std::promise<MapTaskCompleted>> promise_ptr =
+        //std::static_pointer_cast<std::promise<MapTaskCompleted>>(got_tag);
+		//std::promise<MapTaskCompleted>* promise_ptr = static_cast<std::promise<MapTaskCompleted>*>(got_tag);
+		 //auto promise_ptr = static_cast<std::promise<MapTaskCompleted>*>(got_tag);
+       		 try {
+           		 if (status.ok()) {
+                		std::cout << "Master: got map response" << std::endl;
+                		promise->set_value(response);
+                		return 1; //success
+            		} else if (status.error_code() == grpc::DEADLINE_EXCEEDED) {
+                		std::cout << "Error: Map task timed out" << std::endl;
+                		promise->set_value(MapTaskCompleted());
+                		return 0; // retry
+            		} else {
+                		std::cout << status.error_code() << ": " << status.error_message() << std::endl;
+                		promise->set_value(MapTaskCompleted());
+                		return 0; //retry
+            		}
+        	} catch (const std::exception& e) {
+            		std::cerr << "Exception while setting promise value: " << e.what() << std::endl;
+            		promise->set_value(MapTaskCompleted());
+            		return 0; //retry
+        	}
+        //on success
+        //return 1;
         
 
 }
 
 //Implementation of AssignReduceTask
-TaskCompletion GreeterClient::AssignReduceTask(const ReduceTask& request){
+int GreeterClient::AssignReduceTask(const ReduceTaskRequest& request, promise<ReduceTaskCompleted>* promise){
 	ClientContext context;
 	Status status;
-	TaskCompletion response;
-	status = stub_->AssignReduceTask(&context, request, &response);
-	if(status.ok()){
-		std::cout << "got reduce response" << std::endl;
-		return response;
-	} else {
-		std::cout << status.error_code() << ": " << status.error_message()
-                << std::endl;
-                //for now return empty task completion object
-                return TaskCompletion();
-        }
+	ReduceTaskCompleted response;
+	
+	//5 second deadline for rpc
+	auto deadline = std::chrono::system_clock::now() + std::chrono::seconds(180);
+	context.set_deadline(deadline);
+	
+	//future/promise
+	//std::promise<ReduceTaskCompleted> promise;
+	//auto promise_ptr = std::make_shared<std::promise<ReduceTaskCompleted>>();
+	//auto future = promise_ptr->get_future();
+	
+	std::unique_ptr<ClientAsyncResponseReader<ReduceTaskCompleted>> rpc(
+		stub_->PrepareAsyncAssignReduceTask(&context, request, &cq_));
+	rpc->StartCall();
+	rpc->Finish(&response, &status, (void*)1);
+	
+	void* got_tag;
+	bool ok = false;
+	GPR_ASSERT(cq_.Next(&got_tag, &ok));
+	
+		GPR_ASSERT(ok);
+		//auto promise_ptr = static_cast<std::promise<ReduceTaskCompleted>*>(got_tag);
+       		 try {
+           		 if (status.ok()) {
+                		std::cout << "Master: got reduce response" << std::endl;
+                		promise->set_value(response);
+                		return 1; //success
+            		} else if (status.error_code() == grpc::DEADLINE_EXCEEDED) {
+                		std::cout << "Error: Reduce task timed out" << std::endl;
+                		promise->set_value(ReduceTaskCompleted());
+                		return 0; //retry
+            		} else {
+                		std::cout << status.error_code() << ": " << status.error_message() << std::endl;
+                		promise->set_value(ReduceTaskCompleted());
+                		return 0; //retry
+            		}
+        	} catch (const std::exception& e) {
+            		std::cerr << "Exception while setting promise value: " << e.what() << std::endl;
+            		promise->set_value(ReduceTaskCompleted());
+            		return 0; //retry
+        	}
+        
+        //return "reduce success";
 	
 	
 	
@@ -124,33 +180,36 @@ class Master {
 		/* NOW you can add below, data members and member functions as per the need of your implementation*/
 		MapReduceSpec spec;
 		std::vector<FileShard> shards;
-		
 		int maps;
 		int reduces;
+		//std::vector<std::string> worker_ips_;
+		//std::vector<std::unique_ptr<GreeterClient>> worker_clients_;
+		int map_task_count;
+		int reduce_task_count;
+		//GreeterClient greeter;
+		//for all worker ip passed in
+		std::vector<std::string> worker_ips_;
+    		std::vector<std::unique_ptr<GreeterClient>> worker_clients_;
 		
 		std::queue<int> available_workers;
-		//Track availablity of the worker
-		std::vector<bool> worker_states;
-		//save input file file paths for intermediate data
-		std::vector<std::string> intermediateFilePaths;
-		int intermediate_index;
+		std::vector<bool> map_task_status;
+		std::vector<bool> reduce_task_status;
 		
-		GreeterClient greeter;
+		//future vectors for map and reduce tasks
+		std::vector<std::future<MapTaskCompleted>> future_map_tasks;
+		std::vector<std::future<ReduceTaskCompleted>> future_reduce_tasks;
 		
-		//atomic counters for number of map and reduce workers
-		std::atomic<int> remain_map_tasks;
-		std::atomic<int> remain_reduce_tasks;
-		TaskCompletion task_response;
 		
-		//Do we need this
-		// CompletionQueue completion_queue_;
+    		
+    		void initializeWorkerClients();
+    		void assignMapTasks();
+    		void assignReduceTasks();
+    		
+    		void waitForMapTask();
+    		void waitForReduceTask();
+    		void handleMapTaskCompletion();
+    		void handleReduceTaskCompletion();
 		
-		//Helper methods
-		void assignMapTasks();
-		void assignReduceTasks();
-		void handleTaskCompletion();
-		void waitForMapTasks();
-		void waitForReduceTasks();
 		
 };
 
@@ -160,145 +219,212 @@ class Master {
 Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_shards):
 	spec(mr_spec),
 	shards(file_shards),
-	task_response(TaskCompletion()),
 	maps(file_shards.size()),
 	reduces(spec.num_out_files),
-	remain_map_tasks(maps),
-	remain_reduce_tasks(reduces),
-	intermediate_index(0),
-	//setup connections to worker threads
-	greeter(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials())){
-	//std::string user("world");
-	//std::string reply = greeter.SayHello(user);
-	//std::cout << "Greeter received: " << reply << std::endl;	
+	map_task_count(0),
+	reduce_task_count(0) {
+	//greeter(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials())){
+	//Initialize Worker(Greeter) clients
+	initializeWorkerClients();
 	
-	//Initialize available workers with indices
+}
+
+void Master::initializeWorkerClients(){
+	//create worker/greeter client instance for each worker IP
+	//CHECK HERE: Make spec.worker workers
+	//But make only one grpc channel - maybe localhost:50051- and then use threads??
+	for(const std::string& ip: spec.ips){
+		worker_ips_.push_back(ip);
+		worker_clients_.emplace_back(std::make_unique<GreeterClient>(
+			grpc::CreateChannel(ip, grpc::InsecureChannelCredentials())));
+	}
 	for(int i = 0; i < spec.workers; ++i){
 		available_workers.push(i);
-		worker_states.push_back(true);
-		intermediateFilePaths.push_back(""); //does this work?
 	}
+	map_task_status.resize(maps, false);
+	reduce_task_status.resize(reduces, false);
 }
+	//ini
 
 //Helper methods implementation
 void Master::assignMapTasks(){
+	//assign map tasks to available workers
+	std::cout << "assignMaptask worker_clients_ size = " << worker_clients_.size() <<std::endl;
 	for(int i = 0; i < maps; ++i){
-		//get the available worker index
-		int worker_index = available_workers.front();
+		int worker_index = (available_workers.front() % worker_clients_.size()); //-1 or not??
+		
+		std::cout << "assingMapTask: worker_index = " << worker_index << std::endl;
 		available_workers.pop();
+		MapTaskRequest request;
+		request.set_task_id(map_task_count);
+		ShardInfo* shard_info = request.mutable_shard_info();
+		shard_info->set_file_name(shards[i].shards[0].file_name);
+		shard_info->set_start_offset(shards[i].shards[0].start_offset);
+		shard_info->set_end_offset(shards[i].shards[0].end_offset);
+		request.set_num_reduces(reduces);
+		//make the call
 		
-		//Create a MapTask
-		MapTask mapTask;
-		//populate the fields of MapTask
-		//unique id
-		mapTask.set_taskid(i);
-		//MAP type
-		mapTask.set_tasktype(TaskType::MAP);
-		//create and set an intermediate file path - look into this
-		//new file: intermediate_worker_index_taskID.txt
-		std::string intermediateFilePath = "intermediate_" + std::to_string(worker_index) + "_" + std::to_string(i) + ".txt";
-		mapTask.set_filepath(intermediateFilePath);
-		intermediateFilePaths[i] = intermediateFilePath;
-		//set the file shard information based on the shards vector - CHECK THIS
-		for(const MiniShard& mini: shards[i].shards){
-			masterworker::MiniShard* miniShard = mapTask.mutable_fileshard()->add_shards();
-			miniShard->set_file_name(mini.file_name);
-			miniShard->set_start_offset(mini.start_offset);
-			miniShard->set_end_offset(mini.end_offset);
+		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
+		promise<MapTaskCompleted> promise;
+		future<MapTaskCompleted> future = promise.get_future();
+		int result = worker_clients_[worker_index]->AssignMapTask(request, &promise);
+		std::cout << "map result = " << result << std::endl;
+		std::future<MapTaskCompleted> temp_future;
+		while(result == 0){
+			//retry logic
+			//use worker_index = (worker_index + 1) % worker_clients_.size(); -> make the call again
+			//create new promise
+			std::promise<MapTaskCompleted> retry_promise;
+			std::future<MapTaskCompleted> retry_future = retry_promise.get_future();
+			worker_index = (worker_index + 1)%worker_clients_.size();
+			std::cout << "worker calling AssignMapTask with DIFF workerIP" <<worker_ips_[worker_index] <<std::endl;
+			//call again with a different worker-client
+			result  = worker_clients_[worker_index]->AssignMapTask(request, &retry_promise);
+			temp_future = (result == 1) ? std::move(retry_future) : std::move(future);
+			
 		}
 		
-		//TaskCompletion object to hold reponse
-		//TaskCompletion response;
+		//success
+		future_map_tasks.push_back(move(temp_future));
+		++map_task_count;
+			
+		//future_map_tasks.push_back(move(future));
+		//worker_clients_[worker_index]->AssignMapTask(request).get();
 		
-		//assign map task to worker async
-		//greeter.AssignMapTask(mapTask, &response);
-		TaskCompletion response = greeter.AssignMapTask(mapTask);
-		task_response = response;
-		//Handling error
-		if(response.taskid() != -1) {
-			worker_states[worker_index] = false;
-			handleTaskCompletion();
-		} else {
-			std::cout << "Error in AssignMapTask" << std::endl;
-		}
+		//greeter.AssignMapTask(request);
+		//if(worker_clients_[worker_index]){
+			//std::cout << "worker calling AssignMapTask," << std::endl;
+			//worker_clients_[worker_index]->AssignMapTask(request);
+		//} else {
+			//std::cout << "Error: Attempting to use null unique_ptr" << std::endl;
+		//}
 		
+
+		//++map_task_count;
 	}
 }
 
 void Master::assignReduceTasks() {
-	for(int i = 0; i< reduces; ++i){
-		int worker_index = available_workers.front();
+
+	
+	std::cout << "assignMaptask worker_clients_ size = " << worker_clients_.size() <<std::endl;
+	for(int i = 0; i < reduces; ++i){
+		int worker_index = (available_workers.front() % worker_clients_.size()); //-1 or not??
+		std::cout << "assingReduceTask: worker_index = " << worker_index << std::endl;
 		available_workers.pop();
-		
-		//create and populate reduce task
-		ReduceTask reduceTask;
-		reduceTask.set_taskid(i);
-		reduceTask.set_tasktype(TaskType::REDUCE);
-		//set the output file
-		std::string outputFilePath = "output_" + std::to_string(worker_index) + "_" + std::to_string(i) + ".txt";
-		reduceTask.set_outputfilepath(outputFilePath);
-		//Now assign the set of intermediate files to reducer worker - check bounds
-		for(int j = 0; j < maps/reduces && intermediate_index < maps; ++j) {
-			reduceTask.add_inputfilepath(intermediateFilePaths[intermediate_index]);
-			++intermediate_index;
+		ReduceTaskRequest request;
+		request.set_task_id(reduce_task_count);
+		//M*R intermediate files- each worker write R intermediate files
+		for(int j = 0; j < reduces; ++j){
+			IntermediateFile* intermediate_file = request.add_intermediate_files();
+			intermediate_file->set_file_name("intermediate" + std::to_string(j) + ".txt");
 		}
+		std::cout << "worker calling assignReduceTask with worker ip" << worker_ips_[worker_index] <<std::endl;
 		
-		//task complete object
-		TaskCompletion response = greeter.AssignReduceTask(reduceTask);
-		task_response = response;
-		//Handling error
-		if(response.taskid() != -1) {
-			worker_states[worker_index] = false;
-			handleTaskCompletion();
-		} else {
-			std::cout << "Error in AssignReduceTask" << std::endl;
-		}
-		
-	}
-}
-
-void Master::handleTaskCompletion() {
-	//TaskCompletion response;
-	
-	//extract worker index
-	int worker_index = task_response.taskid();
-	if(task_response.tasktype() == TaskType::MAP){	
-		--remain_map_tasks;
-	} else if (task_response.tasktype() == TaskType::REDUCE){
-		--remain_reduce_tasks;
-	}
-	
-	//make the worker as available
-	available_workers.push(worker_index);
-	worker_states[worker_index] = true;
-}
-
-void Master::waitForMapTasks() {
-	while(remain_map_tasks > 0){
-		handleTaskCompletion();
-	}
-}
-void Master::waitForReduceTasks() {
-	while(remain_reduce_tasks > 0){
-		handleTaskCompletion();
-	}
-}
+		promise<ReduceTaskCompleted> promise;
+		future<ReduceTaskCompleted> future = promise.get_future();
+		int result = worker_clients_[worker_index]->AssignReduceTask(request, &promise);
+		std::cout <<"reduce result = " << result << std::endl;
+		std::future<ReduceTaskCompleted> temp_future;
+		while(result == 0) {
+		//retry logic
+			//create new promise
+			std::promise<ReduceTaskCompleted> retry_promise;
+			std::future<ReduceTaskCompleted> retry_future = retry_promise.get_future();
+			worker_index = (worker_index + 1) % worker_clients_.size();
+			std::cout << "worker calling AssignReduceTask with DIFF workerIP" <<worker_ips_[worker_index] <<std::endl;
+			result = worker_clients_[worker_index]->AssignReduceTask(request, &retry_promise);
+			temp_future = (result == 1)? std::move(retry_future) : std::move(future);
 			
+		}
+		future_reduce_tasks.push_back(std::move(temp_future));
 		
+
+
+		++reduce_task_count;
+		//call wait before or after ++ count
+	}
 		
-		
-		
+}
+
+void Master::handleMapTaskCompletion() {
+	
+	for(int i = 0; i < maps; i++) {
+		map_task_status[i] = true;
+		available_workers.push(i);
+	}
+}
+
+void Master::handleReduceTaskCompletion() {
+	
+	for(int i = 0; i < reduces; i++) {
+		reduce_task_status[i] = true;
+		available_workers.push(i);
+	}
+}
+
+
+void Master::waitForMapTask() {
+	std::cout << "future_map_tasks size = " << future_map_tasks.size() << std::endl;
+	for(int i = 0; i < maps; ++i) {
+		auto& future = future_map_tasks[i];
+		if(future.valid()){
+			try {
+                    		future.get();  // Wait for each map task future to be ready
+                	} catch (const std::exception& e) {
+                    		std::cerr << "Exception in waitForMapTaskCompletion: " << e.what() << std::endl;
+                	}
+		}
+		//std::cout << "future not valid" << std::endl;
+	}
+    	std::cout << "calling handle map"<<std::endl;
+    	handleMapTaskCompletion();
+    	std::cout << "leaving waitForMapTask()"<<std::endl;
+
+}
+void Master::waitForReduceTask() {
+	
+    	std::cout << "future_reduce_tasks size = " << future_reduce_tasks.size() << std::endl;
+    	for(int i= 0;i < reduces; ++i) {
+    		auto& future = future_reduce_tasks[i];
+    		if(future.valid()){
+    			try {
+                    		future.get();  // Wait for each reduce task future to be ready
+                	} catch (const std::exception& e) {
+                    		std::cerr << "Exception in waitForReduceTaskCompletion: " << e.what() << std::endl;
+                	}
+    		}
+    		//std::cout << "future not valid" << std::endl;
+    	}
+    	std::cout << "calling handle reduce"<<std::endl;
+    	handleReduceTaskCompletion();
+	std::cout << "leaving waitForReduceTask()"<<std::endl;
+}
+
 
 
 /* CS6210_TASK: Here you go. once this function is called you will complete whole map reduce task and return true if succeeded */
 bool Master::run() {
 
 	// first run the map tasks
+	std::cout << "Calling assignMapTask" <<std::endl;
 	assignMapTasks();
-	waitForMapTasks();
+	// wait for all map tasks to complete
+   	//std::for_each(future_map_tasks.begin(), future_map_tasks.end(), [](auto& future) {
+        	//future.get();  // Wait for each map task future to be ready
+    	//});
+
+	std::cout << "calling waitForMapTask() " << std::endl;
+	waitForMapTask();
 	// then the reduce functions
+	std::cout << "Calling assignReduceTask" <<std::endl;
 	assignReduceTasks();
-	waitForReduceTasks();
+	// wait for all reduce tasks to complete
+    	//std::for_each(future_reduce_tasks.begin(), future_reduce_tasks.end(), [](auto& future) {
+        	//future.get();  // Wait for each reduce task future to be ready
+    	//});
+	
+	waitForReduceTask();
 
 	return true;
 }
