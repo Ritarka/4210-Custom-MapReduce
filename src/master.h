@@ -33,10 +33,10 @@ using masterworker::MapTaskRequest;
 using masterworker::MapTaskCompleted;
 using masterworker::ReduceTaskRequest;
 using masterworker::ReduceTaskCompleted;
-using masterworker::ShardInfo;
+using masterworker::Fileshard;
+using masterworker::Minishard;
 using masterworker::IntermediateFile;
 using masterworker::OutputFile;
-//using masterworker::FileShard;
 
 
 class GreeterClient {
@@ -256,12 +256,12 @@ void Master::assignMapTasks(){
 		std::cout << "assingMapTask: worker_index = " << worker_index << std::endl;
 		available_workers.pop();
 		MapTaskRequest request;
-		request.set_task_id(map_task_count);
-		ShardInfo* shard_info = request.mutable_shard_info();
-		shard_info->set_file_name(shards[i].shards[0].file_name);
-		shard_info->set_start_offset(shards[i].shards[0].start_offset);
-		shard_info->set_end_offset(shards[i].shards[0].end_offset);
-		request.set_num_reduces(reduces);
+		request.set_taskid(map_task_count);
+		// ShardInfo* shard_info = request.mutable_shard_info();
+		// shard_info->set_file_name(shards[i].shards[0].file_name);
+		// shard_info->set_start_offset(shards[i].shards[0].start_offset);
+		// shard_info->set_end_offset(shards[i].shards[0].end_offset);
+		// request.set_num_reduces(reduces);
 		//make the call
 		
 		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
@@ -315,10 +315,10 @@ void Master::assignReduceTasks() {
 		ReduceTaskRequest request;
 		request.set_task_id(reduce_task_count);
 		//M*R intermediate files- each worker write R intermediate files
-		for(int j = 0; j < reduces; ++j){
-			IntermediateFile* intermediate_file = request.add_intermediate_files();
-			intermediate_file->set_file_name("intermediate" + std::to_string(j) + ".txt");
-		}
+		// for(int j = 0; j < reduces; ++j){
+		// 	IntermediateFile* intermediate_file = request.add_intermediate_files();
+		// 	intermediate_file->set_file_name("intermediate" + std::to_string(j) + ".txt");
+		// }
 		std::cout << "worker calling assignReduceTask with worker ip" << worker_ips_[worker_index] <<std::endl;
 		
 		promise<ReduceTaskCompleted> promise;

@@ -51,6 +51,9 @@ struct TableStruct_masterworker_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
     descriptor_table_masterworker_2eproto;
 namespace masterworker {
+class Fileshard;
+struct FileshardDefaultTypeInternal;
+extern FileshardDefaultTypeInternal _Fileshard_default_instance_;
 class HelloReply;
 struct HelloReplyDefaultTypeInternal;
 extern HelloReplyDefaultTypeInternal _HelloReply_default_instance_;
@@ -66,6 +69,9 @@ extern MapTaskCompletedDefaultTypeInternal _MapTaskCompleted_default_instance_;
 class MapTaskRequest;
 struct MapTaskRequestDefaultTypeInternal;
 extern MapTaskRequestDefaultTypeInternal _MapTaskRequest_default_instance_;
+class Minishard;
+struct MinishardDefaultTypeInternal;
+extern MinishardDefaultTypeInternal _Minishard_default_instance_;
 class OutputFile;
 struct OutputFileDefaultTypeInternal;
 extern OutputFileDefaultTypeInternal _OutputFile_default_instance_;
@@ -75,11 +81,10 @@ extern ReduceTaskCompletedDefaultTypeInternal _ReduceTaskCompleted_default_insta
 class ReduceTaskRequest;
 struct ReduceTaskRequestDefaultTypeInternal;
 extern ReduceTaskRequestDefaultTypeInternal _ReduceTaskRequest_default_instance_;
-class ShardInfo;
-struct ShardInfoDefaultTypeInternal;
-extern ShardInfoDefaultTypeInternal _ShardInfo_default_instance_;
 }  // namespace masterworker
 PROTOBUF_NAMESPACE_OPEN
+template <>
+::masterworker::Fileshard* Arena::CreateMaybeMessage<::masterworker::Fileshard>(Arena*);
 template <>
 ::masterworker::HelloReply* Arena::CreateMaybeMessage<::masterworker::HelloReply>(Arena*);
 template <>
@@ -91,13 +96,13 @@ template <>
 template <>
 ::masterworker::MapTaskRequest* Arena::CreateMaybeMessage<::masterworker::MapTaskRequest>(Arena*);
 template <>
+::masterworker::Minishard* Arena::CreateMaybeMessage<::masterworker::Minishard>(Arena*);
+template <>
 ::masterworker::OutputFile* Arena::CreateMaybeMessage<::masterworker::OutputFile>(Arena*);
 template <>
 ::masterworker::ReduceTaskCompleted* Arena::CreateMaybeMessage<::masterworker::ReduceTaskCompleted>(Arena*);
 template <>
 ::masterworker::ReduceTaskRequest* Arena::CreateMaybeMessage<::masterworker::ReduceTaskRequest>(Arena*);
-template <>
-::masterworker::ShardInfo* Arena::CreateMaybeMessage<::masterworker::ShardInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 namespace masterworker {
@@ -437,25 +442,25 @@ class HelloReply final :
   friend struct ::TableStruct_masterworker_2eproto;
 };// -------------------------------------------------------------------
 
-class ShardInfo final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:masterworker.ShardInfo) */ {
+class Minishard final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:masterworker.Minishard) */ {
  public:
-  inline ShardInfo() : ShardInfo(nullptr) {}
-  ~ShardInfo() override;
+  inline Minishard() : Minishard(nullptr) {}
+  ~Minishard() override;
   template<typename = void>
-  explicit PROTOBUF_CONSTEXPR ShardInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Minishard(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ShardInfo(const ShardInfo& from);
-  ShardInfo(ShardInfo&& from) noexcept
-    : ShardInfo() {
+  Minishard(const Minishard& from);
+  Minishard(Minishard&& from) noexcept
+    : Minishard() {
     *this = ::std::move(from);
   }
 
-  inline ShardInfo& operator=(const ShardInfo& from) {
+  inline Minishard& operator=(const Minishard& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ShardInfo& operator=(ShardInfo&& from) noexcept {
+  inline Minishard& operator=(Minishard&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -485,20 +490,20 @@ class ShardInfo final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const ShardInfo& default_instance() {
+  static const Minishard& default_instance() {
     return *internal_default_instance();
   }
-  static inline const ShardInfo* internal_default_instance() {
-    return reinterpret_cast<const ShardInfo*>(
-               &_ShardInfo_default_instance_);
+  static inline const Minishard* internal_default_instance() {
+    return reinterpret_cast<const Minishard*>(
+               &_Minishard_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     2;
 
-  friend void swap(ShardInfo& a, ShardInfo& b) {
+  friend void swap(Minishard& a, Minishard& b) {
     a.Swap(&b);
   }
-  inline void Swap(ShardInfo* other) {
+  inline void Swap(Minishard* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -511,7 +516,7 @@ class ShardInfo final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(ShardInfo* other) {
+  void UnsafeArenaSwap(Minishard* other) {
     if (other == this) return;
     ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -519,14 +524,14 @@ class ShardInfo final :
 
   // implements Message ----------------------------------------------
 
-  ShardInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ShardInfo>(arena);
+  Minishard* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Minishard>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ShardInfo& from);
+  void CopyFrom(const Minishard& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const ShardInfo& from) {
-    ShardInfo::MergeImpl(*this, from);
+  void MergeFrom( const Minishard& from) {
+    Minishard::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -544,15 +549,15 @@ class ShardInfo final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ShardInfo* other);
+  void InternalSwap(Minishard* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::absl::string_view FullMessageName() {
-    return "masterworker.ShardInfo";
+    return "masterworker.Minishard";
   }
   protected:
-  explicit ShardInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  explicit Minishard(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
 
   static const ClassData _class_data_;
@@ -609,7 +614,7 @@ class ShardInfo final :
   void _internal_set_end_offset(::int64_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:masterworker.ShardInfo)
+  // @@protoc_insertion_point(class_scope:masterworker.Minishard)
  private:
   class _Internal;
 
@@ -620,6 +625,171 @@ class ShardInfo final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
     ::int64_t start_offset_;
     ::int64_t end_offset_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_masterworker_2eproto;
+};// -------------------------------------------------------------------
+
+class Fileshard final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:masterworker.Fileshard) */ {
+ public:
+  inline Fileshard() : Fileshard(nullptr) {}
+  ~Fileshard() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR Fileshard(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Fileshard(const Fileshard& from);
+  Fileshard(Fileshard&& from) noexcept
+    : Fileshard() {
+    *this = ::std::move(from);
+  }
+
+  inline Fileshard& operator=(const Fileshard& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Fileshard& operator=(Fileshard&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Fileshard& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Fileshard* internal_default_instance() {
+    return reinterpret_cast<const Fileshard*>(
+               &_Fileshard_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(Fileshard& a, Fileshard& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Fileshard* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Fileshard* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Fileshard* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Fileshard>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Fileshard& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const Fileshard& from) {
+    Fileshard::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Fileshard* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "masterworker.Fileshard";
+  }
+  protected:
+  explicit Fileshard(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kShardsFieldNumber = 1,
+  };
+  // repeated .masterworker.Minishard shards = 1;
+  int shards_size() const;
+  private:
+  int _internal_shards_size() const;
+
+  public:
+  void clear_shards() ;
+  ::masterworker::Minishard* mutable_shards(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::Minishard >*
+      mutable_shards();
+  private:
+  const ::masterworker::Minishard& _internal_shards(int index) const;
+  ::masterworker::Minishard* _internal_add_shards();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::Minishard>& _internal_shards() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::Minishard>* _internal_mutable_shards();
+  public:
+  const ::masterworker::Minishard& shards(int index) const;
+  ::masterworker::Minishard* add_shards();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::Minishard >&
+      shards() const;
+  // @@protoc_insertion_point(class_scope:masterworker.Fileshard)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::Minishard > shards_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -682,7 +852,7 @@ class IntermediateFile final :
                &_IntermediateFile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(IntermediateFile& a, IntermediateFile& b) {
     a.Swap(&b);
@@ -847,7 +1017,7 @@ class OutputFile final :
                &_OutputFile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(OutputFile& a, OutputFile& b) {
     a.Swap(&b);
@@ -1012,7 +1182,7 @@ class MapTaskRequest final :
                &_MapTaskRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(MapTaskRequest& a, MapTaskRequest& b) {
     a.Swap(&b);
@@ -1084,42 +1254,73 @@ class MapTaskRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kShardInfoFieldNumber = 2,
+    kFilePathFieldNumber = 3,
+    kUseridFieldNumber = 5,
+    kFileShardFieldNumber = 4,
     kTaskIdFieldNumber = 1,
-    kNumReducesFieldNumber = 3,
   };
-  // .masterworker.ShardInfo shard_info = 2;
-  bool has_shard_info() const;
-  void clear_shard_info() ;
-  const ::masterworker::ShardInfo& shard_info() const;
-  PROTOBUF_NODISCARD ::masterworker::ShardInfo* release_shard_info();
-  ::masterworker::ShardInfo* mutable_shard_info();
-  void set_allocated_shard_info(::masterworker::ShardInfo* shard_info);
-  private:
-  const ::masterworker::ShardInfo& _internal_shard_info() const;
-  ::masterworker::ShardInfo* _internal_mutable_shard_info();
-  public:
-  void unsafe_arena_set_allocated_shard_info(
-      ::masterworker::ShardInfo* shard_info);
-  ::masterworker::ShardInfo* unsafe_arena_release_shard_info();
-  // int32 task_id = 1;
-  void clear_task_id() ;
-  ::int32_t task_id() const;
-  void set_task_id(::int32_t value);
+  // string filePath = 3;
+  void clear_filepath() ;
+  const std::string& filepath() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_filepath(Arg_&& arg, Args_... args);
+  std::string* mutable_filepath();
+  PROTOBUF_NODISCARD std::string* release_filepath();
+  void set_allocated_filepath(std::string* ptr);
 
   private:
-  ::int32_t _internal_task_id() const;
-  void _internal_set_task_id(::int32_t value);
+  const std::string& _internal_filepath() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_filepath(
+      const std::string& value);
+  std::string* _internal_mutable_filepath();
 
   public:
-  // int32 num_reduces = 3;
-  void clear_num_reduces() ;
-  ::int32_t num_reduces() const;
-  void set_num_reduces(::int32_t value);
+  // string userid = 5;
+  void clear_userid() ;
+  const std::string& userid() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_userid(Arg_&& arg, Args_... args);
+  std::string* mutable_userid();
+  PROTOBUF_NODISCARD std::string* release_userid();
+  void set_allocated_userid(std::string* ptr);
 
   private:
-  ::int32_t _internal_num_reduces() const;
-  void _internal_set_num_reduces(::int32_t value);
+  const std::string& _internal_userid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_userid(
+      const std::string& value);
+  std::string* _internal_mutable_userid();
+
+  public:
+  // .masterworker.Fileshard fileShard = 4;
+  bool has_fileshard() const;
+  void clear_fileshard() ;
+  const ::masterworker::Fileshard& fileshard() const;
+  PROTOBUF_NODISCARD ::masterworker::Fileshard* release_fileshard();
+  ::masterworker::Fileshard* mutable_fileshard();
+  void set_allocated_fileshard(::masterworker::Fileshard* fileshard);
+  private:
+  const ::masterworker::Fileshard& _internal_fileshard() const;
+  ::masterworker::Fileshard* _internal_mutable_fileshard();
+  public:
+  void unsafe_arena_set_allocated_fileshard(
+      ::masterworker::Fileshard* fileshard);
+  ::masterworker::Fileshard* unsafe_arena_release_fileshard();
+  // int32 taskId = 1;
+  void clear_taskid() ;
+  ::int32_t taskid() const;
+  void set_taskid(::int32_t value);
+
+  private:
+  ::int32_t _internal_taskid() const;
+  void _internal_set_taskid(::int32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:masterworker.MapTaskRequest)
@@ -1132,9 +1333,10 @@ class MapTaskRequest final :
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::masterworker::ShardInfo* shard_info_;
-    ::int32_t task_id_;
-    ::int32_t num_reduces_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr filepath_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
+    ::masterworker::Fileshard* fileshard_;
+    ::int32_t taskid_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_masterworker_2eproto;
@@ -1196,7 +1398,7 @@ class MapTaskCompleted final :
                &_MapTaskCompleted_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(MapTaskCompleted& a, MapTaskCompleted& b) {
     a.Swap(&b);
@@ -1351,7 +1553,7 @@ class ReduceTaskRequest final :
                &_ReduceTaskRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(ReduceTaskRequest& a, ReduceTaskRequest& b) {
     a.Swap(&b);
@@ -1423,9 +1625,42 @@ class ReduceTaskRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kInputFilePathFieldNumber = 4,
     kOutputFileFieldNumber = 2,
+    kUseridFieldNumber = 3,
+    kOutputFilePathFieldNumber = 5,
     kTaskIdFieldNumber = 1,
   };
+  // repeated string inputFilePath = 4;
+  int inputfilepath_size() const;
+  private:
+  int _internal_inputfilepath_size() const;
+
+  public:
+  void clear_inputfilepath() ;
+  const std::string& inputfilepath(int index) const;
+  std::string* mutable_inputfilepath(int index);
+  void set_inputfilepath(int index, const std::string& value);
+  void set_inputfilepath(int index, std::string&& value);
+  void set_inputfilepath(int index, const char* value);
+  void set_inputfilepath(int index, const char* value, std::size_t size);
+  void set_inputfilepath(int index, absl::string_view value);
+  std::string* add_inputfilepath();
+  void add_inputfilepath(const std::string& value);
+  void add_inputfilepath(std::string&& value);
+  void add_inputfilepath(const char* value);
+  void add_inputfilepath(const char* value, std::size_t size);
+  void add_inputfilepath(absl::string_view value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& inputfilepath() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_inputfilepath();
+
+  private:
+  const std::string& _internal_inputfilepath(int index) const;
+  std::string* _internal_add_inputfilepath();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& _internal_inputfilepath() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* _internal_mutable_inputfilepath();
+
+  public:
   // string output_file = 2;
   void clear_output_file() ;
   const std::string& output_file() const;
@@ -1446,6 +1681,46 @@ class ReduceTaskRequest final :
   std::string* _internal_mutable_output_file();
 
   public:
+  // string userid = 3;
+  void clear_userid() ;
+  const std::string& userid() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_userid(Arg_&& arg, Args_... args);
+  std::string* mutable_userid();
+  PROTOBUF_NODISCARD std::string* release_userid();
+  void set_allocated_userid(std::string* ptr);
+
+  private:
+  const std::string& _internal_userid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_userid(
+      const std::string& value);
+  std::string* _internal_mutable_userid();
+
+  public:
+  // string outputFilePath = 5;
+  void clear_outputfilepath() ;
+  const std::string& outputfilepath() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_outputfilepath(Arg_&& arg, Args_... args);
+  std::string* mutable_outputfilepath();
+  PROTOBUF_NODISCARD std::string* release_outputfilepath();
+  void set_allocated_outputfilepath(std::string* ptr);
+
+  private:
+  const std::string& _internal_outputfilepath() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_outputfilepath(
+      const std::string& value);
+  std::string* _internal_mutable_outputfilepath();
+
+  public:
   // int32 task_id = 1;
   void clear_task_id() ;
   ::int32_t task_id() const;
@@ -1464,7 +1739,10 @@ class ReduceTaskRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> inputfilepath_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr output_file_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr outputfilepath_;
     ::int32_t task_id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1528,7 +1806,7 @@ class ReduceTaskCompleted final :
                &_ReduceTaskCompleted_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(ReduceTaskCompleted& a, ReduceTaskCompleted& b) {
     a.Swap(&b);
@@ -1743,93 +2021,145 @@ inline void HelloReply::set_allocated_message(std::string* value) {
 
 // -------------------------------------------------------------------
 
-// ShardInfo
+// Minishard
 
 // string file_name = 1;
-inline void ShardInfo::clear_file_name() {
+inline void Minishard::clear_file_name() {
   _impl_.file_name_.ClearToEmpty();
 }
-inline const std::string& ShardInfo::file_name() const {
-  // @@protoc_insertion_point(field_get:masterworker.ShardInfo.file_name)
+inline const std::string& Minishard::file_name() const {
+  // @@protoc_insertion_point(field_get:masterworker.Minishard.file_name)
   return _internal_file_name();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void ShardInfo::set_file_name(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void Minishard::set_file_name(Arg_&& arg,
                                                      Args_... args) {
   ;
   _impl_.file_name_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:masterworker.ShardInfo.file_name)
+  // @@protoc_insertion_point(field_set:masterworker.Minishard.file_name)
 }
-inline std::string* ShardInfo::mutable_file_name() {
+inline std::string* Minishard::mutable_file_name() {
   std::string* _s = _internal_mutable_file_name();
-  // @@protoc_insertion_point(field_mutable:masterworker.ShardInfo.file_name)
+  // @@protoc_insertion_point(field_mutable:masterworker.Minishard.file_name)
   return _s;
 }
-inline const std::string& ShardInfo::_internal_file_name() const {
+inline const std::string& Minishard::_internal_file_name() const {
   return _impl_.file_name_.Get();
 }
-inline void ShardInfo::_internal_set_file_name(const std::string& value) {
+inline void Minishard::_internal_set_file_name(const std::string& value) {
   ;
 
 
   _impl_.file_name_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ShardInfo::_internal_mutable_file_name() {
+inline std::string* Minishard::_internal_mutable_file_name() {
   ;
   return _impl_.file_name_.Mutable( GetArenaForAllocation());
 }
-inline std::string* ShardInfo::release_file_name() {
-  // @@protoc_insertion_point(field_release:masterworker.ShardInfo.file_name)
+inline std::string* Minishard::release_file_name() {
+  // @@protoc_insertion_point(field_release:masterworker.Minishard.file_name)
   return _impl_.file_name_.Release();
 }
-inline void ShardInfo::set_allocated_file_name(std::string* value) {
+inline void Minishard::set_allocated_file_name(std::string* value) {
   _impl_.file_name_.SetAllocated(value, GetArenaForAllocation());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.file_name_.IsDefault()) {
           _impl_.file_name_.Set("", GetArenaForAllocation());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:masterworker.ShardInfo.file_name)
+  // @@protoc_insertion_point(field_set_allocated:masterworker.Minishard.file_name)
 }
 
 // int64 start_offset = 2;
-inline void ShardInfo::clear_start_offset() {
+inline void Minishard::clear_start_offset() {
   _impl_.start_offset_ = ::int64_t{0};
 }
-inline ::int64_t ShardInfo::start_offset() const {
-  // @@protoc_insertion_point(field_get:masterworker.ShardInfo.start_offset)
+inline ::int64_t Minishard::start_offset() const {
+  // @@protoc_insertion_point(field_get:masterworker.Minishard.start_offset)
   return _internal_start_offset();
 }
-inline void ShardInfo::set_start_offset(::int64_t value) {
+inline void Minishard::set_start_offset(::int64_t value) {
   _internal_set_start_offset(value);
-  // @@protoc_insertion_point(field_set:masterworker.ShardInfo.start_offset)
+  // @@protoc_insertion_point(field_set:masterworker.Minishard.start_offset)
 }
-inline ::int64_t ShardInfo::_internal_start_offset() const {
+inline ::int64_t Minishard::_internal_start_offset() const {
   return _impl_.start_offset_;
 }
-inline void ShardInfo::_internal_set_start_offset(::int64_t value) {
+inline void Minishard::_internal_set_start_offset(::int64_t value) {
   ;
   _impl_.start_offset_ = value;
 }
 
 // int64 end_offset = 3;
-inline void ShardInfo::clear_end_offset() {
+inline void Minishard::clear_end_offset() {
   _impl_.end_offset_ = ::int64_t{0};
 }
-inline ::int64_t ShardInfo::end_offset() const {
-  // @@protoc_insertion_point(field_get:masterworker.ShardInfo.end_offset)
+inline ::int64_t Minishard::end_offset() const {
+  // @@protoc_insertion_point(field_get:masterworker.Minishard.end_offset)
   return _internal_end_offset();
 }
-inline void ShardInfo::set_end_offset(::int64_t value) {
+inline void Minishard::set_end_offset(::int64_t value) {
   _internal_set_end_offset(value);
-  // @@protoc_insertion_point(field_set:masterworker.ShardInfo.end_offset)
+  // @@protoc_insertion_point(field_set:masterworker.Minishard.end_offset)
 }
-inline ::int64_t ShardInfo::_internal_end_offset() const {
+inline ::int64_t Minishard::_internal_end_offset() const {
   return _impl_.end_offset_;
 }
-inline void ShardInfo::_internal_set_end_offset(::int64_t value) {
+inline void Minishard::_internal_set_end_offset(::int64_t value) {
   ;
   _impl_.end_offset_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// Fileshard
+
+// repeated .masterworker.Minishard shards = 1;
+inline int Fileshard::_internal_shards_size() const {
+  return _impl_.shards_.size();
+}
+inline int Fileshard::shards_size() const {
+  return _internal_shards_size();
+}
+inline void Fileshard::clear_shards() {
+  _internal_mutable_shards()->Clear();
+}
+inline ::masterworker::Minishard* Fileshard::mutable_shards(int index) {
+  // @@protoc_insertion_point(field_mutable:masterworker.Fileshard.shards)
+  return _internal_mutable_shards()->Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::Minishard >*
+Fileshard::mutable_shards() {
+  // @@protoc_insertion_point(field_mutable_list:masterworker.Fileshard.shards)
+  return _internal_mutable_shards();
+}
+inline const ::masterworker::Minishard& Fileshard::_internal_shards(int index) const {
+  return _internal_shards().Get(index);
+}
+inline const ::masterworker::Minishard& Fileshard::shards(int index) const {
+  // @@protoc_insertion_point(field_get:masterworker.Fileshard.shards)
+  return _internal_shards(index);
+}
+inline ::masterworker::Minishard* Fileshard::_internal_add_shards() {
+  return _internal_mutable_shards()->Add();
+}
+inline ::masterworker::Minishard* Fileshard::add_shards() {
+  ::masterworker::Minishard* _add = _internal_add_shards();
+  // @@protoc_insertion_point(field_add:masterworker.Fileshard.shards)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::Minishard >&
+Fileshard::shards() const {
+  // @@protoc_insertion_point(field_list:masterworker.Fileshard.shards)
+  return _internal_shards();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::Minishard>&
+Fileshard::_internal_shards() const {
+  return _impl_.shards_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::Minishard>*
+Fileshard::_internal_mutable_shards() {
+  return &_impl_.shards_;
 }
 
 // -------------------------------------------------------------------
@@ -1938,62 +2268,109 @@ inline void OutputFile::set_allocated_file_name(std::string* value) {
 
 // MapTaskRequest
 
-// int32 task_id = 1;
-inline void MapTaskRequest::clear_task_id() {
-  _impl_.task_id_ = 0;
+// int32 taskId = 1;
+inline void MapTaskRequest::clear_taskid() {
+  _impl_.taskid_ = 0;
 }
-inline ::int32_t MapTaskRequest::task_id() const {
-  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.task_id)
-  return _internal_task_id();
+inline ::int32_t MapTaskRequest::taskid() const {
+  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.taskId)
+  return _internal_taskid();
 }
-inline void MapTaskRequest::set_task_id(::int32_t value) {
-  _internal_set_task_id(value);
-  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.task_id)
+inline void MapTaskRequest::set_taskid(::int32_t value) {
+  _internal_set_taskid(value);
+  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.taskId)
 }
-inline ::int32_t MapTaskRequest::_internal_task_id() const {
-  return _impl_.task_id_;
+inline ::int32_t MapTaskRequest::_internal_taskid() const {
+  return _impl_.taskid_;
 }
-inline void MapTaskRequest::_internal_set_task_id(::int32_t value) {
+inline void MapTaskRequest::_internal_set_taskid(::int32_t value) {
   ;
-  _impl_.task_id_ = value;
+  _impl_.taskid_ = value;
 }
 
-// .masterworker.ShardInfo shard_info = 2;
-inline bool MapTaskRequest::has_shard_info() const {
+// string filePath = 3;
+inline void MapTaskRequest::clear_filepath() {
+  _impl_.filepath_.ClearToEmpty();
+}
+inline const std::string& MapTaskRequest::filepath() const {
+  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.filePath)
+  return _internal_filepath();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void MapTaskRequest::set_filepath(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.filepath_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.filePath)
+}
+inline std::string* MapTaskRequest::mutable_filepath() {
+  std::string* _s = _internal_mutable_filepath();
+  // @@protoc_insertion_point(field_mutable:masterworker.MapTaskRequest.filePath)
+  return _s;
+}
+inline const std::string& MapTaskRequest::_internal_filepath() const {
+  return _impl_.filepath_.Get();
+}
+inline void MapTaskRequest::_internal_set_filepath(const std::string& value) {
+  ;
+
+
+  _impl_.filepath_.Set(value, GetArenaForAllocation());
+}
+inline std::string* MapTaskRequest::_internal_mutable_filepath() {
+  ;
+  return _impl_.filepath_.Mutable( GetArenaForAllocation());
+}
+inline std::string* MapTaskRequest::release_filepath() {
+  // @@protoc_insertion_point(field_release:masterworker.MapTaskRequest.filePath)
+  return _impl_.filepath_.Release();
+}
+inline void MapTaskRequest::set_allocated_filepath(std::string* value) {
+  _impl_.filepath_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.filepath_.IsDefault()) {
+          _impl_.filepath_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:masterworker.MapTaskRequest.filePath)
+}
+
+// .masterworker.Fileshard fileShard = 4;
+inline bool MapTaskRequest::has_fileshard() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.shard_info_ != nullptr);
+  PROTOBUF_ASSUME(!value || _impl_.fileshard_ != nullptr);
   return value;
 }
-inline void MapTaskRequest::clear_shard_info() {
-  if (_impl_.shard_info_ != nullptr) _impl_.shard_info_->Clear();
+inline void MapTaskRequest::clear_fileshard() {
+  if (_impl_.fileshard_ != nullptr) _impl_.fileshard_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::masterworker::ShardInfo& MapTaskRequest::_internal_shard_info() const {
-  const ::masterworker::ShardInfo* p = _impl_.shard_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::masterworker::ShardInfo&>(
-      ::masterworker::_ShardInfo_default_instance_);
+inline const ::masterworker::Fileshard& MapTaskRequest::_internal_fileshard() const {
+  const ::masterworker::Fileshard* p = _impl_.fileshard_;
+  return p != nullptr ? *p : reinterpret_cast<const ::masterworker::Fileshard&>(
+      ::masterworker::_Fileshard_default_instance_);
 }
-inline const ::masterworker::ShardInfo& MapTaskRequest::shard_info() const {
-  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.shard_info)
-  return _internal_shard_info();
+inline const ::masterworker::Fileshard& MapTaskRequest::fileshard() const {
+  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.fileShard)
+  return _internal_fileshard();
 }
-inline void MapTaskRequest::unsafe_arena_set_allocated_shard_info(
-    ::masterworker::ShardInfo* shard_info) {
+inline void MapTaskRequest::unsafe_arena_set_allocated_fileshard(
+    ::masterworker::Fileshard* fileshard) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.shard_info_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.fileshard_);
   }
-  _impl_.shard_info_ = shard_info;
-  if (shard_info) {
+  _impl_.fileshard_ = fileshard;
+  if (fileshard) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:masterworker.MapTaskRequest.shard_info)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:masterworker.MapTaskRequest.fileShard)
 }
-inline ::masterworker::ShardInfo* MapTaskRequest::release_shard_info() {
+inline ::masterworker::Fileshard* MapTaskRequest::release_fileshard() {
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::masterworker::ShardInfo* temp = _impl_.shard_info_;
-  _impl_.shard_info_ = nullptr;
+  ::masterworker::Fileshard* temp = _impl_.fileshard_;
+  _impl_.fileshard_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -2005,64 +2382,91 @@ inline ::masterworker::ShardInfo* MapTaskRequest::release_shard_info() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::masterworker::ShardInfo* MapTaskRequest::unsafe_arena_release_shard_info() {
-  // @@protoc_insertion_point(field_release:masterworker.MapTaskRequest.shard_info)
+inline ::masterworker::Fileshard* MapTaskRequest::unsafe_arena_release_fileshard() {
+  // @@protoc_insertion_point(field_release:masterworker.MapTaskRequest.fileShard)
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::masterworker::ShardInfo* temp = _impl_.shard_info_;
-  _impl_.shard_info_ = nullptr;
+  ::masterworker::Fileshard* temp = _impl_.fileshard_;
+  _impl_.fileshard_ = nullptr;
   return temp;
 }
-inline ::masterworker::ShardInfo* MapTaskRequest::_internal_mutable_shard_info() {
+inline ::masterworker::Fileshard* MapTaskRequest::_internal_mutable_fileshard() {
   _impl_._has_bits_[0] |= 0x00000001u;
-  if (_impl_.shard_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::masterworker::ShardInfo>(GetArenaForAllocation());
-    _impl_.shard_info_ = p;
+  if (_impl_.fileshard_ == nullptr) {
+    auto* p = CreateMaybeMessage<::masterworker::Fileshard>(GetArenaForAllocation());
+    _impl_.fileshard_ = p;
   }
-  return _impl_.shard_info_;
+  return _impl_.fileshard_;
 }
-inline ::masterworker::ShardInfo* MapTaskRequest::mutable_shard_info() {
-  ::masterworker::ShardInfo* _msg = _internal_mutable_shard_info();
-  // @@protoc_insertion_point(field_mutable:masterworker.MapTaskRequest.shard_info)
+inline ::masterworker::Fileshard* MapTaskRequest::mutable_fileshard() {
+  ::masterworker::Fileshard* _msg = _internal_mutable_fileshard();
+  // @@protoc_insertion_point(field_mutable:masterworker.MapTaskRequest.fileShard)
   return _msg;
 }
-inline void MapTaskRequest::set_allocated_shard_info(::masterworker::ShardInfo* shard_info) {
+inline void MapTaskRequest::set_allocated_fileshard(::masterworker::Fileshard* fileshard) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.shard_info_;
+    delete _impl_.fileshard_;
   }
-  if (shard_info) {
+  if (fileshard) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(shard_info);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(fileshard);
     if (message_arena != submessage_arena) {
-      shard_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, shard_info, submessage_arena);
+      fileshard = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, fileshard, submessage_arena);
     }
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  _impl_.shard_info_ = shard_info;
-  // @@protoc_insertion_point(field_set_allocated:masterworker.MapTaskRequest.shard_info)
+  _impl_.fileshard_ = fileshard;
+  // @@protoc_insertion_point(field_set_allocated:masterworker.MapTaskRequest.fileShard)
 }
 
-// int32 num_reduces = 3;
-inline void MapTaskRequest::clear_num_reduces() {
-  _impl_.num_reduces_ = 0;
+// string userid = 5;
+inline void MapTaskRequest::clear_userid() {
+  _impl_.userid_.ClearToEmpty();
 }
-inline ::int32_t MapTaskRequest::num_reduces() const {
-  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.num_reduces)
-  return _internal_num_reduces();
+inline const std::string& MapTaskRequest::userid() const {
+  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.userid)
+  return _internal_userid();
 }
-inline void MapTaskRequest::set_num_reduces(::int32_t value) {
-  _internal_set_num_reduces(value);
-  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.num_reduces)
-}
-inline ::int32_t MapTaskRequest::_internal_num_reduces() const {
-  return _impl_.num_reduces_;
-}
-inline void MapTaskRequest::_internal_set_num_reduces(::int32_t value) {
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void MapTaskRequest::set_userid(Arg_&& arg,
+                                                     Args_... args) {
   ;
-  _impl_.num_reduces_ = value;
+  _impl_.userid_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.userid)
+}
+inline std::string* MapTaskRequest::mutable_userid() {
+  std::string* _s = _internal_mutable_userid();
+  // @@protoc_insertion_point(field_mutable:masterworker.MapTaskRequest.userid)
+  return _s;
+}
+inline const std::string& MapTaskRequest::_internal_userid() const {
+  return _impl_.userid_.Get();
+}
+inline void MapTaskRequest::_internal_set_userid(const std::string& value) {
+  ;
+
+
+  _impl_.userid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* MapTaskRequest::_internal_mutable_userid() {
+  ;
+  return _impl_.userid_.Mutable( GetArenaForAllocation());
+}
+inline std::string* MapTaskRequest::release_userid() {
+  // @@protoc_insertion_point(field_release:masterworker.MapTaskRequest.userid)
+  return _impl_.userid_.Release();
+}
+inline void MapTaskRequest::set_allocated_userid(std::string* value) {
+  _impl_.userid_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.userid_.IsDefault()) {
+          _impl_.userid_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:masterworker.MapTaskRequest.userid)
 }
 
 // -------------------------------------------------------------------
@@ -2158,6 +2562,193 @@ inline void ReduceTaskRequest::set_allocated_output_file(std::string* value) {
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:masterworker.ReduceTaskRequest.output_file)
+}
+
+// string userid = 3;
+inline void ReduceTaskRequest::clear_userid() {
+  _impl_.userid_.ClearToEmpty();
+}
+inline const std::string& ReduceTaskRequest::userid() const {
+  // @@protoc_insertion_point(field_get:masterworker.ReduceTaskRequest.userid)
+  return _internal_userid();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void ReduceTaskRequest::set_userid(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.userid_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:masterworker.ReduceTaskRequest.userid)
+}
+inline std::string* ReduceTaskRequest::mutable_userid() {
+  std::string* _s = _internal_mutable_userid();
+  // @@protoc_insertion_point(field_mutable:masterworker.ReduceTaskRequest.userid)
+  return _s;
+}
+inline const std::string& ReduceTaskRequest::_internal_userid() const {
+  return _impl_.userid_.Get();
+}
+inline void ReduceTaskRequest::_internal_set_userid(const std::string& value) {
+  ;
+
+
+  _impl_.userid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ReduceTaskRequest::_internal_mutable_userid() {
+  ;
+  return _impl_.userid_.Mutable( GetArenaForAllocation());
+}
+inline std::string* ReduceTaskRequest::release_userid() {
+  // @@protoc_insertion_point(field_release:masterworker.ReduceTaskRequest.userid)
+  return _impl_.userid_.Release();
+}
+inline void ReduceTaskRequest::set_allocated_userid(std::string* value) {
+  _impl_.userid_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.userid_.IsDefault()) {
+          _impl_.userid_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:masterworker.ReduceTaskRequest.userid)
+}
+
+// repeated string inputFilePath = 4;
+inline int ReduceTaskRequest::_internal_inputfilepath_size() const {
+  return _impl_.inputfilepath_.size();
+}
+inline int ReduceTaskRequest::inputfilepath_size() const {
+  return _internal_inputfilepath_size();
+}
+inline void ReduceTaskRequest::clear_inputfilepath() {
+  _internal_mutable_inputfilepath()->Clear();
+}
+inline std::string* ReduceTaskRequest::add_inputfilepath() {
+  std::string* _s = _internal_add_inputfilepath();
+  // @@protoc_insertion_point(field_add_mutable:masterworker.ReduceTaskRequest.inputFilePath)
+  return _s;
+}
+inline const std::string& ReduceTaskRequest::inputfilepath(int index) const {
+  // @@protoc_insertion_point(field_get:masterworker.ReduceTaskRequest.inputFilePath)
+  return _internal_inputfilepath(index);
+}
+inline std::string* ReduceTaskRequest::mutable_inputfilepath(int index) {
+  // @@protoc_insertion_point(field_mutable:masterworker.ReduceTaskRequest.inputFilePath)
+  return _internal_mutable_inputfilepath()->Mutable(index);
+}
+inline void ReduceTaskRequest::set_inputfilepath(int index, const std::string& value) {
+  _internal_mutable_inputfilepath()->Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::set_inputfilepath(int index, std::string&& value) {
+  _internal_mutable_inputfilepath()->Mutable(index)->assign(std::move(value));
+  // @@protoc_insertion_point(field_set:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::set_inputfilepath(int index, const char* value) {
+  ABSL_DCHECK(value != nullptr);
+  _internal_mutable_inputfilepath()->Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::set_inputfilepath(int index, const char* value,
+                              std::size_t size) {
+  _internal_mutable_inputfilepath()->Mutable(index)->assign(
+      reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::set_inputfilepath(int index, absl::string_view value) {
+  _internal_mutable_inputfilepath()->Mutable(index)->assign(value.data(),
+                                                     value.size());
+  // @@protoc_insertion_point(field_set_string_piece:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::add_inputfilepath(const std::string& value) {
+  _internal_mutable_inputfilepath()->Add()->assign(value);
+  // @@protoc_insertion_point(field_add:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::add_inputfilepath(std::string&& value) {
+  _internal_mutable_inputfilepath()->Add(std::move(value));
+  // @@protoc_insertion_point(field_add:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::add_inputfilepath(const char* value) {
+  ABSL_DCHECK(value != nullptr);
+  _internal_mutable_inputfilepath()->Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::add_inputfilepath(const char* value, std::size_t size) {
+  _internal_mutable_inputfilepath()->Add()->assign(
+      reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline void ReduceTaskRequest::add_inputfilepath(absl::string_view value) {
+  _internal_mutable_inputfilepath()->Add()->assign(value.data(), value.size());
+  // @@protoc_insertion_point(field_add_string_piece:masterworker.ReduceTaskRequest.inputFilePath)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+ReduceTaskRequest::inputfilepath() const {
+  // @@protoc_insertion_point(field_list:masterworker.ReduceTaskRequest.inputFilePath)
+  return _internal_inputfilepath();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* ReduceTaskRequest::mutable_inputfilepath() {
+  // @@protoc_insertion_point(field_mutable_list:masterworker.ReduceTaskRequest.inputFilePath)
+  return _internal_mutable_inputfilepath();
+}
+inline const std::string& ReduceTaskRequest::_internal_inputfilepath(int index) const {
+  return _internal_inputfilepath().Get(index);
+}
+inline std::string* ReduceTaskRequest::_internal_add_inputfilepath() {
+  return _internal_mutable_inputfilepath()->Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+ReduceTaskRequest::_internal_inputfilepath() const {
+  return _impl_.inputfilepath_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+ReduceTaskRequest::_internal_mutable_inputfilepath() {
+  return &_impl_.inputfilepath_;
+}
+
+// string outputFilePath = 5;
+inline void ReduceTaskRequest::clear_outputfilepath() {
+  _impl_.outputfilepath_.ClearToEmpty();
+}
+inline const std::string& ReduceTaskRequest::outputfilepath() const {
+  // @@protoc_insertion_point(field_get:masterworker.ReduceTaskRequest.outputFilePath)
+  return _internal_outputfilepath();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void ReduceTaskRequest::set_outputfilepath(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.outputfilepath_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:masterworker.ReduceTaskRequest.outputFilePath)
+}
+inline std::string* ReduceTaskRequest::mutable_outputfilepath() {
+  std::string* _s = _internal_mutable_outputfilepath();
+  // @@protoc_insertion_point(field_mutable:masterworker.ReduceTaskRequest.outputFilePath)
+  return _s;
+}
+inline const std::string& ReduceTaskRequest::_internal_outputfilepath() const {
+  return _impl_.outputfilepath_.Get();
+}
+inline void ReduceTaskRequest::_internal_set_outputfilepath(const std::string& value) {
+  ;
+
+
+  _impl_.outputfilepath_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ReduceTaskRequest::_internal_mutable_outputfilepath() {
+  ;
+  return _impl_.outputfilepath_.Mutable( GetArenaForAllocation());
+}
+inline std::string* ReduceTaskRequest::release_outputfilepath() {
+  // @@protoc_insertion_point(field_release:masterworker.ReduceTaskRequest.outputFilePath)
+  return _impl_.outputfilepath_.Release();
+}
+inline void ReduceTaskRequest::set_allocated_outputfilepath(std::string* value) {
+  _impl_.outputfilepath_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.outputfilepath_.IsDefault()) {
+          _impl_.outputfilepath_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:masterworker.ReduceTaskRequest.outputFilePath)
 }
 
 // -------------------------------------------------------------------

@@ -2,6 +2,7 @@
 
 #include <mr_task_factory.h>
 #include "mr_tasks.h"
+#include "file_shard.h"
 #include <chrono>
 #include <thread>
 
@@ -22,6 +23,8 @@ using grpc::ServerCompletionQueue;
 using grpc::ServerContext;
 using grpc::Status;
 using masterworker::IntermediateFile;
+using masterworker::Fileshard;
+using masterworker::Minishard;
 using masterworker::MapTaskCompleted;
 using masterworker::MapTaskRequest;
 using masterworker::MasterWorker;
@@ -29,6 +32,8 @@ using masterworker::ReduceTaskCompleted;
 using masterworker::ReduceTaskRequest;
 using namespace std;
 
+extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::string& user_id);
+extern std::shared_ptr<BaseMapper> get_mapper_from_task_factory(const std::string& user_id);
 
 class GreeterServiceImpl final : public MasterWorker::Service {
 public:
@@ -58,16 +63,49 @@ Status GreeterServiceImpl::AssignMapTask(ServerContext* context, const MapTaskRe
         return Status(grpc::DEADLINE_EXCEEDED, "Simulated timeout in task processing.");
     }
 
-    reply->set_task_id(request->task_id());
-    std::cout << "Worker received MapTask " << request->task_id() << std::endl;
+    reply->set_task_id(request->taskid());
+	
+	cout << "Got Map Task" << endl;
 
-    // Add intermediate file
-    for (int i = 0; i < request->num_reduces(); ++i) {
-        IntermediateFile* intermediate_file = reply->add_intermediate_files();
-        intermediate_file->set_file_name("intermediate" + std::to_string(i) + ".txt");
-    }
+	FileShard fs;
+	const masterworker::Fileshard mfs = request->fileshard();
+	for (masterworker::Minishard ms : mfs.shards()) {
+		MiniShard m;
+		m.end_offset = ms.end_offset();
+		m.start_offset = ms.start_offset();
+		m.file_name = ms.file_name();
+		fs.shards.push_back(m);
+	}
 
-    std::cout << "Got Map Task" << std::endl;
+	for (int j = 0; j < fs.shards.size(); j++)
+		printf("(%s %ld) ", fs.shards[j].file_name.c_str(), 
+			fs.shards[j].end_offset - fs.shards[j].start_offset);
+	printf("\n");
+
+
+	// printf("File Path: %s, task type: %d, task id: %d\n",
+	// 	request->file_name().c_str(), request->tasktype(), request->taskid());
+
+	cout << request->userid() << endl;
+	std::shared_ptr<BaseMapper> mapper = get_mapper_from_task_factory(request->userid());
+
+	string item;
+	for (MiniShard ms : fs.shards) {
+		ifstream s(ms.file_name);
+		int pos = 0;
+		while(pos < ms.start_offset && getline(s, item, '\n')) {
+			pos += item.size();
+		}
+
+		string acc;
+		while(pos < ms.end_offset && getline(s, item, '\n')) {
+			pos += item.size();
+			acc += item;
+		}
+		// cout << acc << endl;
+		mapper->map(acc);
+	}
+
     return Status::OK;
 }
 Status GreeterServiceImpl::AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
@@ -82,10 +120,21 @@ Status GreeterServiceImpl::AssignReduceTask(ServerContext* context, const Reduce
     reply->set_task_id(request->task_id());
     std::cout << "Worker received ReduceTask " << request->task_id() << std::endl;
 
-    // Add the output file
-    reply->mutable_output_file()->set_file_name("output" + std::to_string(request->task_id()) + ".txt");
+    reply->set_task_id(request->task_id());
+	cout << "Got Reduce Task" << endl;
 
-    std::cout << "Got Reduce Task" << std::endl;
+
+	std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(request->userid());
+
+
+	const string& user_id = request->userid();
+	for (string path : request->inputfilepath()) {
+		cout << path << endl;
+		ifstream input(path);
+
+		// reducer->reduce(path, std::vector<std::string>({"1", "1"}));
+	}
+
     return Status::OK;
 }
 void GreeterServiceImpl::simulateScenarios() {
@@ -154,11 +203,7 @@ bool Worker::run() {
 
 }
 
-
 /*
-  Status AssignMapTask(ServerContext* context, const MapTask* request,
-                       TaskCompletion* reply) override {
-0.  }
 
   Status AssignReduceTask(ServerContext* context, const ReduceTask* request,
                        TaskCompletion* reply) override {
@@ -180,7 +225,5 @@ bool Worker::run() {
 
     return Status::OK;
   }
-
-
 
 */

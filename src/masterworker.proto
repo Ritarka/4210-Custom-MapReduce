@@ -28,10 +28,14 @@ message HelloReply {
 }
 
 //File shard information
-message ShardInfo {
+message Minishard {
 	string file_name = 1;
 	int64 start_offset = 2;
 	int64 end_offset = 3;
+}
+
+message Fileshard {
+	repeated Minishard shards = 1;
 }
 
 //intermediate file for mapper
@@ -46,9 +50,13 @@ message OutputFile {
 
 //Message sent from master to worker to assign map task
 message MapTaskRequest {
-	int32 task_id = 1;
-	ShardInfo shard_info = 2;
-	int32 num_reduces = 3;
+	//task ID
+	int32 taskId = 1;
+	//enum for type
+	string filePath = 3;
+	//file shard info
+	Fileshard fileShard = 4;
+	string userid = 5;
 }
 
 //message sent from worker to master for map task complete
@@ -61,6 +69,11 @@ message MapTaskCompleted {
 message ReduceTaskRequest {
 	int32 task_id = 1;
 	string output_file = 2;
+	string userid = 3;
+	repeated string inputFilePath = 4; //to read intermediate data
+	string outputFilePath = 5; //to write output data
+
+
 	// repeated IntermediateFile intermediate_files = 2;
 }
 //message from worker to master for reduce task
