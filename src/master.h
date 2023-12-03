@@ -11,9 +11,10 @@
 #include <future> //to store the asynchronous results
 #include "mapreduce_spec.h"
 #include "file_shard.h"
+//for mkdir
 #include <iostream>
 #include <stdlib.h>
-
+#include <sys/stat.h>
 #include <grpcpp/grpcpp.h>
 #include <grpc/support/log.h>
 
@@ -254,6 +255,7 @@ void Master::initializeWorkerClients(){
 //Helper methods implementation
 void Master::assignMapTasks(){
 	//assign map tasks to available workers
+	const char * out_dir = output_dir.c_str();
 	std::cout << "assignMaptask worker_clients_ size = " << worker_clients_.size() <<std::endl;
 	for(int i = 0; i < maps; ++i){
 		int worker_index = (available_workers.front() % worker_clients_.size()); //-1 or not??
@@ -280,8 +282,8 @@ void Master::assignMapTasks(){
 		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
 		promise<MapTaskCompleted> promise;
 		future<MapTaskCompleted> future = promise.get_future();
-		//std::cout<< "calling mkdir" << std::endl;
-		//mkdir(output_dir, 0777);
+		std::cout<< "calling mkdir" << std::endl;
+		mkdir(out_dir, 0777);
 		int result = worker_clients_[worker_index]->AssignMapTask(request, &promise);
 		std::cout << "map result = " << result << std::endl;
 		std::future<MapTaskCompleted> temp_future;
