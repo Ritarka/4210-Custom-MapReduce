@@ -106,7 +106,7 @@ Status GreeterServiceImpl::AssignMapTask(ServerContext* context, const MapTaskRe
 		mapper->map(acc);
 		mapper->emit(acc, nullptr);
 
-        mapper->writeInterToFile(ms.file_name + ".inter");
+        //mapper->writeInterToFile(ms.file_name + ".inter");
 	}
 
     return Status::OK;
@@ -193,7 +193,7 @@ Worker::Worker(std::string ip_addr_port) {
 	BaseReduer's member BaseReducerInternal impl_ directly, 
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
-	GreeterServiceImpl service(true, false, 10);
+	GreeterServiceImpl service(false, false, 0);
 	
 	return true;
 

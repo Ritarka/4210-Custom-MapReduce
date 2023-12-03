@@ -11,6 +11,8 @@
 #include <future> //to store the asynchronous results
 #include "mapreduce_spec.h"
 #include "file_shard.h"
+#include <iostream>
+#include <stdlib.h>
 
 #include <grpcpp/grpcpp.h>
 #include <grpc/support/log.h>
@@ -182,10 +184,12 @@ class Master {
 		std::vector<FileShard> shards;
 		int maps;
 		int reduces;
+		std::string output_dir;
 		//std::vector<std::string> worker_ips_;
 		//std::vector<std::unique_ptr<GreeterClient>> worker_clients_;
 		int map_task_count;
 		int reduce_task_count;
+		
 		//GreeterClient greeter;
 		//for all worker ip passed in
 		std::vector<std::string> worker_ips_;
@@ -220,6 +224,7 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
 	spec(mr_spec),
 	shards(file_shards),
 	maps(file_shards.size()),
+	output_dir(spec.out_dir),
 	reduces(spec.num_out_files),
 	map_task_count(0),
 	reduce_task_count(0) {
@@ -275,6 +280,8 @@ void Master::assignMapTasks(){
 		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
 		promise<MapTaskCompleted> promise;
 		future<MapTaskCompleted> future = promise.get_future();
+		//std::cout<< "calling mkdir" << std::endl;
+		//mkdir(output_dir, 0777);
 		int result = worker_clients_[worker_index]->AssignMapTask(request, &promise);
 		std::cout << "map result = " << result << std::endl;
 		std::future<MapTaskCompleted> temp_future;
@@ -322,6 +329,7 @@ void Master::assignReduceTasks() {
 		available_workers.pop();
 		ReduceTaskRequest request;
 		request.set_task_id(reduce_task_count);
+		//request.set_outFilePath(output_dir);
 		//M*R intermediate files- each worker write R intermediate files
 		// for(int j = 0; j < reduces; ++j){
 		// 	IntermediateFile* intermediate_file = request.add_intermediate_files();
