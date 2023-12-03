@@ -257,11 +257,19 @@ void Master::assignMapTasks(){
 		available_workers.pop();
 		MapTaskRequest request;
 		request.set_taskid(map_task_count);
+		request.set_userid(spec.id);
+		for(const MiniShard& mini: shards[i].shards){
+			masterworker::Minishard* miniShard = request.mutable_fileshard()->add_shards();
+			miniShard->set_file_name(mini.file_name);
+			miniShard->set_start_offset(mini.start_offset);
+			miniShard->set_end_offset(mini.end_offset);
+		}
+
 		// ShardInfo* shard_info = request.mutable_shard_info();
 		// shard_info->set_file_name(shards[i].shards[0].file_name);
 		// shard_info->set_start_offset(shards[i].shards[0].start_offset);
 		// shard_info->set_end_offset(shards[i].shards[0].end_offset);
-		// request.set_num_reduces(reduces);
+		request.set_num_reduces(reduces);
 		//make the call
 		
 		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;

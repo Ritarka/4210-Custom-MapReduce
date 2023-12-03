@@ -57,6 +57,7 @@ message MapTaskRequest {
 	//file shard info
 	Fileshard fileShard = 4;
 	string userid = 5;
+	int32 num_reduces = 6;
 }
 
 //message sent from worker to master for map task complete

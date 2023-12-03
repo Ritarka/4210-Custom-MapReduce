@@ -104,6 +104,9 @@ Status GreeterServiceImpl::AssignMapTask(ServerContext* context, const MapTaskRe
 		}
 		// cout << acc << endl;
 		mapper->map(acc);
+		mapper->emit(acc, nullptr);
+
+        mapper->writeInterToFile(ms.file_name + ".inter");
 	}
 
     return Status::OK;
@@ -119,10 +122,6 @@ Status GreeterServiceImpl::AssignReduceTask(ServerContext* context, const Reduce
 
     reply->set_task_id(request->task_id());
     std::cout << "Worker received ReduceTask " << request->task_id() << std::endl;
-
-    reply->set_task_id(request->task_id());
-	cout << "Got Reduce Task" << endl;
-
 
 	std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(request->userid());
 
@@ -188,9 +187,6 @@ Worker::Worker(std::string ip_addr_port) {
 	server->Wait();
 }
 
-extern std::shared_ptr<BaseMapper> get_mapper_from_task_factory(const std::string& user_id);
-extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::string& user_id);
-
 /* CS6210_TASK: Here you go. once this function is called your woker's job is to keep looking for new tasks 
 	from Master, complete when given one and again keep looking for the next one.
 	Note that you have the access to BaseMapper's member BaseMapperInternal impl_ and 
@@ -202,28 +198,3 @@ bool Worker::run() {
 	return true;
 
 }
-
-/*
-
-  Status AssignReduceTask(ServerContext* context, const ReduceTask* request,
-                       TaskCompletion* reply) override {
-    reply->set_taskid(request->taskid());
-    reply->set_tasktype(request->tasktype());
-	cout << "Got Reduce Task" << endl;
-
-
-	std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(request->userid());
-
-
-	const string& user_id = request->userid();
-	for (string path : request->inputfilepath()) {
-		cout << path << endl;
-		ifstream input(path);
-
-		// reducer->reduce(path, std::vector<std::string>({"1", "1"}));
-	}
-
-    return Status::OK;
-  }
-
-*/

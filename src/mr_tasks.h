@@ -5,7 +5,6 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-//string stream for breaking the words
 
 /* CS6210_TASK Implement this data structureas per your implementation.
 		You will need this when your worker is running the map task*/
@@ -34,7 +33,7 @@ inline BaseMapperInternal::BaseMapperInternal() {
 
 /* CS6210_TASK Implement this function */
 inline void BaseMapperInternal::emit(const std::string& key, const std::string& val) {
-	std::cout << "Dummy emit by BaseMapperInternal: " << key << ", " << val << std::endl;
+	// std::cout << "Dummy emit by BaseMapperInternal: " << key << ", " << val << std::endl;
 	//create a key, value pair and push it into the int pair vector
 	intermediatePairs.emplace_back(key, val);
 }
@@ -46,6 +45,7 @@ inline void BaseMapperInternal::writeInterToFile(const std:: string& filePath){
 			intermediateFile << pair.first << " " << pair.second << "\n";
 		}
 		intermediateFile.close();
+		intermediatePairs.clear();
 	} else {
 		std::cerr <<"Error: unable to open the file for writing intermediate data\n";
 	}
@@ -83,7 +83,7 @@ inline BaseReducerInternal::BaseReducerInternal() {
 
 /* CS6210_TASK Implement this function */
 inline void BaseReducerInternal::emit(const std::string& key, const std::string& val) {
-	std::cout << "Dummy emit by BaseReducerInternal: " << key << ", " << val << std::endl;
+	// std::cout << "Dummy emit by BaseReducerInternal: " << key << ", " << val << std::endl;
 	finalPairs.emplace_back(key, val);
 }
 //implementation of writeOutputToFile()

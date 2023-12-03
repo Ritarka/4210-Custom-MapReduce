@@ -1258,6 +1258,7 @@ class MapTaskRequest final :
     kUseridFieldNumber = 5,
     kFileShardFieldNumber = 4,
     kTaskIdFieldNumber = 1,
+    kNumReducesFieldNumber = 6,
   };
   // string filePath = 3;
   void clear_filepath() ;
@@ -1323,6 +1324,16 @@ class MapTaskRequest final :
   void _internal_set_taskid(::int32_t value);
 
   public:
+  // int32 num_reduces = 6;
+  void clear_num_reduces() ;
+  ::int32_t num_reduces() const;
+  void set_num_reduces(::int32_t value);
+
+  private:
+  ::int32_t _internal_num_reduces() const;
+  void _internal_set_num_reduces(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:masterworker.MapTaskRequest)
  private:
   class _Internal;
@@ -1337,6 +1348,7 @@ class MapTaskRequest final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
     ::masterworker::Fileshard* fileshard_;
     ::int32_t taskid_;
+    ::int32_t num_reduces_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_masterworker_2eproto;
@@ -2467,6 +2479,26 @@ inline void MapTaskRequest::set_allocated_userid(std::string* value) {
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:masterworker.MapTaskRequest.userid)
+}
+
+// int32 num_reduces = 6;
+inline void MapTaskRequest::clear_num_reduces() {
+  _impl_.num_reduces_ = 0;
+}
+inline ::int32_t MapTaskRequest::num_reduces() const {
+  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.num_reduces)
+  return _internal_num_reduces();
+}
+inline void MapTaskRequest::set_num_reduces(::int32_t value) {
+  _internal_set_num_reduces(value);
+  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.num_reduces)
+}
+inline ::int32_t MapTaskRequest::_internal_num_reduces() const {
+  return _impl_.num_reduces_;
+}
+inline void MapTaskRequest::_internal_set_num_reduces(::int32_t value) {
+  ;
+  _impl_.num_reduces_ = value;
 }
 
 // -------------------------------------------------------------------
