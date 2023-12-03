@@ -1268,29 +1268,8 @@ class MapTaskCompleted final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kIntermediateFilesFieldNumber = 2,
     kTaskIdFieldNumber = 1,
   };
-  // repeated .masterworker.IntermediateFile intermediate_files = 2;
-  int intermediate_files_size() const;
-  private:
-  int _internal_intermediate_files_size() const;
-
-  public:
-  void clear_intermediate_files() ;
-  ::masterworker::IntermediateFile* mutable_intermediate_files(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >*
-      mutable_intermediate_files();
-  private:
-  const ::masterworker::IntermediateFile& _internal_intermediate_files(int index) const;
-  ::masterworker::IntermediateFile* _internal_add_intermediate_files();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>& _internal_intermediate_files() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>* _internal_mutable_intermediate_files();
-  public:
-  const ::masterworker::IntermediateFile& intermediate_files(int index) const;
-  ::masterworker::IntermediateFile* add_intermediate_files();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >&
-      intermediate_files() const;
   // int32 task_id = 1;
   void clear_task_id() ;
   ::int32_t task_id() const;
@@ -1309,7 +1288,6 @@ class MapTaskCompleted final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile > intermediate_files_;
     ::int32_t task_id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1445,29 +1423,29 @@ class ReduceTaskRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kIntermediateFilesFieldNumber = 2,
+    kOutputFileFieldNumber = 2,
     kTaskIdFieldNumber = 1,
   };
-  // repeated .masterworker.IntermediateFile intermediate_files = 2;
-  int intermediate_files_size() const;
+  // string output_file = 2;
+  void clear_output_file() ;
+  const std::string& output_file() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_output_file(Arg_&& arg, Args_... args);
+  std::string* mutable_output_file();
+  PROTOBUF_NODISCARD std::string* release_output_file();
+  void set_allocated_output_file(std::string* ptr);
+
   private:
-  int _internal_intermediate_files_size() const;
+  const std::string& _internal_output_file() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_output_file(
+      const std::string& value);
+  std::string* _internal_mutable_output_file();
 
   public:
-  void clear_intermediate_files() ;
-  ::masterworker::IntermediateFile* mutable_intermediate_files(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >*
-      mutable_intermediate_files();
-  private:
-  const ::masterworker::IntermediateFile& _internal_intermediate_files(int index) const;
-  ::masterworker::IntermediateFile* _internal_add_intermediate_files();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>& _internal_intermediate_files() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>* _internal_mutable_intermediate_files();
-  public:
-  const ::masterworker::IntermediateFile& intermediate_files(int index) const;
-  ::masterworker::IntermediateFile* add_intermediate_files();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >&
-      intermediate_files() const;
   // int32 task_id = 1;
   void clear_task_id() ;
   ::int32_t task_id() const;
@@ -1486,7 +1464,7 @@ class ReduceTaskRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile > intermediate_files_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr output_file_;
     ::int32_t task_id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1622,23 +1600,8 @@ class ReduceTaskCompleted final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kOutputFileFieldNumber = 2,
     kTaskIdFieldNumber = 1,
   };
-  // .masterworker.OutputFile output_file = 2;
-  bool has_output_file() const;
-  void clear_output_file() ;
-  const ::masterworker::OutputFile& output_file() const;
-  PROTOBUF_NODISCARD ::masterworker::OutputFile* release_output_file();
-  ::masterworker::OutputFile* mutable_output_file();
-  void set_allocated_output_file(::masterworker::OutputFile* output_file);
-  private:
-  const ::masterworker::OutputFile& _internal_output_file() const;
-  ::masterworker::OutputFile* _internal_mutable_output_file();
-  public:
-  void unsafe_arena_set_allocated_output_file(
-      ::masterworker::OutputFile* output_file);
-  ::masterworker::OutputFile* unsafe_arena_release_output_file();
   // int32 task_id = 1;
   void clear_task_id() ;
   ::int32_t task_id() const;
@@ -1657,10 +1620,8 @@ class ReduceTaskCompleted final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::masterworker::OutputFile* output_file_;
     ::int32_t task_id_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_masterworker_2eproto;
@@ -2128,54 +2089,6 @@ inline void MapTaskCompleted::_internal_set_task_id(::int32_t value) {
   _impl_.task_id_ = value;
 }
 
-// repeated .masterworker.IntermediateFile intermediate_files = 2;
-inline int MapTaskCompleted::_internal_intermediate_files_size() const {
-  return _impl_.intermediate_files_.size();
-}
-inline int MapTaskCompleted::intermediate_files_size() const {
-  return _internal_intermediate_files_size();
-}
-inline void MapTaskCompleted::clear_intermediate_files() {
-  _internal_mutable_intermediate_files()->Clear();
-}
-inline ::masterworker::IntermediateFile* MapTaskCompleted::mutable_intermediate_files(int index) {
-  // @@protoc_insertion_point(field_mutable:masterworker.MapTaskCompleted.intermediate_files)
-  return _internal_mutable_intermediate_files()->Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >*
-MapTaskCompleted::mutable_intermediate_files() {
-  // @@protoc_insertion_point(field_mutable_list:masterworker.MapTaskCompleted.intermediate_files)
-  return _internal_mutable_intermediate_files();
-}
-inline const ::masterworker::IntermediateFile& MapTaskCompleted::_internal_intermediate_files(int index) const {
-  return _internal_intermediate_files().Get(index);
-}
-inline const ::masterworker::IntermediateFile& MapTaskCompleted::intermediate_files(int index) const {
-  // @@protoc_insertion_point(field_get:masterworker.MapTaskCompleted.intermediate_files)
-  return _internal_intermediate_files(index);
-}
-inline ::masterworker::IntermediateFile* MapTaskCompleted::_internal_add_intermediate_files() {
-  return _internal_mutable_intermediate_files()->Add();
-}
-inline ::masterworker::IntermediateFile* MapTaskCompleted::add_intermediate_files() {
-  ::masterworker::IntermediateFile* _add = _internal_add_intermediate_files();
-  // @@protoc_insertion_point(field_add:masterworker.MapTaskCompleted.intermediate_files)
-  return _add;
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >&
-MapTaskCompleted::intermediate_files() const {
-  // @@protoc_insertion_point(field_list:masterworker.MapTaskCompleted.intermediate_files)
-  return _internal_intermediate_files();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>&
-MapTaskCompleted::_internal_intermediate_files() const {
-  return _impl_.intermediate_files_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>*
-MapTaskCompleted::_internal_mutable_intermediate_files() {
-  return &_impl_.intermediate_files_;
-}
-
 // -------------------------------------------------------------------
 
 // ReduceTaskRequest
@@ -2200,52 +2113,51 @@ inline void ReduceTaskRequest::_internal_set_task_id(::int32_t value) {
   _impl_.task_id_ = value;
 }
 
-// repeated .masterworker.IntermediateFile intermediate_files = 2;
-inline int ReduceTaskRequest::_internal_intermediate_files_size() const {
-  return _impl_.intermediate_files_.size();
+// string output_file = 2;
+inline void ReduceTaskRequest::clear_output_file() {
+  _impl_.output_file_.ClearToEmpty();
 }
-inline int ReduceTaskRequest::intermediate_files_size() const {
-  return _internal_intermediate_files_size();
+inline const std::string& ReduceTaskRequest::output_file() const {
+  // @@protoc_insertion_point(field_get:masterworker.ReduceTaskRequest.output_file)
+  return _internal_output_file();
 }
-inline void ReduceTaskRequest::clear_intermediate_files() {
-  _internal_mutable_intermediate_files()->Clear();
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void ReduceTaskRequest::set_output_file(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.output_file_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:masterworker.ReduceTaskRequest.output_file)
 }
-inline ::masterworker::IntermediateFile* ReduceTaskRequest::mutable_intermediate_files(int index) {
-  // @@protoc_insertion_point(field_mutable:masterworker.ReduceTaskRequest.intermediate_files)
-  return _internal_mutable_intermediate_files()->Mutable(index);
+inline std::string* ReduceTaskRequest::mutable_output_file() {
+  std::string* _s = _internal_mutable_output_file();
+  // @@protoc_insertion_point(field_mutable:masterworker.ReduceTaskRequest.output_file)
+  return _s;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >*
-ReduceTaskRequest::mutable_intermediate_files() {
-  // @@protoc_insertion_point(field_mutable_list:masterworker.ReduceTaskRequest.intermediate_files)
-  return _internal_mutable_intermediate_files();
+inline const std::string& ReduceTaskRequest::_internal_output_file() const {
+  return _impl_.output_file_.Get();
 }
-inline const ::masterworker::IntermediateFile& ReduceTaskRequest::_internal_intermediate_files(int index) const {
-  return _internal_intermediate_files().Get(index);
+inline void ReduceTaskRequest::_internal_set_output_file(const std::string& value) {
+  ;
+
+
+  _impl_.output_file_.Set(value, GetArenaForAllocation());
 }
-inline const ::masterworker::IntermediateFile& ReduceTaskRequest::intermediate_files(int index) const {
-  // @@protoc_insertion_point(field_get:masterworker.ReduceTaskRequest.intermediate_files)
-  return _internal_intermediate_files(index);
+inline std::string* ReduceTaskRequest::_internal_mutable_output_file() {
+  ;
+  return _impl_.output_file_.Mutable( GetArenaForAllocation());
 }
-inline ::masterworker::IntermediateFile* ReduceTaskRequest::_internal_add_intermediate_files() {
-  return _internal_mutable_intermediate_files()->Add();
+inline std::string* ReduceTaskRequest::release_output_file() {
+  // @@protoc_insertion_point(field_release:masterworker.ReduceTaskRequest.output_file)
+  return _impl_.output_file_.Release();
 }
-inline ::masterworker::IntermediateFile* ReduceTaskRequest::add_intermediate_files() {
-  ::masterworker::IntermediateFile* _add = _internal_add_intermediate_files();
-  // @@protoc_insertion_point(field_add:masterworker.ReduceTaskRequest.intermediate_files)
-  return _add;
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::masterworker::IntermediateFile >&
-ReduceTaskRequest::intermediate_files() const {
-  // @@protoc_insertion_point(field_list:masterworker.ReduceTaskRequest.intermediate_files)
-  return _internal_intermediate_files();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>&
-ReduceTaskRequest::_internal_intermediate_files() const {
-  return _impl_.intermediate_files_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::masterworker::IntermediateFile>*
-ReduceTaskRequest::_internal_mutable_intermediate_files() {
-  return &_impl_.intermediate_files_;
+inline void ReduceTaskRequest::set_allocated_output_file(std::string* value) {
+  _impl_.output_file_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.output_file_.IsDefault()) {
+          _impl_.output_file_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:masterworker.ReduceTaskRequest.output_file)
 }
 
 // -------------------------------------------------------------------
@@ -2270,93 +2182,6 @@ inline ::int32_t ReduceTaskCompleted::_internal_task_id() const {
 inline void ReduceTaskCompleted::_internal_set_task_id(::int32_t value) {
   ;
   _impl_.task_id_ = value;
-}
-
-// .masterworker.OutputFile output_file = 2;
-inline bool ReduceTaskCompleted::has_output_file() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.output_file_ != nullptr);
-  return value;
-}
-inline void ReduceTaskCompleted::clear_output_file() {
-  if (_impl_.output_file_ != nullptr) _impl_.output_file_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const ::masterworker::OutputFile& ReduceTaskCompleted::_internal_output_file() const {
-  const ::masterworker::OutputFile* p = _impl_.output_file_;
-  return p != nullptr ? *p : reinterpret_cast<const ::masterworker::OutputFile&>(
-      ::masterworker::_OutputFile_default_instance_);
-}
-inline const ::masterworker::OutputFile& ReduceTaskCompleted::output_file() const {
-  // @@protoc_insertion_point(field_get:masterworker.ReduceTaskCompleted.output_file)
-  return _internal_output_file();
-}
-inline void ReduceTaskCompleted::unsafe_arena_set_allocated_output_file(
-    ::masterworker::OutputFile* output_file) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.output_file_);
-  }
-  _impl_.output_file_ = output_file;
-  if (output_file) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:masterworker.ReduceTaskCompleted.output_file)
-}
-inline ::masterworker::OutputFile* ReduceTaskCompleted::release_output_file() {
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  ::masterworker::OutputFile* temp = _impl_.output_file_;
-  _impl_.output_file_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::masterworker::OutputFile* ReduceTaskCompleted::unsafe_arena_release_output_file() {
-  // @@protoc_insertion_point(field_release:masterworker.ReduceTaskCompleted.output_file)
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  ::masterworker::OutputFile* temp = _impl_.output_file_;
-  _impl_.output_file_ = nullptr;
-  return temp;
-}
-inline ::masterworker::OutputFile* ReduceTaskCompleted::_internal_mutable_output_file() {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  if (_impl_.output_file_ == nullptr) {
-    auto* p = CreateMaybeMessage<::masterworker::OutputFile>(GetArenaForAllocation());
-    _impl_.output_file_ = p;
-  }
-  return _impl_.output_file_;
-}
-inline ::masterworker::OutputFile* ReduceTaskCompleted::mutable_output_file() {
-  ::masterworker::OutputFile* _msg = _internal_mutable_output_file();
-  // @@protoc_insertion_point(field_mutable:masterworker.ReduceTaskCompleted.output_file)
-  return _msg;
-}
-inline void ReduceTaskCompleted::set_allocated_output_file(::masterworker::OutputFile* output_file) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete _impl_.output_file_;
-  }
-  if (output_file) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(output_file);
-    if (message_arena != submessage_arena) {
-      output_file = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, output_file, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.output_file_ = output_file;
-  // @@protoc_insertion_point(field_set_allocated:masterworker.ReduceTaskCompleted.output_file)
 }
 
 #ifdef __GNUC__

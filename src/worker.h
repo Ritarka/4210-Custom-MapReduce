@@ -98,50 +98,6 @@ void GreeterServiceImpl::simulateScenarios() {
         std::cout << "Worker is ready to process tasks." << std::endl;
     }
 }
-  //Status AssignMapTask(ServerContext* context, const MapTaskRequest* request,
-                       //MapTaskCompleted* reply) override {
-     //std::string prefix("Hello again ");
-     //reply->set_message(prefix + request->name());
-     //reply->set_task_id(request->task_id());
-     //std::cout << "Worker received MapTask" << request->task_id() << std::endl;
-	// Add intermediate file
-    // for (int i = 0; i < request->num_reduces(); ++i)
-     //{
-	//IntermediateFile *intermediate_file = reply->add_intermediate_files();
-	//intermediate_file->set_file_name("intermediate" + std::to_string(i) + ".txt");
-     //}
-	//cout << "Got Map Task" << endl;
-    //return Status::OK;
-  //}
-
-  //Status AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
-                       //ReduceTaskCompleted* reply) override {
-     //reply->set_task_id(request->task_id());
-     //std::cout << "Worker received ReduceTask" << request->task_id() << std::endl;
-	// add the output file
-     //reply->mutable_output_file()->set_file_name("output" + std::to_string(request->task_id()) + ".txt");
-	//cout << "Got Reduce Task" << endl;
-    //return Status::OK;
-  //}
-
-
-
-  //Status SayHello(ServerContext* context, const HelloRequest* request,
-                  //HelloReply* reply) override {
-		//std::string prefix("Hello ");
-		//reply->set_message(prefix + request->name());
-		//return Status::OK;
-	//}
-
-  //Status SayHelloAgain(ServerContext* context, const HelloRequest* request,
-                      // HelloReply* reply) override {
-    //std::string prefix("Hello again ");
-    //reply->set_message(prefix + request->name());
-    //return Status::OK;
-  //}
-  
-  
-//};
 
 
 
@@ -193,41 +149,38 @@ extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::str
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
 	GreeterServiceImpl service(true, false, 10);
-	//ServerBuilder builder;
-	//builder.AddListeningPort(ip_port, grpc::InsecureServiceCredentials());
-	//builder.RegisterService(&service);
-	
-	//cq_ = builder.AddCompletionQueue();
-	
-	//std::unique_ptr<Server> server(builder.BuildAndStart());
-	//std::cout << "Server listening on " << ip_port << std::endl;
-	
-	//service.RequestAssignMapTask(cq_.get(), &cq_, server.get());
-	//service.RequestAssignReduceTask(cq_.get(), &cq_, server.get());
-	
-	//void* tag;
-	//bool ok;
-	
-	//while(true){
-		//cq_->Next(&tag, &ok);
-		//if(ok){
-			//if(tag == (void*)1 || tag == (void*)2) {
-				//do nothing
-			//}
-		//} else {
-			//std::cerr << "Error in completion queue processing." << std::endl;
-		//}
-	//}
 	
 	return true;
 
 }
 
 
-	// /*  Below 5 lines are just examples of how you will call map and reduce
-	// 	Remove them once you start writing your own logic */ 
-	// std::cout << "worker.run(), I'm not ready yet" <<std::endl;
-	// auto mapper = get_mapper_from_task_factory("cs6210");
-	// mapper->map("I m just a 'dummy', a \"dummy line\"");
-	// auto reducer = get_reducer_from_task_factory("cs6210");
-	// reducer->reduce("dummy", std::vector<std::string>({"1", "1"}));
+/*
+  Status AssignMapTask(ServerContext* context, const MapTask* request,
+                       TaskCompletion* reply) override {
+0.  }
+
+  Status AssignReduceTask(ServerContext* context, const ReduceTask* request,
+                       TaskCompletion* reply) override {
+    reply->set_taskid(request->taskid());
+    reply->set_tasktype(request->tasktype());
+	cout << "Got Reduce Task" << endl;
+
+
+	std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(request->userid());
+
+
+	const string& user_id = request->userid();
+	for (string path : request->inputfilepath()) {
+		cout << path << endl;
+		ifstream input(path);
+
+		// reducer->reduce(path, std::vector<std::string>({"1", "1"}));
+	}
+
+    return Status::OK;
+  }
+
+
+
+*/

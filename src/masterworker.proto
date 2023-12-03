@@ -29,11 +29,8 @@ message HelloReply {
 
 //File shard information
 message ShardInfo {
-	//name of input file
 	string file_name = 1;
-	//start offset
 	int64 start_offset = 2;
-	//end offset
 	int64 end_offset = 3;
 }
 
@@ -57,18 +54,18 @@ message MapTaskRequest {
 //message sent from worker to master for map task complete
 message MapTaskCompleted {
 	int32 task_id = 1;
-	//list of intermediate files produces
-	repeated IntermediateFile intermediate_files = 2;
+	// //list of intermediate files produces
+	// repeated IntermediateFile intermediate_files = 2;
 }
 //message from master to worker for reduce task
 message ReduceTaskRequest {
 	int32 task_id = 1;
-	repeated IntermediateFile intermediate_files = 2;
+	string output_file = 2;
+	// repeated IntermediateFile intermediate_files = 2;
 }
 //message from worker to master for reduce task
 message ReduceTaskCompleted {
 	int32 task_id = 1;
-	OutputFile output_file = 2;
 }
 
 
