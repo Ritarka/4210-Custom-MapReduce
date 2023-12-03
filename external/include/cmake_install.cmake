@@ -1,4 +1,4 @@
-# Install script for directory: /home/apatel768/4210-proj4/external/include
+# Install script for directory: /home/ritarka/cs4210/4210-proj4/external/include
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

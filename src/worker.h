@@ -104,7 +104,7 @@ Status GreeterServiceImpl::AssignMapTask(ServerContext* context, const MapTaskRe
 		}
 		// cout << acc << endl;
 		mapper->map(acc);
-		mapper->emit(acc, nullptr);
+		// mapper->emit(acc, );
 
         //mapper->writeInterToFile(ms.file_name + ".inter");
 	}

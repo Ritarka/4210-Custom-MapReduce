@@ -36,12 +36,12 @@ struct BaseMapperInternal {
 
 /* CS6210_TASK Implement this function */
 inline BaseMapperInternal::BaseMapperInternal() {
-//leave the constructor empty?
 	MapReduceSpec mr_spec;
-	read_mr_spec_from_config_file("config,ini", mr_spec);
+	read_mr_spec_from_config_file("config.ini", mr_spec);
 	//callmapReduceInfo to get reduce number
 	num_reduces = mr_spec.num_out_files;
 	//create a offstream file here
+	cout << num_reduces << endl;
 	for(int i = 0; i < num_reduces; ++i) {
 		std::string intermediateFile("int_" + std::to_string(i) + ".txt");
 		intermediateFileVector.push_back(intermediateFile);
@@ -56,11 +56,13 @@ inline void BaseMapperInternal::emit(const std::string& key, const std::string& 
 	//create a key, value pair and push it into the int pair vector
 	//intermediatePairs.emplace_back(key, val);
 	//write the key and value to the offstream file
+
+
 	hash<string> hasher;
 	size_t index = hasher(key) % num_reduces;
 	ofstream stream;
 	stream.open(intermediateFileVector[index], fstream::app);
-	stream << key << " " << val;
+	stream << key << " " << val << endl;
 }
 //inline void BaseMapperInternal::writeInterToFile(const std:: string& filePath){
 	//std::ofstream intermediateFile(filePath);

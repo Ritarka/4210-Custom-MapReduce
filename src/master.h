@@ -282,8 +282,8 @@ void Master::assignMapTasks(){
 		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
 		promise<MapTaskCompleted> promise;
 		future<MapTaskCompleted> future = promise.get_future();
-		std::cout<< "calling mkdir" << std::endl;
-		mkdir(out_dir, 0777);
+		// std::cout<< "calling mkdir" << std::endl;
+		// mkdir(out_dir, 0777);
 		int result = worker_clients_[worker_index]->AssignMapTask(request, &promise);
 		std::cout << "map result = " << result << std::endl;
 		std::future<MapTaskCompleted> temp_future;
