@@ -327,56 +327,57 @@ void Master::assignReduceTasks() {
 	if(!std::filesystem::exists(path) || !std::filesystem::is_directory(path)){
 		std::cout << "Error: temp/ doesn't exists" <<std::endl;
 	}
-	try {
-        for (const auto &entry : std::filesystem::directory_iterator(path)) {
-            string name = entry.path();
+	//try {
+        //for (const auto &entry : std::filesystem::directory_iterator(path)) {
+            //string name = entry.path();
 
-            // Ensure the file name is not empty
-            if (name.empty()) {
-                std::cerr << "Error: Empty file name encountered." << std::endl;
-                continue;  // Skip this entry
-            }
+            // Check file name is not empty
+            //if (name.empty()) {
+                //std::cerr << "Error: Empty file name encountered." << std::endl;
+                //continue;  // Skip this entry
+            //}
 
-            // Extract the file number using a safer method
-            size_t lastUnderscore = name.find_last_of('_');
-            if (lastUnderscore == std::string::npos) {
-                std::cerr << "Error: File name does not contain an underscore." << std::endl;
-                continue;  // Skip this entry
-            }
+            // get file number 
+            //size_t lastUnderscore = name.find_last_of('_');
+            //if (lastUnderscore == std::string::npos) {
+                //std::cerr << "Error: File name does not contain an underscore." << std::endl;
+               // continue;  // Skip this entry
+            //}
 
             // Extract the file number and convert it to an integer
-            std::string num = name.substr(lastUnderscore + 1);
-            int index;
-            try {
-                index = std::stoi(num);
-            } catch (const std::invalid_argument &ex) {
-                std::cerr << "Error: Invalid file number format." << std::endl;
-                continue;  // Skip this entry
-            }
+            //std::string num = name.substr(lastUnderscore + 1);
+            //int index;
+            //try {
+                //index = std::stoi(num);
+            //} catch (const std::invalid_argument &ex) {
+                //std::cerr << "Error: Invalid file number format." << std::endl;
+                //continue;  // Skip this entry
+            //}
 
             // Ensure the index is within bounds
-            if (index < 0 || index >= spec.num_out_files) {
-                std::cerr << "Error: Invalid file number." << std::endl;
-                continue;  // Skip this entry
-            }
+            //if (index < 0 || index >= spec.num_out_files) {
+                //std::cerr << "Error: Invalid file number." << std::endl;
+                //continue;  // Skip this entry
+            //}
 
             // Push the valid file path into the vector
-            paths[index].push_back(name);
-        }
-    } catch (const std::filesystem::filesystem_error &ex) {
-        std::cerr << "Error: " << ex.what() << std::endl;
-        return;
-    }
+            //paths[index].push_back(name);
+        //}
+    //} catch (const std::filesystem::filesystem_error &ex) {
+        //std::cerr << "Error: " << ex.what() << std::endl;
+        //return;
+    //}
 
 	
 	
 	
-    //for (const auto & entry : std::filesystem::directory_iterator(path)) {
-		//string name = entry.path();
-		//string num = name.substr(name.find_last_of("_") + 1);
-		//int index = stoi(num);
-		//paths[index].push_back(name);
-	//}
+    for (const auto & entry : std::filesystem::directory_iterator(path)) {
+		string name = entry.path();
+		string num = name.substr(name.find_last_of("_") + 1);
+		int index = stoi(num);
+		std::cout << "file name for recuder" << reduce_task_count << " : " << name << std::endl;
+		paths[index].push_back(name);
+	}
 
 
 	
@@ -391,8 +392,10 @@ void Master::assignReduceTasks() {
 		request.set_task_id(reduce_task_count);
 		request.set_userid(spec.id);
 		request.set_output_file(spec.out_dir + "/" + to_string(i) + ".txt");
-		for (string path : paths[i])
+		for (string path : paths[i]){
+			std::cout << "file path for recuder" << reduce_task_count << " : " << path << std::endl;
 			request.add_inputfilepath(path);
+		}
 		
 		
 		std::cout << "worker calling assignReduceTask with worker ip" << worker_ips_[worker_index] <<std::endl;

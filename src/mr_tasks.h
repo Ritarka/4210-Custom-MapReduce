@@ -98,9 +98,19 @@ inline void BaseReducerInternal::emit(const std::string& key, const std::string&
 }
 //implementation of writeOutputToFile()
 inline void BaseReducerInternal::writeOutputToFile(string path) {
+	//added - sorting the finalPair vector
+	std::sort(finalPairs.begin(), finalPairs.end());
 	std::ofstream outputFile(path);
+	//added for duplicates
+	std::string previousKey;
 	for(const auto& pair: finalPairs){
-		outputFile << pair.first << " " << pair.second << "\n";
+		if(pair.first != previousKey){
+			outputFile << pair.first << " " << pair.second << "\n";
+			previousKey = pair.first;
+		} 
+		//else {
+			//std::cout << "Writing DUPLICATE"<< std::endl;
+		//}
 	}
 	finalPairs.clear();
 }

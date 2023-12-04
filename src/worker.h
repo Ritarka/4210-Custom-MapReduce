@@ -177,8 +177,11 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
 		cout << path << endl;
 		ifstream input(path);
         string line;
-        unordered_map<string, vector<string>> pairs;
-
+        //unordered_map<string, vector<string>> pairs;
+        //added
+        std::map<string, vector<string>> pairs;
+        //added
+	//std::vector<std::pair<std::string, std::string>> pairsVector;
         while (getline(input, line)) {
             size_t pos = line.find(" ");
             string key = line.substr(0, pos);
@@ -188,7 +191,10 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
                 pairs[key] = vector<string>();
             pairs[key].push_back(val);
         }
+        
         for (auto pair : pairs) {
+        	//added
+        	//reducer->impl_->finalPairs.clear();
             reducer->reduce(pair.first, pair.second);
         }
 	}
