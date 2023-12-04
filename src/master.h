@@ -277,7 +277,7 @@ void Master::assignMapTasks(){
 		request.set_num_reduces(reduces);
 		//make the call
 		
-		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
+		//std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
 		promise<MapTaskCompleted> promise;
 		future<MapTaskCompleted> future = promise.get_future();
 		// std::cout<< "calling mkdir" << std::endl;
@@ -320,15 +320,63 @@ void Master::assignMapTasks(){
 }
 
 void Master::assignReduceTasks() {
-
+	std::cout << "INSIDE assignReduceTask" << std::endl;
 	vector<vector<string>> paths(spec.num_out_files);
 	std::string path = "temp/";
-    for (const auto & entry : std::filesystem::directory_iterator(path)) {
-		string name = entry.path();
-		string num = name.substr(name.find_last_of("_") + 1);
-		int index = stoi(num);
-		paths[index].push_back(name);
+	//added error checks with files and paths
+	if(!std::filesystem::exists(path) || !std::filesystem::is_directory(path)){
+		std::cout << "Error: temp/ doesn't exists" <<std::endl;
 	}
+	try {
+        for (const auto &entry : std::filesystem::directory_iterator(path)) {
+            string name = entry.path();
+
+            // Ensure the file name is not empty
+            if (name.empty()) {
+                std::cerr << "Error: Empty file name encountered." << std::endl;
+                continue;  // Skip this entry
+            }
+
+            // Extract the file number using a safer method
+            size_t lastUnderscore = name.find_last_of('_');
+            if (lastUnderscore == std::string::npos) {
+                std::cerr << "Error: File name does not contain an underscore." << std::endl;
+                continue;  // Skip this entry
+            }
+
+            // Extract the file number and convert it to an integer
+            std::string num = name.substr(lastUnderscore + 1);
+            int index;
+            try {
+                index = std::stoi(num);
+            } catch (const std::invalid_argument &ex) {
+                std::cerr << "Error: Invalid file number format." << std::endl;
+                continue;  // Skip this entry
+            }
+
+            // Ensure the index is within bounds
+            if (index < 0 || index >= spec.num_out_files) {
+                std::cerr << "Error: Invalid file number." << std::endl;
+                continue;  // Skip this entry
+            }
+
+            // Push the valid file path into the vector
+            paths[index].push_back(name);
+        }
+    } catch (const std::filesystem::filesystem_error &ex) {
+        std::cerr << "Error: " << ex.what() << std::endl;
+        return;
+    }
+
+	
+	
+	
+    //for (const auto & entry : std::filesystem::directory_iterator(path)) {
+		//string name = entry.path();
+		//string num = name.substr(name.find_last_of("_") + 1);
+		//int index = stoi(num);
+		//paths[index].push_back(name);
+	//}
 
 
 	
@@ -401,9 +449,11 @@ void Master::waitForMapTask() {
                     		future.get();  // Wait for each map task future to be ready
                 	} catch (const std::exception& e) {
                     		std::cerr << "Exception in waitForMapTaskCompletion: " << e.what() << std::endl;
+                    		//would this work??
+                    		//return;
                 	}
 		}
-		//std::cout << "future not valid" << std::endl;
+		std::cout << "future not valid" << std::endl;
 	}
     	std::cout << "calling handle map"<<std::endl;
     	handleMapTaskCompletion();
@@ -422,7 +472,7 @@ void Master::waitForReduceTask() {
                     		std::cerr << "Exception in waitForReduceTaskCompletion: " << e.what() << std::endl;
                 	}
     		}
-    		//std::cout << "future not valid" << std::endl;
+    		std::cout << "future not valid" << std::endl;
     	}
     	std::cout << "calling handle reduce"<<std::endl;
     	handleReduceTaskCompletion();
@@ -447,6 +497,7 @@ bool Master::run() {
 	std::cout << "Calling assignReduceTask" <<std::endl;
 
 	std::filesystem::create_directory(spec.out_dir);
+	std::cout << "After create directory" << std::endl;
 	assignReduceTasks();
 	
 	waitForReduceTask();

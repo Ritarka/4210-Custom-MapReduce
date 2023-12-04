@@ -108,7 +108,7 @@ bool Worker::run() {
 
 Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* request,
                                          MapTaskCompleted* reply) {
-    simulateScenarios();  // Simulate different scenarios
+    //simulateScenarios();  // Simulate different scenarios
 
     // Check for simulated timeout
     if (simulate_timeout_) {
@@ -159,7 +159,7 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 }
 Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
                                             ReduceTaskCompleted* reply) {
-    simulateScenarios();  // Simulate different scenarios
+    //simulateScenarios();  // Simulate different scenarios
 
     // Check for simulated timeout
     if (simulate_timeout_) {
@@ -198,12 +198,12 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
 }
 void Worker::simulateScenarios() {
     if (simulate_failure_) {
-        std::cerr << "Simulated failure in task processing." << std::endl;
+        //std::cerr << "Simulated failure in task processing." << std::endl;
         exit(1);  // Simulate a failure by exiting the worker process
     } else if (simulate_delay_ > 0) {
         std::this_thread::sleep_for(std::chrono::seconds(simulate_delay_));  // Simulate a delay in task processing
     } else {
-        // std::cout << "Worker is ready to process tasks." << std::endl;
+         std::cout << "Worker is ready to process tasks." << std::endl;
         ;
     }
 }
