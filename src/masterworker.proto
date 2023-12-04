@@ -52,8 +52,6 @@ message OutputFile {
 message MapTaskRequest {
 	//task ID
 	int32 taskId = 1;
-	//enum for type
-	string filePath = 3;
 	//file shard info
 	Fileshard fileShard = 4;
 	string userid = 5;
@@ -63,8 +61,6 @@ message MapTaskRequest {
 //message sent from worker to master for map task complete
 message MapTaskCompleted {
 	int32 task_id = 1;
-	// //list of intermediate files produces
-	// repeated IntermediateFile intermediate_files = 2;
 }
 //message from master to worker for reduce task
 message ReduceTaskRequest {

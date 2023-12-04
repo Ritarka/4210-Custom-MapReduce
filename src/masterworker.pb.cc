@@ -133,10 +133,6 @@ PROTOBUF_CONSTEXPR MapTaskRequest::MapTaskRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.filepath_)*/ {
-    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
-  }
-
   , /*decltype(_impl_.userid_)*/ {
     &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
   }
@@ -290,11 +286,9 @@ const ::uint32_t TableStruct_masterworker_2eproto::offsets[] PROTOBUF_SECTION_VA
     ~0u,  // no _split_
     ~0u,  // no sizeof(Split)
     PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.taskid_),
-    PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.filepath_),
     PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.fileshard_),
     PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.userid_),
     PROTOBUF_FIELD_OFFSET(::masterworker::MapTaskRequest, _impl_.num_reduces_),
-    ~0u,
     ~0u,
     0,
     ~0u,
@@ -340,10 +334,10 @@ static const ::_pbi::MigrationSchema
         { 29, -1, -1, sizeof(::masterworker::Fileshard)},
         { 38, -1, -1, sizeof(::masterworker::IntermediateFile)},
         { 47, -1, -1, sizeof(::masterworker::OutputFile)},
-        { 56, 69, -1, sizeof(::masterworker::MapTaskRequest)},
-        { 74, -1, -1, sizeof(::masterworker::MapTaskCompleted)},
-        { 83, -1, -1, sizeof(::masterworker::ReduceTaskRequest)},
-        { 96, -1, -1, sizeof(::masterworker::ReduceTaskCompleted)},
+        { 56, 68, -1, sizeof(::masterworker::MapTaskRequest)},
+        { 72, -1, -1, sizeof(::masterworker::MapTaskCompleted)},
+        { 81, -1, -1, sizeof(::masterworker::ReduceTaskRequest)},
+        { 94, -1, -1, sizeof(::masterworker::ReduceTaskCompleted)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -366,30 +360,29 @@ const char descriptor_table_protodef_masterworker_2eproto[] PROTOBUF_SECTION_VAR
     "set\030\003 \001(\003\"4\n\tFileshard\022\'\n\006shards\030\001 \003(\0132\027"
     ".masterworker.Minishard\"%\n\020IntermediateF"
     "ile\022\021\n\tfile_name\030\001 \001(\t\"\037\n\nOutputFile\022\021\n\t"
-    "file_name\030\001 \001(\t\"\203\001\n\016MapTaskRequest\022\016\n\006ta"
-    "skId\030\001 \001(\005\022\020\n\010filePath\030\003 \001(\t\022*\n\tfileShar"
-    "d\030\004 \001(\0132\027.masterworker.Fileshard\022\016\n\006user"
-    "id\030\005 \001(\t\022\023\n\013num_reduces\030\006 \001(\005\"#\n\020MapTask"
-    "Completed\022\017\n\007task_id\030\001 \001(\005\"x\n\021ReduceTask"
-    "Request\022\017\n\007task_id\030\001 \001(\005\022\023\n\013output_file\030"
-    "\002 \001(\t\022\016\n\006userid\030\003 \001(\t\022\025\n\rinputFilePath\030\004"
-    " \003(\t\022\026\n\016outputFilePath\030\005 \001(\t\"&\n\023ReduceTa"
-    "skCompleted\022\017\n\007task_id\030\001 \001(\0052\302\002\n\014MasterW"
-    "orker\022M\n\rAssignMapTask\022\034.masterworker.Ma"
-    "pTaskRequest\032\036.masterworker.MapTaskCompl"
-    "eted\022V\n\020AssignReduceTask\022\037.masterworker."
-    "ReduceTaskRequest\032!.masterworker.ReduceT"
-    "askCompleted\022B\n\010SayHello\022\032.masterworker."
-    "HelloRequest\032\030.masterworker.HelloReply\"\000"
-    "\022G\n\rSayHelloAgain\022\032.masterworker.HelloRe"
-    "quest\032\030.masterworker.HelloReply\"\000b\006proto"
-    "3"
+    "file_name\030\001 \001(\t\"q\n\016MapTaskRequest\022\016\n\006tas"
+    "kId\030\001 \001(\005\022*\n\tfileShard\030\004 \001(\0132\027.masterwor"
+    "ker.Fileshard\022\016\n\006userid\030\005 \001(\t\022\023\n\013num_red"
+    "uces\030\006 \001(\005\"#\n\020MapTaskCompleted\022\017\n\007task_i"
+    "d\030\001 \001(\005\"x\n\021ReduceTaskRequest\022\017\n\007task_id\030"
+    "\001 \001(\005\022\023\n\013output_file\030\002 \001(\t\022\016\n\006userid\030\003 \001"
+    "(\t\022\025\n\rinputFilePath\030\004 \003(\t\022\026\n\016outputFileP"
+    "ath\030\005 \001(\t\"&\n\023ReduceTaskCompleted\022\017\n\007task"
+    "_id\030\001 \001(\0052\302\002\n\014MasterWorker\022M\n\rAssignMapT"
+    "ask\022\034.masterworker.MapTaskRequest\032\036.mast"
+    "erworker.MapTaskCompleted\022V\n\020AssignReduc"
+    "eTask\022\037.masterworker.ReduceTaskRequest\032!"
+    ".masterworker.ReduceTaskCompleted\022B\n\010Say"
+    "Hello\022\032.masterworker.HelloRequest\032\030.mast"
+    "erworker.HelloReply\"\000\022G\n\rSayHelloAgain\022\032"
+    ".masterworker.HelloRequest\032\030.masterworke"
+    "r.HelloReply\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_masterworker_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_masterworker_2eproto = {
     false,
     false,
-    961,
+    942,
     descriptor_table_protodef_masterworker_2eproto,
     "masterworker.proto",
     &descriptor_table_masterworker_2eproto_once,
@@ -1682,8 +1675,6 @@ MapTaskRequest::MapTaskRequest(const MapTaskRequest& from)
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.filepath_) {}
-
     , decltype(_impl_.userid_) {}
 
     , decltype(_impl_.fileshard_){nullptr}
@@ -1693,13 +1684,6 @@ MapTaskRequest::MapTaskRequest(const MapTaskRequest& from)
   };
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.filepath_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.filepath_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_filepath().empty()) {
-    _this->_impl_.filepath_.Set(from._internal_filepath(), _this->GetArenaForAllocation());
-  }
   _impl_.userid_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         _impl_.userid_.Set("", GetArenaForAllocation());
@@ -1721,8 +1705,6 @@ inline void MapTaskRequest::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.filepath_) {}
-
     , decltype(_impl_.userid_) {}
 
     , decltype(_impl_.fileshard_){nullptr}
@@ -1731,10 +1713,6 @@ inline void MapTaskRequest::SharedCtor(::_pb::Arena* arena) {
     , decltype(_impl_.num_reduces_) { 0 }
 
   };
-  _impl_.filepath_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        _impl_.filepath_.Set("", GetArenaForAllocation());
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.userid_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         _impl_.userid_.Set("", GetArenaForAllocation());
@@ -1752,7 +1730,6 @@ MapTaskRequest::~MapTaskRequest() {
 
 inline void MapTaskRequest::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.filepath_.Destroy();
   _impl_.userid_.Destroy();
   if (this != internal_default_instance()) delete _impl_.fileshard_;
 }
@@ -1767,7 +1744,6 @@ void MapTaskRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.filepath_.ClearToEmpty();
   _impl_.userid_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
@@ -1793,17 +1769,6 @@ const char* MapTaskRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
           _impl_.taskid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      // string filePath = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
-          auto str = _internal_mutable_filepath();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "masterworker.MapTaskRequest.filePath"));
         } else {
           goto handle_unusual;
         }
@@ -1874,14 +1839,6 @@ failure:
         1, this->_internal_taskid(), target);
   }
 
-  // string filePath = 3;
-  if (!this->_internal_filepath().empty()) {
-    const std::string& _s = this->_internal_filepath();
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "masterworker.MapTaskRequest.filePath");
-    target = stream->WriteStringMaybeAliased(3, _s, target);
-  }
-
   cached_has_bits = _impl_._has_bits_[0];
   // .masterworker.Fileshard fileShard = 4;
   if (cached_has_bits & 0x00000001u) {
@@ -1920,12 +1877,6 @@ failure:
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
-
-  // string filePath = 3;
-  if (!this->_internal_filepath().empty()) {
-    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-                                    this->_internal_filepath());
-  }
 
   // string userid = 5;
   if (!this->_internal_userid().empty()) {
@@ -1971,9 +1922,6 @@ void MapTaskRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_filepath().empty()) {
-    _this->_internal_set_filepath(from._internal_filepath());
-  }
   if (!from._internal_userid().empty()) {
     _this->_internal_set_userid(from._internal_userid());
   }
@@ -2007,8 +1955,6 @@ void MapTaskRequest::InternalSwap(MapTaskRequest* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.filepath_, lhs_arena,
-                                       &other->_impl_.filepath_, rhs_arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.userid_, lhs_arena,
                                        &other->_impl_.userid_, rhs_arena);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<

@@ -67,6 +67,8 @@
     "sstream": "cpp",
     "stdexcept": "cpp",
     "streambuf": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "iomanip": "cpp",
+    "variant": "cpp"
   }
 }

@@ -1254,32 +1254,11 @@ class MapTaskRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFilePathFieldNumber = 3,
     kUseridFieldNumber = 5,
     kFileShardFieldNumber = 4,
     kTaskIdFieldNumber = 1,
     kNumReducesFieldNumber = 6,
   };
-  // string filePath = 3;
-  void clear_filepath() ;
-  const std::string& filepath() const;
-
-
-
-
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_filepath(Arg_&& arg, Args_... args);
-  std::string* mutable_filepath();
-  PROTOBUF_NODISCARD std::string* release_filepath();
-  void set_allocated_filepath(std::string* ptr);
-
-  private:
-  const std::string& _internal_filepath() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_filepath(
-      const std::string& value);
-  std::string* _internal_mutable_filepath();
-
-  public:
   // string userid = 5;
   void clear_userid() ;
   const std::string& userid() const;
@@ -1344,7 +1323,6 @@ class MapTaskRequest final :
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr filepath_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
     ::masterworker::Fileshard* fileshard_;
     ::int32_t taskid_;
@@ -2298,53 +2276,6 @@ inline ::int32_t MapTaskRequest::_internal_taskid() const {
 inline void MapTaskRequest::_internal_set_taskid(::int32_t value) {
   ;
   _impl_.taskid_ = value;
-}
-
-// string filePath = 3;
-inline void MapTaskRequest::clear_filepath() {
-  _impl_.filepath_.ClearToEmpty();
-}
-inline const std::string& MapTaskRequest::filepath() const {
-  // @@protoc_insertion_point(field_get:masterworker.MapTaskRequest.filePath)
-  return _internal_filepath();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void MapTaskRequest::set_filepath(Arg_&& arg,
-                                                     Args_... args) {
-  ;
-  _impl_.filepath_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:masterworker.MapTaskRequest.filePath)
-}
-inline std::string* MapTaskRequest::mutable_filepath() {
-  std::string* _s = _internal_mutable_filepath();
-  // @@protoc_insertion_point(field_mutable:masterworker.MapTaskRequest.filePath)
-  return _s;
-}
-inline const std::string& MapTaskRequest::_internal_filepath() const {
-  return _impl_.filepath_.Get();
-}
-inline void MapTaskRequest::_internal_set_filepath(const std::string& value) {
-  ;
-
-
-  _impl_.filepath_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MapTaskRequest::_internal_mutable_filepath() {
-  ;
-  return _impl_.filepath_.Mutable( GetArenaForAllocation());
-}
-inline std::string* MapTaskRequest::release_filepath() {
-  // @@protoc_insertion_point(field_release:masterworker.MapTaskRequest.filePath)
-  return _impl_.filepath_.Release();
-}
-inline void MapTaskRequest::set_allocated_filepath(std::string* value) {
-  _impl_.filepath_.SetAllocated(value, GetArenaForAllocation());
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.filepath_.IsDefault()) {
-          _impl_.filepath_.Set("", GetArenaForAllocation());
-        }
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:masterworker.MapTaskRequest.filePath)
 }
 
 // .masterworker.Fileshard fileShard = 4;

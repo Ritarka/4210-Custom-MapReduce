@@ -55,8 +55,8 @@ if __name__ == '__main__':
         print('Aborting. Please make sure all required files are present')
         print('The following files were not found:', missingFiles)
     else:
-        firstname = input('Enter first name: ')
-        lastname = input('Enter last name: ')
+        firstname = "Ritarka"
+        lastname = "Samanta"
        
         dirName = firstname + '_' + lastname + '_p4'
         createZippedFile(dirName, requiredFiles)

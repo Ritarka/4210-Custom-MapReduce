@@ -9,6 +9,7 @@
 #include <thread>
 #include <chrono> //timeout for slow worker and worker failure
 #include <future> //to store the asynchronous results
+#include <filesystem>
 #include "mapreduce_spec.h"
 #include "file_shard.h"
 //for mkdir
@@ -41,6 +42,7 @@ using masterworker::Minishard;
 using masterworker::IntermediateFile;
 using masterworker::OutputFile;
 
+using namespace std;
 
 class GreeterClient {
  public:
@@ -272,10 +274,6 @@ void Master::assignMapTasks(){
 			miniShard->set_end_offset(mini.end_offset);
 		}
 
-		// ShardInfo* shard_info = request.mutable_shard_info();
-		// shard_info->set_file_name(shards[i].shards[0].file_name);
-		// shard_info->set_start_offset(shards[i].shards[0].start_offset);
-		// shard_info->set_end_offset(shards[i].shards[0].end_offset);
 		request.set_num_reduces(reduces);
 		//make the call
 		
@@ -323,20 +321,32 @@ void Master::assignMapTasks(){
 
 void Master::assignReduceTasks() {
 
+	vector<vector<string>> paths(spec.num_out_files);
+	std::string path = "temp/";
+    for (const auto & entry : std::filesystem::directory_iterator(path)) {
+		string name = entry.path();
+		string num = name.substr(name.find_last_of("_") + 1);
+		int index = stoi(num);
+		paths[index].push_back(name);
+	}
+
+
 	
 	std::cout << "assignMaptask worker_clients_ size = " << worker_clients_.size() <<std::endl;
 	for(int i = 0; i < reduces; ++i){
+
 		int worker_index = (available_workers.front() % worker_clients_.size()); //-1 or not??
 		std::cout << "assingReduceTask: worker_index = " << worker_index << std::endl;
+
 		available_workers.pop();
 		ReduceTaskRequest request;
 		request.set_task_id(reduce_task_count);
-		//request.set_outFilePath(output_dir);
-		//M*R intermediate files- each worker write R intermediate files
-		// for(int j = 0; j < reduces; ++j){
-		// 	IntermediateFile* intermediate_file = request.add_intermediate_files();
-		// 	intermediate_file->set_file_name("intermediate" + std::to_string(j) + ".txt");
-		// }
+		request.set_userid(spec.id);
+		request.set_output_file(spec.out_dir + "/" + to_string(i) + ".txt");
+		for (string path : paths[i])
+			request.add_inputfilepath(path);
+		
+		
 		std::cout << "worker calling assignReduceTask with worker ip" << worker_ips_[worker_index] <<std::endl;
 		
 		promise<ReduceTaskCompleted> promise;
@@ -426,21 +436,18 @@ bool Master::run() {
 
 	// first run the map tasks
 	std::cout << "Calling assignMapTask" <<std::endl;
+
+	std::filesystem::create_directory("temp");
+
 	assignMapTasks();
-	// wait for all map tasks to complete
-   	//std::for_each(future_map_tasks.begin(), future_map_tasks.end(), [](auto& future) {
-        	//future.get();  // Wait for each map task future to be ready
-    	//});
 
 	std::cout << "calling waitForMapTask() " << std::endl;
 	waitForMapTask();
 	// then the reduce functions
 	std::cout << "Calling assignReduceTask" <<std::endl;
+
+	std::filesystem::create_directory(spec.out_dir);
 	assignReduceTasks();
-	// wait for all reduce tasks to complete
-    	//std::for_each(future_reduce_tasks.begin(), future_reduce_tasks.end(), [](auto& future) {
-        	//future.get();  // Wait for each reduce task future to be ready
-    	//});
 	
 	waitForReduceTask();
 
