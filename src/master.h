@@ -199,8 +199,6 @@ class Master {
     		std::vector<std::unique_ptr<GreeterClient>> worker_clients_;
 		
 		std::queue<int> available_workers;
-		std::vector<bool> map_task_status;
-		std::vector<bool> reduce_task_status;
 		
 		//future vectors for map and reduce tasks
 		std::vector<std::future<MapTaskCompleted>> future_map_tasks;
@@ -214,8 +212,6 @@ class Master {
     		
     		void waitForMapTask();
     		void waitForReduceTask();
-    		void handleMapTaskCompletion();
-    		void handleReduceTaskCompletion();
 		
 		
 };
@@ -231,28 +227,20 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
 	reduces(spec.num_out_files),
 	map_task_count(0),
 	reduce_task_count(0) {
-	//greeter(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials())){
-	//Initialize Worker(Greeter) clients
 	initializeWorkerClients();
 	
 }
 
 void Master::initializeWorkerClients(){
-	//create worker/greeter client instance for each worker IP
-	//CHECK HERE: Make spec.worker workers
-	//But make only one grpc channel - maybe localhost:50051- and then use threads??
 	for(const std::string& ip: spec.ips){
 		worker_ips_.push_back(ip);
 		worker_clients_.emplace_back(std::make_unique<GreeterClient>(
 			grpc::CreateChannel(ip, grpc::InsecureChannelCredentials())));
 	}
-	for(int i = 0; i < spec.workers; ++i){
+	for (int i = 0; i < spec.workers; ++i){
 		available_workers.push(i);
 	}
-	map_task_status.resize(maps, false);
-	reduce_task_status.resize(reduces, false);
 }
-	//ini
 
 //Helper methods implementation
 void Master::assignMapTasks(){
@@ -280,8 +268,6 @@ void Master::assignMapTasks(){
 		std::cout << "worker calling AssignMapTask with worker ip" <<worker_ips_[worker_index] <<std::endl;
 		promise<MapTaskCompleted> promise;
 		future<MapTaskCompleted> future = promise.get_future();
-		// std::cout<< "calling mkdir" << std::endl;
-		// mkdir(out_dir, 0777);
 		int result = worker_clients_[worker_index]->AssignMapTask(request, &promise);
 		std::cout << "map result = " << result << std::endl;
 		std::future<MapTaskCompleted> temp_future;
@@ -303,19 +289,6 @@ void Master::assignMapTasks(){
 		future_map_tasks.push_back(move(temp_future));
 		++map_task_count;
 			
-		//future_map_tasks.push_back(move(future));
-		//worker_clients_[worker_index]->AssignMapTask(request).get();
-		
-		//greeter.AssignMapTask(request);
-		//if(worker_clients_[worker_index]){
-			//std::cout << "worker calling AssignMapTask," << std::endl;
-			//worker_clients_[worker_index]->AssignMapTask(request);
-		//} else {
-			//std::cout << "Error: Attempting to use null unique_ptr" << std::endl;
-		//}
-		
-
-		//++map_task_count;
 	}
 }
 
@@ -334,7 +307,7 @@ void Master::assignReduceTasks() {
 	
 	std::cout << "assignMaptask worker_clients_ size = " << worker_clients_.size() <<std::endl;
 	for(int i = 0; i < reduces; ++i){
-
+		while (available_workers.empty());
 		int worker_index = (available_workers.front() % worker_clients_.size()); //-1 or not??
 		std::cout << "assingReduceTask: worker_index = " << worker_index << std::endl;
 
@@ -375,38 +348,23 @@ void Master::assignReduceTasks() {
 		
 }
 
-void Master::handleMapTaskCompletion() {
-	
-	for(int i = 0; i < maps; i++) {
-		map_task_status[i] = true;
-		available_workers.push(i);
-	}
-}
-
-void Master::handleReduceTaskCompletion() {
-	
-	for(int i = 0; i < reduces; i++) {
-		reduce_task_status[i] = true;
-		available_workers.push(i);
-	}
-}
-
-
 void Master::waitForMapTask() {
 	std::cout << "future_map_tasks size = " << future_map_tasks.size() << std::endl;
 	for(int i = 0; i < maps; ++i) {
 		auto& future = future_map_tasks[i];
 		if(future.valid()){
 			try {
-                    		future.get();  // Wait for each map task future to be ready
-                	} catch (const std::exception& e) {
-                    		std::cerr << "Exception in waitForMapTaskCompletion: " << e.what() << std::endl;
-                	}
+				future.get();  // Wait for each map task future to be ready
+			} catch (const std::exception& e) {
+				std::cerr << "Exception in waitForMapTaskCompletion: " << e.what() << std::endl;
+			}
 		}
 		//std::cout << "future not valid" << std::endl;
 	}
     	std::cout << "calling handle map"<<std::endl;
-    	handleMapTaskCompletion();
+    	for(int i = 0; i < maps; i++) {
+			available_workers.push(i);
+		}
     	std::cout << "leaving waitForMapTask()"<<std::endl;
 
 }
@@ -417,15 +375,17 @@ void Master::waitForReduceTask() {
     		auto& future = future_reduce_tasks[i];
     		if(future.valid()){
     			try {
-                    		future.get();  // Wait for each reduce task future to be ready
-                	} catch (const std::exception& e) {
-                    		std::cerr << "Exception in waitForReduceTaskCompletion: " << e.what() << std::endl;
-                	}
+                	future.get();  // Wait for each reduce task future to be ready
+                } catch (const std::exception& e) {
+					std::cerr << "Exception in waitForReduceTaskCompletion: " << e.what() << std::endl;
+                }
     		}
     		//std::cout << "future not valid" << std::endl;
     	}
     	std::cout << "calling handle reduce"<<std::endl;
-    	handleReduceTaskCompletion();
+		for (int i = 0; i < reduces; i++) {
+			available_workers.push(i);
+		}
 	std::cout << "leaving waitForReduceTask()"<<std::endl;
 }
 
@@ -450,6 +410,9 @@ bool Master::run() {
 	assignReduceTasks();
 	
 	waitForReduceTask();
+
+	// std::filesystem::remove_all("temp"); // Deletes one or more files recursively.
+
 
 	return true;
 }

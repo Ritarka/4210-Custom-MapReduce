@@ -6,5 +6,5 @@ CXX_DEFINES = -DCARES_STATICLIB
 
 CXX_INCLUDES = -I/home/ritarka/cs4210/4210-proj4/src -isystem /home/ritarka/.local/include
 
-CXX_FLAGS = 
+CXX_FLAGS = -g
 

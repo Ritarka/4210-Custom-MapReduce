@@ -1,0 +1,25 @@
+Worker received MapTask 0
+(input/testdata_1.txt 46291+0) 
+Worker received MapTask 1
+(input/testdata_1.txt 46374+46291) 
+Worker received MapTask 2
+(input/testdata_1.txt 46376+92665) 
+Worker received MapTask 3
+(input/testdata_1.txt 46362+139041) 
+Worker received MapTask 4
+(input/testdata_1.txt 46356+185403) 
+Worker received MapTask 5
+(input/testdata_1.txt 46314+231759) 
+Worker received MapTask 6
+(input/testdata_1.txt 46295+278073) 
+Worker received MapTask 7
+(input/testdata_1.txt 14269+324368) (input/testdata_2.txt 31991+0) 
+Worker received MapTask 8
+(input/testdata_2.txt 10614+31991) (input/testdata_3.txt 35774+0) 
+Worker received MapTask 9
+(input/testdata_3.txt 46282+35774) 
+Worker received MapTask 10
+(input/testdata_3.txt 46289+82056) 
+Worker received MapTask 11
+(input/testdata_3.txt 41268+128345) 
+Worker received ReduceTask 0

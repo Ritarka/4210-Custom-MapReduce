@@ -25,6 +25,7 @@ struct BaseMapperInternal {
 		void write_to_file(int);
 		int num_reduces;
 		std::vector<std::pair<std::string, std::string>> pairs;
+		int ii = 0;
 };
 
 
@@ -41,17 +42,14 @@ inline void BaseMapperInternal::emit(const std::string& key, const std::string& 
 }
 	
 inline void BaseMapperInternal::write_to_file(int index) {
-	ofstream stream;
 	vector<vector<pair<string, string>>> inter(num_reduces);
-	for (int i = 0; i < num_reduces; i++) {
-		for (auto pair : pairs) {
-			hash<string> hasher;
-			size_t index = hasher(pair.first) % num_reduces;
-			inter[index].push_back(pair);
-		}
-		stream.close();
+	hash<string> hasher;
+	for (auto pair : pairs) {
+		size_t index = hasher(pair.first) % num_reduces;
+		inter[index].push_back(pair);
 	}
 
+	fstream stream;
 	for (int i = 0; i < num_reduces; i++) {
 		string name = "temp/intermediate_" + to_string(index) + "_" + to_string(i);
 		stream.open(name, fstream::app);
@@ -99,6 +97,7 @@ inline void BaseReducerInternal::emit(const std::string& key, const std::string&
 //implementation of writeOutputToFile()
 inline void BaseReducerInternal::writeOutputToFile(string path) {
 	std::ofstream outputFile(path);
+	sort(finalPairs.begin(), finalPairs.end());
 	for(const auto& pair: finalPairs){
 		outputFile << pair.first << " " << pair.second << "\n";
 	}

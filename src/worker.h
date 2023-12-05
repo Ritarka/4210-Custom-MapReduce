@@ -36,41 +36,31 @@ using namespace std;
 extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::string& user_id);
 extern std::shared_ptr<BaseMapper> get_mapper_from_task_factory(const std::string& user_id);
 
-
-// Worker::Worker(bool simulateTimeout, bool simulateFailure, int simulateDelay)
-//     : simulate_timeout_(simulateTimeout), simulate_failure_(simulateFailure), simulate_delay_(simulateDelay) {}
-
-
-
-
 /* CS6210_TASK: Handle all the task a Worker is supposed to do.
 	This is a big task for this project, will test your understanding of map reduce */
 class Worker final : public MasterWorker::Service {
 
-
 public:
-    // explicit Worker(bool simulateTimeout = false, bool simulateFailure = false, int simulateDelay = 0);
-
     Status AssignMapTask(ServerContext* context, const MapTaskRequest* request,
                         MapTaskCompleted* reply) override;
 
     Status AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
                         ReduceTaskCompleted* reply) override;
 
-		/* DON'T change the function signature of this constructor */
-		Worker(std::string ip_addr_port);
+	/* DON'T change the function signature of this constructor */
+	Worker(std::string ip_addr_port);
 
-		/* DON'T change this function's signature */
-		bool run();
+	/* DON'T change this function's signature */
+	bool run();
 
-	private:
-		/* NOW you can add below, data members and member functions as per the need of your implementation*/
-		//std::unique_ptr<ServerCompletionQueue> cq_;
-		std::string ip_port;
-        bool simulate_timeout_ = false;
-        bool simulate_failure_ = false;
-        int simulate_delay_ = 0;
-        void simulateScenarios();
+private:
+	/* NOW you can add below, data members and member functions as per the need of your implementation*/
+	//std::unique_ptr<ServerCompletionQueue> cq_;
+	std::string ip_port;
+	bool simulate_timeout_ = false;
+	bool simulate_failure_ = false;
+	int simulate_delay_ = 0;
+	void simulateScenarios();
 
 };
 
@@ -79,9 +69,7 @@ public:
 	You can populate your other class data members here if you want */
 Worker::Worker(std::string ip_addr_port) {
 	ip_port = ip_addr_port;
-	// Worker service;
 
-	
 	ServerBuilder builder;
 
 	builder.AddListeningPort(ip_addr_port, grpc::InsecureServerCredentials());
@@ -99,10 +87,7 @@ Worker::Worker(std::string ip_addr_port) {
 	BaseReduer's member BaseReducerInternal impl_ directly, 
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
-	// Worker service(false, false, 0);
-	
 	return true;
-
 }
 
 
@@ -117,7 +102,7 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 
     reply->set_task_id(request->taskid());
 	
-	cout << "Got Map Task" << endl;
+    std::cout << "Worker received MapTask " << request->taskid() << std::endl;
 
 	FileShard fs;
 	const masterworker::Fileshard mfs = request->fileshard();
@@ -130,8 +115,8 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 	}
 
 	for (int j = 0; j < fs.shards.size(); j++)
-		printf("(%s %ld) ", fs.shards[j].file_name.c_str(), 
-			fs.shards[j].end_offset - fs.shards[j].start_offset);
+		printf("(%s %ld+%ld) ", fs.shards[j].file_name.c_str(), 
+			fs.shards[j].start_offset, fs.shards[j].end_offset - fs.shards[j].start_offset);
 	printf("\n");
 
 
@@ -141,17 +126,42 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 	for (MiniShard ms : fs.shards) {
 		ifstream s(ms.file_name);
 		int pos = 0;
-		while(pos < ms.start_offset && getline(s, item, '\n')) {
+		while(pos != ms.start_offset && getline(s, item, '\n')) {
 			pos += item.size();
 		}
 
 		string acc;
-		while(pos < ms.end_offset && getline(s, item, '\n')) {
+		while(pos != ms.end_offset && getline(s, item, '\n')) {
 			pos += item.size();
 			acc += item;
 		}
 		mapper->map(acc);
 	}
+	// ofstream accu(to_string(request->taskid()) + "acc.txt", fstream::app);
+	// accu << acc << endl;
+	// accu.close();
+
+	// int i = 0;
+	// char * c_input = new char [acc.length()+1];
+	// std::strcpy (c_input, acc.c_str());
+	// static const char* delims = " ,.\"'";
+	// char *start, *save_pointer;
+	// start = strtok_r (c_input, delims, &save_pointer);
+	// while (start != NULL) {
+	// 	// emit(start, "1");
+	// 	string s = start;
+	// 	if (s == "shrugged") {
+	// 		cout << "shrugged" << endl;
+	// 		i++;
+	// 	}
+	// 	start = strtok_r (nullptr, delims, &save_pointer);
+	// }
+	// delete[] c_input;
+
+	// cout << "Saw " << i << " shrugged" << endl;
+
+
+	// mapper->map(acc);
     mapper->impl_->num_reduces = request->num_reduces();
     mapper->impl_->write_to_file(request->taskid());
 
@@ -172,12 +182,12 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
 	std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(request->userid());
 
 
+	unordered_map<string, vector<string>> pairs;
 	const string& user_id = request->userid();
 	for (string path : request->inputfilepath()) {
-		cout << path << endl;
+		// cout << path << endl;
 		ifstream input(path);
         string line;
-        unordered_map<string, vector<string>> pairs;
 
         while (getline(input, line)) {
             size_t pos = line.find(" ");
@@ -188,9 +198,9 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
                 pairs[key] = vector<string>();
             pairs[key].push_back(val);
         }
-        for (auto pair : pairs) {
-            reducer->reduce(pair.first, pair.second);
-        }
+	}
+	for (auto pair : pairs) {
+		reducer->reduce(pair.first, pair.second);
 	}
     reducer->impl_->writeOutputToFile(request->output_file());
 
