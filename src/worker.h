@@ -11,8 +11,6 @@
 #include <grpc/support/log.h>
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
-
-
 #include "masterworker.pb.h"
 #include "masterworker.grpc.pb.h"
 
@@ -48,6 +46,7 @@ extern std::shared_ptr<BaseMapper> get_mapper_from_task_factory(const std::strin
 class Worker final : public MasterWorker::Service {
 
 
+
 public:
     // explicit Worker(bool simulateTimeout = false, bool simulateFailure = false, int simulateDelay = 0);
 
@@ -71,6 +70,7 @@ public:
         bool simulate_failure_ = false;
         int simulate_delay_ = 0;
         void simulateScenarios();
+
 
 };
 
@@ -102,6 +102,12 @@ bool Worker::run() {
 	// Worker service(false, false, 0);
 	
 	return true;
+	//from ASSignMapTap:
+ // Check for simulated timeout
+    //if (simulate_timeout_) {
+        //return Status(grpc::DEADLINE_EXCEEDED, "Simulated timeout in task processing.");
+    //}
+
 
 }
 
@@ -110,11 +116,7 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
                                          MapTaskCompleted* reply) {
     //simulateScenarios();  // Simulate different scenarios
 
-    // Check for simulated timeout
-    if (simulate_timeout_) {
-        return Status(grpc::DEADLINE_EXCEEDED, "Simulated timeout in task processing.");
-    }
-
+   
     reply->set_task_id(request->taskid());
 	
 	cout << "Got Map Task" << endl;
@@ -130,7 +132,7 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 	}
 
 	for (int j = 0; j < fs.shards.size(); j++)
-		printf("(%s %ld) ", fs.shards[j].file_name.c_str(), 
+		printf("HERE: (%s %ld) ", fs.shards[j].file_name.c_str(), 
 			fs.shards[j].end_offset - fs.shards[j].start_offset);
 	printf("\n");
 
@@ -139,18 +141,20 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 
 	string item;
 	for (MiniShard ms : fs.shards) {
+		std::cout << "File name worker: " << ms.file_name << std::endl;
 		ifstream s(ms.file_name);
 		int pos = 0;
-		while(pos < ms.start_offset && getline(s, item, '\n')) {
+		while(pos < ms.start_offset && getline(s, item)) {
 			pos += item.size();
 		}
 
 		string acc;
-		while(pos < ms.end_offset && getline(s, item, '\n')) {
+		while(pos < ms.end_offset && getline(s, item)) {
 			pos += item.size();
-			acc += item;
+			mapper->map(item);
+			//acc += item;
 		}
-		mapper->map(acc);
+		//mapper->map(acc);
 	}
     mapper->impl_->num_reduces = request->num_reduces();
     mapper->impl_->write_to_file(request->taskid());
@@ -173,35 +177,35 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
 
 
 	const string& user_id = request->userid();
+	std::map<string, vector<string>> pairs;
 	for (string path : request->inputfilepath()) {
 		cout << path << endl;
 		ifstream input(path);
-        string line;
-        //unordered_map<string, vector<string>> pairs;
-        //added
-        std::map<string, vector<string>> pairs;
-        //added
-	//std::vector<std::pair<std::string, std::string>> pairsVector;
-        while (getline(input, line)) {
-            size_t pos = line.find(" ");
-            string key = line.substr(0, pos);
-            string val = line.substr(pos + 1);
-            // cout << key << val << endl;
-            if (pairs.find(key) == pairs.end())
-                pairs[key] = vector<string>();
-            pairs[key].push_back(val);
-        }
+        	string line;
         
+        	//std::map<string, vector<string>> pairs;
+        
+        	while (getline(input, line)) {
+            	size_t pos = line.find(" ");
+            	string key = line.substr(0, pos);
+            	string val = line.substr(pos + 1); //added
+            // cout << key << val << endl;
+            	if (pairs.find(key) == pairs.end())
+                	pairs[key] = vector<string>();
+            		pairs[key].push_back(val);
+        	}
+        }
         for (auto pair : pairs) {
-        	//added
-        	//reducer->impl_->finalPairs.clear();
+        	
             reducer->reduce(pair.first, pair.second);
         }
-	}
+	//}
     reducer->impl_->writeOutputToFile(request->output_file());
 
     return Status::OK;
 }
+
+
 void Worker::simulateScenarios() {
     if (simulate_failure_) {
         //std::cerr << "Simulated failure in task processing." << std::endl;

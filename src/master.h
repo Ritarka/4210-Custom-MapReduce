@@ -23,7 +23,7 @@
 #include "masterworker.grpc.pb.h"
 
 
-
+namespace fs = std::filesystem;
 using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
@@ -69,7 +69,7 @@ int GreeterClient::AssignMapTask(const MapTaskRequest& request, promise<MapTaskC
 	Status status;
 	MapTaskCompleted response;
 	//5 second deadline for rpc
-	auto deadline = std::chrono::system_clock::now() + std::chrono::seconds(180);
+	std::chrono::time_point deadline = std::chrono::system_clock::now() + std::chrono::milliseconds(20000);
 	context.set_deadline(deadline);
 	
 	//future/promise
@@ -124,7 +124,7 @@ int GreeterClient::AssignReduceTask(const ReduceTaskRequest& request, promise<Re
 	ReduceTaskCompleted response;
 	
 	//5 second deadline for rpc
-	auto deadline = std::chrono::system_clock::now() + std::chrono::seconds(180);
+	std::chrono::time_point deadline = std::chrono::system_clock::now() + std::chrono::milliseconds(20000);
 	context.set_deadline(deadline);
 	
 	//future/promise
@@ -216,6 +216,7 @@ class Master {
     		void waitForReduceTask();
     		void handleMapTaskCompletion();
     		void handleReduceTaskCompletion();
+    		void deleteDirectory(const fs::path& path);
 		
 		
 };
@@ -303,19 +304,7 @@ void Master::assignMapTasks(){
 		future_map_tasks.push_back(move(temp_future));
 		++map_task_count;
 			
-		//future_map_tasks.push_back(move(future));
-		//worker_clients_[worker_index]->AssignMapTask(request).get();
 		
-		//greeter.AssignMapTask(request);
-		//if(worker_clients_[worker_index]){
-			//std::cout << "worker calling AssignMapTask," << std::endl;
-			//worker_clients_[worker_index]->AssignMapTask(request);
-		//} else {
-			//std::cout << "Error: Attempting to use null unique_ptr" << std::endl;
-		//}
-		
-
-		//++map_task_count;
 	}
 }
 
@@ -327,47 +316,6 @@ void Master::assignReduceTasks() {
 	if(!std::filesystem::exists(path) || !std::filesystem::is_directory(path)){
 		std::cout << "Error: temp/ doesn't exists" <<std::endl;
 	}
-	//try {
-        //for (const auto &entry : std::filesystem::directory_iterator(path)) {
-            //string name = entry.path();
-
-            // Check file name is not empty
-            //if (name.empty()) {
-                //std::cerr << "Error: Empty file name encountered." << std::endl;
-                //continue;  // Skip this entry
-            //}
-
-            // get file number 
-            //size_t lastUnderscore = name.find_last_of('_');
-            //if (lastUnderscore == std::string::npos) {
-                //std::cerr << "Error: File name does not contain an underscore." << std::endl;
-               // continue;  // Skip this entry
-            //}
-
-            // Extract the file number and convert it to an integer
-            //std::string num = name.substr(lastUnderscore + 1);
-            //int index;
-            //try {
-                //index = std::stoi(num);
-            //} catch (const std::invalid_argument &ex) {
-                //std::cerr << "Error: Invalid file number format." << std::endl;
-                //continue;  // Skip this entry
-            //}
-
-            // Ensure the index is within bounds
-            //if (index < 0 || index >= spec.num_out_files) {
-                //std::cerr << "Error: Invalid file number." << std::endl;
-                //continue;  // Skip this entry
-            //}
-
-            // Push the valid file path into the vector
-            //paths[index].push_back(name);
-        //}
-    //} catch (const std::filesystem::filesystem_error &ex) {
-        //std::cerr << "Error: " << ex.what() << std::endl;
-        //return;
-    //}
-
 	
 	
 	
@@ -482,6 +430,35 @@ void Master::waitForReduceTask() {
 	std::cout << "leaving waitForReduceTask()"<<std::endl;
 }
 
+void Master::deleteDirectory(const fs::path& path) {
+    try {
+        //path exists
+        if (fs::exists(path)) {
+            // check if directory
+            if (fs::is_directory(path)) {
+                // delete content recursively
+                for (const auto& entry : fs::directory_iterator(path)) {
+                    if (fs::is_directory(entry)) {
+                        // Recursively delete subdirectories
+                        deleteDirectory(entry.path());
+                    } else {
+                        // Delete files
+                        fs::remove(entry);
+                    }
+                }
+
+                // Remove the empty directory itself
+                fs::remove(path);
+            } else {
+                // If it's not a directory, just delete the file
+                fs::remove(path);
+            }
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error deleting directory: " << e.what() << std::endl;
+    }
+}
+
 
 
 /* CS6210_TASK: Here you go. once this function is called you will complete whole map reduce task and return true if succeeded */
@@ -504,6 +481,14 @@ bool Master::run() {
 	assignReduceTasks();
 	
 	waitForReduceTask();
+	//remove temp directory after the program finishes
+	//if(rmdir("temp") == -1){
+		//std::cout << "removing temp directory failed" << std::endl;
+	//}
+	fs::path tempPath = "temp";
+	deleteDirectory(tempPath);
+	std::cout << "REMOVED TEMP" << std::endl;
+	
 
 	return true;
 }
