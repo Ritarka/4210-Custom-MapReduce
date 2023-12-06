@@ -278,7 +278,7 @@ void Master::assignMapTasks(){
 			std::promise<MapTaskCompleted> retry_promise;
 			std::future<MapTaskCompleted> retry_future = retry_promise.get_future();
 			worker_index = (worker_index + 1)%worker_clients_.size();
-			std::cout << "worker calling AssignMapTask with DIFF workerIP" <<worker_ips_[worker_index] <<std::endl;
+			// std::cout << "worker calling AssignMapTask with DIFF workerIP" <<worker_ips_[worker_index] <<std::endl;
 			//call again with a different worker-client
 			result  = worker_clients_[worker_index]->AssignMapTask(request, &retry_promise);
 			temp_future = (result == 1) ? std::move(retry_future) : std::move(future);

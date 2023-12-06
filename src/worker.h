@@ -127,18 +127,26 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 	for (MiniShard ms : fs.shards) {
 		ifstream s(ms.file_name);
 		int pos = 0;
-		while(pos != ms.start_offset && getline(s, item, '\n')) {
+		// cout << "Name: " << ms.file_name << " " << ms.start_offset << " " << ms.end_offset << endl;
+		while (pos != ms.start_offset) {
+
+			getline(s, item, '\n');
+			// cout << pos << " " << item << endl;
 			pos += item.size();
 		}
 
+		// cout << "Midway" << endl;
+
 		string acc;
-		while(pos != ms.end_offset && getline(s, item, '\n')) {
+		while(pos != ms.end_offset) {
+			getline(s, item, '\n');
+			// cout << pos << " " << item << endl;
 			pos += item.size();
 			acc += item;
 			tot += item;
 		}
 		mapper->map(acc);
-		cout << acc << endl;
+		// cout << acc << endl;
 	}
 
 	fstream stream("acc_" + to_string(request->taskid()), fstream::app);

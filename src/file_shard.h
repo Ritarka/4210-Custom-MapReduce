@@ -55,8 +55,13 @@ inline bool shard_files(const MapReduceSpec& spec, std::vector<FileShard>& fileS
 				ms.file_name = name;
 				ms.start_offset = start;
 
-				if ((length + size - len_size) < len_size - length) // pick previous \n
-					length += size;
+				// if ((length + size - len_size) < len_size - length) {			// pick next \n
+				// 	length += size;
+				// 	chunk_length += size;
+				// }
+
+				length += size;
+				chunk_length += size;
 
 				ms.end_offset = chunk_length + start;
 				minis.push_back(ms);
@@ -94,17 +99,12 @@ inline bool shard_files(const MapReduceSpec& spec, std::vector<FileShard>& fileS
 		fileShards.push_back(fs);
 	}
 
-	// for (MiniShard mini : minis) {
-	// 	printf("%s: Start: %ld End: %ld Size: %ld\n", mini.file_name.c_str(), mini.start_offset, mini.end_offset,
-	// 		mini.end_offset - mini.start_offset);
-	// }
-
 
 	for (int i = 0; i < fileShards.size(); i++) {
 		printf("Shard %d: ", i);
 		for (int j = 0; j < fileShards[i].shards.size(); j++)
-			printf("(%s %ld) ", fileShards[i].shards[j].file_name.c_str(), 
-				fileShards[i].shards[j].end_offset - fileShards[i].shards[j].start_offset);
+			printf("(%s %ld %ld) ", fileShards[i].shards[j].file_name.c_str(), 
+				fileShards[i].shards[j].start_offset, fileShards[i].shards[j].end_offset);
 
 		printf("\n");
 	}
