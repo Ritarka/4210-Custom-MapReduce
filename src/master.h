@@ -248,10 +248,10 @@ void Master::assignMapTasks(){
 	const char * out_dir = output_dir.c_str();
 	std::cout << "assignMaptask worker_clients_ size = " << worker_clients_.size() <<std::endl;
 	for(int i = 0; i < maps; ++i){
-		int worker_index = (available_workers.front() % worker_clients_.size()); //-1 or not??
+		int worker_index = (i % worker_clients_.size()); //-1 or not??
 		
 		std::cout << "assingMapTask: worker_index = " << worker_index << std::endl;
-		available_workers.pop();
+		// available_workers.pop();
 		MapTaskRequest request;
 		request.set_taskid(map_task_count);
 		request.set_userid(spec.id);
@@ -271,7 +271,7 @@ void Master::assignMapTasks(){
 		int result = worker_clients_[worker_index]->AssignMapTask(request, &promise);
 		std::cout << "map result = " << result << std::endl;
 		std::future<MapTaskCompleted> temp_future;
-		while(result == 0){
+		while (result == 0){
 			//retry logic
 			//use worker_index = (worker_index + 1) % worker_clients_.size(); -> make the call again
 			//create new promise

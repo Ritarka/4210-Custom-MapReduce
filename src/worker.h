@@ -102,7 +102,7 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 
     reply->set_task_id(request->taskid());
 	
-    std::cout << "Worker received MapTask " << request->taskid() << std::endl;
+    // std::cout << "Worker received MapTask " << request->taskid() << std::endl;
 
 	FileShard fs;
 	const masterworker::Fileshard mfs = request->fileshard();
@@ -114,14 +114,15 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 		fs.shards.push_back(m);
 	}
 
-	for (int j = 0; j < fs.shards.size(); j++)
-		printf("(%s %ld+%ld) ", fs.shards[j].file_name.c_str(), 
-			fs.shards[j].start_offset, fs.shards[j].end_offset - fs.shards[j].start_offset);
-	printf("\n");
+	// for (int j = 0; j < fs.shards.size(); j++)
+	// 	printf("(%s %ld+%ld) ", fs.shards[j].file_name.c_str(), 
+	// 		fs.shards[j].start_offset, fs.shards[j].end_offset - fs.shards[j].start_offset);
+	// printf("\n");
 
 
 	std::shared_ptr<BaseMapper> mapper = get_mapper_from_task_factory(request->userid());
 
+	string tot;
 	string item;
 	for (MiniShard ms : fs.shards) {
 		ifstream s(ms.file_name);
@@ -134,32 +135,14 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 		while(pos != ms.end_offset && getline(s, item, '\n')) {
 			pos += item.size();
 			acc += item;
+			tot += item;
 		}
 		mapper->map(acc);
+		cout << acc << endl;
 	}
-	// ofstream accu(to_string(request->taskid()) + "acc.txt", fstream::app);
-	// accu << acc << endl;
-	// accu.close();
 
-	// int i = 0;
-	// char * c_input = new char [acc.length()+1];
-	// std::strcpy (c_input, acc.c_str());
-	// static const char* delims = " ,.\"'";
-	// char *start, *save_pointer;
-	// start = strtok_r (c_input, delims, &save_pointer);
-	// while (start != NULL) {
-	// 	// emit(start, "1");
-	// 	string s = start;
-	// 	if (s == "shrugged") {
-	// 		cout << "shrugged" << endl;
-	// 		i++;
-	// 	}
-	// 	start = strtok_r (nullptr, delims, &save_pointer);
-	// }
-	// delete[] c_input;
-
-	// cout << "Saw " << i << " shrugged" << endl;
-
+	fstream stream("acc_" + to_string(request->taskid()), fstream::app);
+	stream << tot << endl;
 
 	// mapper->map(acc);
     mapper->impl_->num_reduces = request->num_reduces();
@@ -169,7 +152,7 @@ Status Worker::AssignMapTask(ServerContext* context, const MapTaskRequest* reque
 }
 Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest* request,
                                             ReduceTaskCompleted* reply) {
-    simulateScenarios();  // Simulate different scenarios
+    // simulateScenarios();  // Simulate different scenarios
 
     // Check for simulated timeout
     if (simulate_timeout_) {
@@ -177,7 +160,7 @@ Status Worker::AssignReduceTask(ServerContext* context, const ReduceTaskRequest*
     }
 
     reply->set_task_id(request->task_id());
-    std::cout << "Worker received ReduceTask " << request->task_id() << std::endl;
+    // std::cout << "Worker received ReduceTask " << request->task_id() << std::endl;
 
 	std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(request->userid());
 

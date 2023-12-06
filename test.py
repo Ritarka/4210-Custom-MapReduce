@@ -1,4 +1,5 @@
 import os
+import glob
 from collections import defaultdict
 
 def get_words_in_line(line):
@@ -52,14 +53,13 @@ output_dir = 'bin/output'
 input_word_counts = defaultdict(int)
 output_word_counts = defaultdict(int)
 
-# input_filenames = ["bin/0acc.txt", "bin/1acc.txt", "bin/2acc.txt"]
 input_filenames = []
 with open('bin/config.ini', 'r') as file:
   for line in file:
     if line.startswith('input_files='):
       input_filenames = line.split('=')[1].strip().split(',')
       break
-
+  
 print(input_filenames)
 
 # Count words in input files

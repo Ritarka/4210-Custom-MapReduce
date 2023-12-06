@@ -101,5 +101,6 @@ inline void BaseReducerInternal::writeOutputToFile(string path) {
 	for(const auto& pair: finalPairs){
 		outputFile << pair.first << " " << pair.second << "\n";
 	}
+	outputFile.close();
 	finalPairs.clear();
 }
